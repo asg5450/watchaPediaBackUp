@@ -1,0 +1,48 @@
+#title{
+    width: 100%; border:0.5px solid rgb(241, 241, 241);
+    padding-left:16px;
+}
+
+#btn0{
+    display: flex;
+    margin: 0px 10px;
+    justify-content: end;
+}
+
+#butn{
+    border:0.5px solid rgb(241, 241, 241);
+    margin-left:10px;
+}
+.tox-statusbar__branding{
+    display: none;
+}
+
+
+#root {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.title {
+    text-align: center;
+}
+
+.centerdiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgpdiv{
+    border: solid black 1px;
+    width: 500px;
+}
+#preview{
+    width: 100%;
+}
+
+.butn{
+    border:solid 1px ;
+    margin: 5px;
+}
