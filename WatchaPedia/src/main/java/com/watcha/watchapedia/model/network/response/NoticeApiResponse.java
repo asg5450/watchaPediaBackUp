@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NoticeApiResponse {
+    private Long id;
     private String ntcTitle;
     private String ntcText;
     private String ntcRegBy;

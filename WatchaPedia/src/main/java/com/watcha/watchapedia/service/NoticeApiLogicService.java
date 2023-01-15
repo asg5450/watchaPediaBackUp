@@ -28,6 +28,7 @@ public class NoticeApiLogicService extends BaseService<NoticeApiRequest, NoticeA
 
     private NoticeApiResponse response(TbNotice tbNotice){
         NoticeApiResponse noticeApiResponse = NoticeApiResponse.builder()
+                .id(tbNotice.getId())
                 .ntcTitle(tbNotice.getNtcTitle())
                 .ntcText(tbNotice.getNtcText())
                 .ntcBtnText(tbNotice.getNtcBtnText())
@@ -55,8 +56,9 @@ public class NoticeApiLogicService extends BaseService<NoticeApiRequest, NoticeA
                 .build();
 
         System.out.println(newNotice);
-        tbNoticeRepository.save(newNotice);
-        return null;
+        TbNotice newTbNotice = tbNoticeRepository.save(newNotice);
+
+        return Header.OK(response(newTbNotice));
 
     }
 
