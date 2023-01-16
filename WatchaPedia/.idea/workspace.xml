@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21855664-2d20-46f1-a4fe-677457cdf09f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/AI_CLASS.watchaPediaBackUp.WatchaPedia.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/AdminRegist.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
@@ -16,19 +18,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/model/network/response/NoticeApiResponse$NoticeApiResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/model/network/response/NoticeApiResponse$NoticeApiResponseBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/model/network/response/NoticeApiResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/model/network/response/NoticeApiResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/service/NoticeApiLogicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/service/NoticeApiLogicService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/NoticeApiController.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/NoticeApiLogicService.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PageController.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TbNotice$TbNoticeBuilder.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TbNotice.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TbNoticeRepository.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/WatchaPediaApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/WatchaPediaApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/controller/page/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/watcha/watchapedia/controller/page/PageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/3_contents/book/book.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/3_contents/book/book.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/8_admin/hradmin/createaccount.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/8_admin/hradmin/createaccount.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BookApiController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BookRepository.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BookService.class.uniqueId2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/network/response/NoticeApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/network/response/NoticeApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/service/NoticeApiLogicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/service/NoticeApiLogicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/3_contents/book/book.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/3_contents/book/book.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/WatchaPediaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/WatchaPediaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/controller/page/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/controller/page/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/config/Auditable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/config/Auditable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/config/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/config/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/8_admin/hradmin/createaccount.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/8_admin/hradmin/createaccount.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,12 +49,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="WatchaPedia" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -96,7 +95,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/git_clone_folder/watchaPediaBackUp/WatchaPedia",
+    "last_opened_file_path": "C:/AI_CLASS/IntelliJ_Spring/day8",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -108,6 +107,11 @@
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "spring.configuration.checksum": "369b875aaddc008017a48a5275508991",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -137,9 +141,16 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.WatchaPediaApplication (1)">
+  <component name="RunManager" selected="Spring Boot.WatchaPediaApplication (2)">
     <configuration name="WatchaPediaApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="watchaPediaBackUp.WatchaPedia.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.watcha.watchapedia.WatchaPediaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WatchaPediaApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="AI_CLASS.watchaPediaBackUp.WatchaPedia.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.watcha.watchapedia.WatchaPediaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -208,6 +219,7 @@
       <workItem from="1673591281998" duration="2445000" />
       <workItem from="1673698619094" duration="4695000" />
       <workItem from="1673823784581" duration="17000" />
+      <workItem from="1673849982739" duration="8497000" />
     </task>
     <servers />
   </component>

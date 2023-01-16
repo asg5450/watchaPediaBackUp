@@ -57,15 +57,28 @@ public class PageController {
         return new ModelAndView("/1_notice/Notice_Write");
     }
 
+    @PostMapping(path="/AdminLoginOk")
+    public String AdminLoginOk(HttpServletRequest request, String userid, String userpw){
+        return "redirect:/";
+    }
+
     @PostMapping(path = "/noticeOk")
     public String noticeOk(MultipartFile file, String ntcTitle, String ntcText, String ntcBtnText, String ntcBtnColor){
 
         String fileName = file.getOriginalFilename();
         System.out.println("fileName : " + fileName);
-        String filePath = "C:\\AI_CLASS\\image\\"+fileName;
+        String filePath = "C:\\serverMedia\\"+fileName;
 
 
         try {
+            //폴더 생성
+            String folderPath = "C:\\serverMedia";
+            File folder = new File(folderPath);
+
+            if(!folder.exists()){
+                folder.mkdir();
+            }
+
             FileOutputStream fos = new FileOutputStream(filePath);
             InputStream is = file.getInputStream();
             int readCount = 0;

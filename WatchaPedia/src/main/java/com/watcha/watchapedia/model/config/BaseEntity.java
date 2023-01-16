@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public class             BaseEntity {
     @CreatedDate
     private LocalDateTime regDate;
     @LastModifiedDate
