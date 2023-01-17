@@ -10,7 +10,10 @@
         <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="/css/8_admin/hradmin/createaccount.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/vue@3"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script defer src="/js/AdminRegist.js"></script>
     </head>
     <body class="sb-nav-fixed">
     <!-- topbar.html -->
@@ -55,9 +58,12 @@
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">비밀번호 확인</span>
-                                        <input class="content_box_input_text" name="adminPwRe" id="adminPwRe" type="text">
-                                        <span class="admin_error_msg4">
-                                            틀렸습니다
+                                        <input class="content_box_input_text" name="adminPwRe" id="adminPwRe" type="text" @change="pwEquals">
+                                        <span v-if="pwNoText" class="admin_error_msg4" style="color: indianred">
+                                            비밀번호가 잃지하지 않습니다.
+                                        </span>
+                                        <span v-if="pwOkText" class="admin_error_msg4" style="color: cornflowerblue">
+                                            비밀번호가 일치합니다.
                                         </span>
                                     </p>
                                     <p>
@@ -67,6 +73,7 @@
                                         <span class="admin_error_msg4">
                                             틀렸습니다
                                         </span>
+
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">이름</span>
@@ -89,7 +96,7 @@
                                 </div>
                                 <div id="button_box">
                                     <p>
-                                        <button type="button" onclick=""> 등록하기 </button>
+                                        <button type="button" onclick="registCheck()"> 등록하기 </button>
                                         <button type="button" onclick="location.href='/hradmin/searchaccount'"> 취소하기 </button>
                                     </p>
                                 </div>
@@ -111,7 +118,6 @@
 
             </div>
         </div>
-        <script defer src="/js/AdminRegist.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

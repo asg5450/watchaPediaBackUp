@@ -3,7 +3,9 @@ package com.watcha.watchapedia.controller.page;
 
 import com.watcha.watchapedia.model.entity.TbNotice;
 import com.watcha.watchapedia.model.network.Header;
+import com.watcha.watchapedia.model.network.request.AdvertiseApiRequest;
 import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
+import com.watcha.watchapedia.service.AdvertiseApiLogicService;
 import com.watcha.watchapedia.service.NoticeApiLogicService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,9 @@ public class PageController {
 
     @Autowired
     private NoticeApiLogicService noticeApiLogicService;
+
+    @Autowired
+    private AdvertiseApiLogicService advertiseApiLogicService;
 
     @GetMapping(path="")
     public ModelAndView index(){
@@ -215,9 +220,34 @@ public class PageController {
     public ModelAndView admain(){
         return new ModelAndView("/7_advertisement/adMain");
     }
-    @GetMapping(path="/advertisement_regist")
-    public ModelAndView adregist(){
-        return new ModelAndView("/7_advertisement/adRegist");
+    @PostMapping(path="/advertise_regist")
+    public String adregist(MultipartFile file, String ad_title, String ad_content){
+
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName : " + fileName);
+        String filePath = "C:\\image\\"+fileName;
+
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
+            InputStream is = file.getInputStream();
+            int readCount = 0;
+            byte[] buffer = new byte[999999999];
+            while((readCount = is.read(buffer)) != -1){
+                fos.write(buffer, 0, readCount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        AdvertiseApiRequest advertiseApiRequest = AdvertiseApiRequest.builder()
+                .ad_title(ad_title)
+                .ad_content(ad_content)
+                .build();
+
+        advertiseApiLogicService.create(Header.OK(advertiseApiRequest));
+
+
+        return "redirect:/";
     }
 
     @GetMapping(path="/hradmin/accountdetail")
