@@ -23,11 +23,13 @@ public class Header<T> {
                 .resultCode("OK").description("정상").build();
     }
     public static <T> Header<T> OK(T data){
+        System.out.println("매개변수가 있는 OK 발동!");
         return (Header<T>)Header.builder().transactionTime(LocalDateTime.now())
                 .resultCode("OK").description("정상").data(data).build();
     }
     //	3	apple	1111	김사과	010-1111-1111	apple@apple.com	REGISTERED	2022-12-13 10:22:23	2022-12-13 10:22:23
     public static <T> Header<T> ERROR(String description){
+        System.out.println("매개변수가 있는 Error 발동!");
         return (Header<T>)Header.builder().transactionTime(LocalDateTime.now())
                 .resultCode("ERROR").description("description").build();
     }

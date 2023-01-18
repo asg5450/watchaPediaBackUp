@@ -5,6 +5,11 @@ createApp({
         return {
             pwNoText: false,
             pwOkText: false,
+            employeeOk: false,
+            employeeNo: false,
+            employeeDupl: false,
+            idDupl: false,
+            noDupl: false,
         }
     },
     methods: {
@@ -21,25 +26,161 @@ createApp({
                 this.pwNoText = false
                 this.pwOkText = true
             }
-        }
+        },
+        reEmplCheck(){
+            this.employeeOk = false
+            this.employeeNo = false
+            this.employeeDupl = false
+        },
+        employeeCheck(){
+            console.log('employee 메소드 발동!')
+            let flag = false
+            const adminNumber = document.getElementById('adminNumber')
+            console.log("입력한 사번: " + adminNumber.value)
+            for (let i of employee){
+                if(adminNumber.value == i){
+                    console.log('동일한 사번을 찾았습니다!')
+                    flag = true
+                    break
+                }
+            }
+            if(flag == true){
+                this.employeeOk = true
+                this.employeeNo = false
+                this.employeeDupl = false
+            }else{
+                console.log('입력하신 사번은 없는 사번입니다!')
+                this.employeeNo = true
+                this.employeeOk = false
+                this.employeeDupl = false
+            }
 
+            fetch('http://localhost:9090/api/admin/employeeCheck', {
+                method: 'POST',
+                headers: {'content-Type': 'application/json'},
+                body: JSON.stringify({
+                    "transaction_time":`${new Date()}`,
+                    "resultCode":"ok",
+                    "description":"정상",
+                    "data":{
+                        "adminNumber":`${adminNumber.value}`
+                    }
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.resultCode)
+                    if(data.resultCode == "OK"){
+                        this.employeeOk = false
+                        this.employeeNo = false
+                        this.employeeDupl = true
+                    }else {
+                        console.log('중첩되지 않은 사번')
+                    }
+                })
+        },
+        reDupl(){
+            this.idDupl = false
+            this.noDupl = false
+        },
+        idCorrect(){
+            this.idDupl = false
+            this.noDupl = false
+            const adminId = document.getElementById("adminId")
+
+            //tb_admin_user에서 해당 값과 같은 값이 있는지 비교하는 api 개발
+            fetch('http://localhost:9090/api/admin/idCheck', {
+                method: 'POST',
+                headers: {'content-Type': 'application/json'},
+                body: JSON.stringify({
+                    "transaction_time":`${new Date()}`,
+                    "resultCode":"ok",
+                    "description":"정상",
+                    "data":{
+                        "adminId":`${adminId.value}`
+                    }
+                })
+            })
+                .then(header => header.json())
+                .then(data => {
+                    console.log(data.resultCode)
+
+                    if(data.resultCode == "OK"){
+                        this.idDupl = true
+                        this.noDupl = false
+
+                    }else {
+                        this.noDupl = true
+                        this.idDupl = false
+                    }
+                })
+        },
+        registCheck(){
+            const adminId = document.getElementById("adminId")
+            const adminPw = document.getElementById("adminPw")
+            const adminNumber = document.getElementById("adminNumber")
+            const adminName = document.getElementById("adminName")
+            const adminType = document.getElementById("adminType")
+
+            if(this.idDupl == true || this.noDupl == false){
+                console.log('중복 확인을 완료해주세요.')
+                adminId.focus()
+                return false;
+            }
+            if(this.pwNoText == true){
+                console.log('비밀번호가 일치하지 않음')
+                adminPw.focus()
+                return false;
+            }
+            if(this.employeeOk == false){
+                console.log('사번이 올바르지 않음')
+                adminNumber.focus()
+                return false;
+            }
+
+            fetch('http://localhost:9090/api/admin/regist', {
+                method: 'POST',
+                headers: {'content-Type': 'application/json'},
+                body: JSON.stringify({
+                    "transaction_time":`${new Date()}`,
+                    "resultCode":"ok",
+                    "description":"정상",
+                    "data":{
+                        "adminId":`${adminId.value}`,
+                        "adminPw":`${adminPw.value}`,
+                        "adminNumber":`${adminNumber.value}`,
+                        "adminName":`${adminName.value}`,
+                        "adminType":`${adminType.value}`,
+                    }
+                })
+            })
+                .then((header) => {
+                    alert('등록성공')
+                    location.href='/login';
+                    return;
+                })
+                .catch((err) => {
+                    alert('에러!!')
+                    location.reload()
+                    return;
+                })
+        }
     }
 }).mount('#main_box')
 
+const employee = []
 
-let idCheck = false;
-
-//아이디의 value가 바뀔 때마다 idCheck를 false로 바꿈
-function idCheckReset(){
-    idCheck = false;
+for(let i=0; i <100; i++){
+    employee.push(2066000+i)
 }
 
+console.log(`등록된 사원번호 : ${employee}`)
 
-//중복확인 눌렀을 때(onclick), 실행되는 id 중복확인 기능
-function idCorrect(){
-    const idValue = document.getElementById("adminId")
-    // console.log(idValue.value) //값 확인 완료!
 
-    //tb_admin_user에서 해당 값과 같은 값이 있는지 비교하는 api 개발
 
-}
+
+/*const adminId = document.getElementById("adminId")
+    const adminPw = document.getElementById("adminPw")
+    const adminNumber = document.getElementById("adminNumber")
+    const adminName = document.getElementById("adminName")
+    const adminType = document.getElementById("adminType")*/

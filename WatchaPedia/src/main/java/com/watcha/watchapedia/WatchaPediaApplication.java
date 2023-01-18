@@ -10,5 +10,4 @@ public class WatchaPediaApplication {
     public static void main(String[] args) {
         SpringApplication.run(WatchaPediaApplication.class, args);
     }
-
 }
