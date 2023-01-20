@@ -68,6 +68,12 @@ public class AdminApiLogicService extends BaseService<AdminApiRequest, AdminApiR
         return null;
     }
 
+    public Header<AdminApiResponse> read(String userid, String userpw) {
+        return adminRepository.findByAdminIdAndAdminPw(userid, userpw).map(
+                        users -> response(users)).map(Header::OK)
+                .orElseGet(()->Header.ERROR("아이디 또는 비밀번호가 틀렸음!"));
+    }
+
     @Override
     public Header<AdminApiResponse> update(Header<AdminApiRequest> request) {
         return null;

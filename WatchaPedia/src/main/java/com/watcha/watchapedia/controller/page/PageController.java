@@ -5,6 +5,8 @@ import com.watcha.watchapedia.model.entity.TbNotice;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.AdvertiseApiRequest;
 import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
+import com.watcha.watchapedia.model.network.response.AdminApiResponse;
+import com.watcha.watchapedia.service.AdminApiLogicService;
 import com.watcha.watchapedia.service.AdvertiseApiLogicService;
 import com.watcha.watchapedia.service.NoticeApiLogicService;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 
 @Controller
@@ -32,18 +35,48 @@ public class PageController {
     @Autowired
     private AdvertiseApiLogicService advertiseApiLogicService;
 
+    @Autowired
+    private AdminApiLogicService adminApiLogicService;
+
+
+    //로그인을 하지 않고 url로 관리페이지로 뚥고 들어오는 것을 방지 (로그인으로 돌려보냄)
+    public ModelAndView loginCheck(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if(session == null){
+            System.out.println("세션이 없습니다");
+            return new ModelAndView("/0_login/Login");
+        }else{
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
+        }
+        return null;
+    }
+
     @GetMapping(path="")
-    public ModelAndView index(){
+    public ModelAndView index(HttpServletRequest request){
+
+
         return new ModelAndView("/index");
     }
 
     @GetMapping(path="/login")
-    public ModelAndView login(){
+    public ModelAndView login(HttpServletRequest request){
         return new ModelAndView("/0_login/Login");
     }
 
     @GetMapping(path="/notice")
-    public ModelAndView notice(){
+    public ModelAndView notice(HttpServletRequest request){
+        // 로그인 튕겨내기 기능 시작!
+        ModelAndView loginCheck = loginCheck(request);
+        if(loginCheck != null){
+            return loginCheck;
+        }
+        // 로그인 튕겨내기 기능 끝!
+
+
         return new ModelAndView("/1_notice/Notice");
     }
 
@@ -54,6 +87,7 @@ public class PageController {
 
     @GetMapping(path="/notice_view")
     public ModelAndView notice_view(){
+
         return new ModelAndView("/1_notice/Notice_View");
     }
 
@@ -63,12 +97,30 @@ public class PageController {
     }
 
     @PostMapping(path="/AdminLoginOk")
-    public String AdminLoginOk(HttpServletRequest request, String userid, String userpw){
-        return "redirect:/";
+    public String AdminLoginOk(HttpServletRequest request, String adminId, String adminPw){
+        System.out.println(adminId);
+        System.out.println(adminPw);
+        if(adminApiLogicService.read(adminId, adminPw).getData() != null){
+            HttpSession session = request.getSession();
+            AdminApiResponse adminInfo = adminApiLogicService.read(adminId, adminPw).getData();
+            String name = adminInfo.getAdminName();
+            Long idx = adminInfo.getId();
+            session.setAttribute("idx", idx);
+            session.setAttribute("id", adminId);
+            session.setAttribute("name", name);
+            return "redirect:/";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     @PostMapping(path = "/noticeOk")
     public String noticeOk(MultipartFile file, String ntcTitle, String ntcText, String ntcBtnText, String ntcBtnColor){
+
+        System.out.println(file.getSize());
+        for(int i = 0; i < file.getSize(); i++){
+
+        }
 
         String fileName = file.getOriginalFilename();
         System.out.println("fileName : " + fileName);
@@ -231,7 +283,7 @@ public class PageController {
             FileOutputStream fos = new FileOutputStream(filePath);
             InputStream is = file.getInputStream();
             int readCount = 0;
-            byte[] buffer = new byte[999999999];
+            byte[] buffer = new byte[1024];
             while((readCount = is.read(buffer)) != -1){
                 fos.write(buffer, 0, readCount);
             }

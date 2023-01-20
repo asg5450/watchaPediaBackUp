@@ -57,7 +57,7 @@
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">비밀번호</span>
-                                        <input class="content_box_input_text" name="adminPw" id="adminPw" type="text">
+                                        <input class="content_box_input_text" name="adminPw" id="adminPw" type="text" @change="pwLength">
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">비밀번호 확인</span>
@@ -91,7 +91,7 @@
                                     <p>
                                         <span class="content_box_input_label">관리자유형</span>
                                         <select name="adminType" id="adminType" class="admintypeselect">
-                                            <option disabled selected>관리자 유형</option>
+                                            <option disabled selected>관리자유형</option>
                                             <option value="hradmin">인사관리자</option>
                                             <option value="admin">일반관리자</option>
                                         </select>

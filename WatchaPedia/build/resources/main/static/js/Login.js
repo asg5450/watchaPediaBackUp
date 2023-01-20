@@ -24,5 +24,5 @@ function sendit() {
   /*const warning = document.querySelector(".hidden_warning");
     warning.classList.add("visible");*/
 
-  return true;
+  document.getElementById('regform').submit();
 }

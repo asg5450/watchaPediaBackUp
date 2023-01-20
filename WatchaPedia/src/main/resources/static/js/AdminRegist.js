@@ -13,10 +13,20 @@ createApp({
         }
     },
     methods: {
+        pwLength(){
+            const adminPw = document.getElementById('adminPw')
+
+            if(adminPw.value.length <= 5){
+                alert('비밀번호는 6자 이상 입력하셔야 합니다.')
+                adminPw.focus()
+                return false
+            }
+        },
         pwEquals(){
             console.log("비밀번호 확인 메소드 발동!")
             const adminPw = document.getElementById('adminPw')
             const adminPwRe = document.getElementById('adminPwRe')
+
             if(adminPw.value != adminPwRe.value){
                 console.log('비밀번호가 달라서 if문 진입!')
                 this.pwNoText = true
@@ -88,6 +98,12 @@ createApp({
             this.noDupl = false
             const adminId = document.getElementById("adminId")
 
+            if(adminId.value.length <= 5){
+                alert('아이디는 6자 이상 입력하셔야 합니다.')
+                adminId.focus()
+                return false
+            }
+
             //tb_admin_user에서 해당 값과 같은 값이 있는지 비교하는 api 개발
             fetch('http://localhost:9090/api/admin/idCheck', {
                 method: 'POST',
@@ -122,6 +138,7 @@ createApp({
             const adminName = document.getElementById("adminName")
             const adminType = document.getElementById("adminType")
 
+
             if(this.idDupl == true || this.noDupl == false){
                 console.log('중복 확인을 완료해주세요.')
                 adminId.focus()
@@ -135,6 +152,15 @@ createApp({
             if(this.employeeOk == false){
                 console.log('사번이 올바르지 않음')
                 adminNumber.focus()
+                return false;
+            }
+            console.log(adminType.value)
+            if(adminType.value == '관리자유형'){
+                alert('관리자유형을 선택하십시오.')
+                return false;
+            }
+            if(adminName.value == "" || adminName.value.length < 2){
+                alert('이름을 입력하십시오.')
                 return false;
             }
 
