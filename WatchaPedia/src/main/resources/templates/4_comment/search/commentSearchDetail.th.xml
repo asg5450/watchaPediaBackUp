@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#CommentBox" th:object="${comment}">
+        <attr sel="#comment_movie_poster" th:src="${comment.commImg}"/>
+        <attr sel=".commUsername" th:text="${comment.commUsername}"></attr>
+        <attr sel="#commRegDate" th:text="'문의 날짜 : '+${#temporals.format(comment.commRegDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+        <attr sel=".commText" th:text="${comment.commText}"/>
+        <attr sel=".commDetext" th:text="'설명 : '+${comment.commDetext}"/>
+        <attr sel=".commUserIdx" th:text="'좋아요 : '+${comment.commUserIdx}"/>
+        <attr sel=".commContentIdx" th:text="'댓글 : '+${comment.commContentIdx}"/>
+    </attr>
+</thlogic>

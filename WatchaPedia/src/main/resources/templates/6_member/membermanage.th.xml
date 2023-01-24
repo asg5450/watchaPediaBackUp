@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#user-table" th:remove="all-but-first">
+        <attr sel=".user-tr" th:each="user : ${users}">
+            <attr sel="#user-idx" th:text="${user.userIdx}"></attr>
+            <attr sel="#user-id/a" th:text="${user.userId}" th:href="@{'/member/'+${user.userIdx}}"/>
+            <attr sel="#user-status" th:text="${user.userStatus}"/>
+            <attr sel="#user-release" th:date="${user.userReleaseDate}" th:text="*{#temporals.format(user.userReleaseDate, 'yyyy-MM-dd')}"/>
+            <attr sel="#user-caution" th:text="${user.userCautionCnt}"/>
+            <attr sel="#user-warning" th:text="${user.userWarningCnt}"/>
+            <attr sel="#user-suspension" th:text="${user.userSuspensionCnt}"/>
+        </attr>
+    </attr>
+</thlogic>

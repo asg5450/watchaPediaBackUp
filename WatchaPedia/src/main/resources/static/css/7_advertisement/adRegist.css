@@ -1,0 +1,63 @@
+.parent {
+  width: 70%;
+  margin: 5px auto;
+  display: flex;
+}
+
+.first {
+  flex: 40%;
+  box-sizing: border-box;
+}
+
+.second {
+  flex: 20%;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.third {
+  flex: 40%;
+  box-sizing: border-box;
+}
+
+.inputClass {
+  width: 90%;
+}
+
+.file_box {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 40px;
+  text-align: center;
+}
+#before {
+  background-color: lightgray;
+}
+
+#after {
+  height: 250px;
+}
+
+#wish {
+  
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(227, 26, 93);
+}
+
+.inputUrl {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.pushBtn {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}

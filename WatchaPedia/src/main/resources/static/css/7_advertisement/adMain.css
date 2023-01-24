@@ -1,0 +1,125 @@
+.a_font_hide {
+  color: black;
+  text-decoration: initial;
+}
+
+button {
+  border-radius: 5px;
+  border : solid 1px;
+}
+
+.modal-wrap {
+  position: fixed;
+  background: rgba(37, 37, 37, 0.4);
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal1 {
+  width: 250px;
+  background: #fff;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.modal h5 {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+.modal1 button {
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  height: 50px;
+  color: rgb(234, 33, 66);
+  font-weight: bold;
+}
+
+.modal1 button:first-child {
+  border-right: 1px solid #eee;
+}
+
+.modal1 button:hover {
+  background: #e1eef6;
+}
+
+.modal1 .button-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/* --------------------------------------------- */
+.card-body {
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.advertise {
+  text-align: center;
+}
+
+#optad {
+  width: 100%;
+  height: 600px;
+  text-align: initial;
+  border: 1px solid rgb(151, 151, 151);
+  padding: 15px;
+}
+
+#optad > button {
+  margin: 0 2px;
+}
+/* 
+video[id="video"] {
+  aspect-ratio: auto 1280 / 720;
+} */
+
+#sentence {
+  color: gray;
+  font-weight: bold;
+  text-align: center;
+}
+
+#file2 {
+  position: relative;
+}
+
+#advertise_empty {
+  margin: 5px 0;
+  height: 500px;
+  line-height: 500px;
+}
+
+#button_container {
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  width: 105px;
+}
+#video {
+  width: 60%;
+  height: 520px;
+  margin: 15px auto;
+}
+
+.advertise_font {
+  width: 30%;
+  margin-top: 5px;
+}
+
+#text_content {
+  margin: 10px auto;
+}

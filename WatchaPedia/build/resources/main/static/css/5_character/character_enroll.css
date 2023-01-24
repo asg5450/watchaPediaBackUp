@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+#container{
+    margin: 5px 0px 20px;
+    height: 198px;
+    width: 198px;
+
+
+}
+#name{
+    height: 40px;
+    width: 45%;
+    margin: 10px 0px 20px;
+
+}
+#bio{
+    height: 170px;
+    width:55%;
+    margin: 5px 0px 10px;
+}
+.push{
+    text-align: center;
+  
+}
+#ch_cancel{
+    margin: 0px 0px 10px;
+}
+#ch_regis{
+    margin: 0px 0px 10px;
+}
+#root{
+    width:240px;
+    height:240px;
+    margin-bottom:50px;
+}
+.jfile{
+    width: 240px;
+    height: 240px;
+}
+#root>div{
+    width: 242px;
+    height: 242px;
+}
+#root>div>div{
+    width: 240px;
+    height: 240px;
+    background-image: url("/image/camera.png");
+}
