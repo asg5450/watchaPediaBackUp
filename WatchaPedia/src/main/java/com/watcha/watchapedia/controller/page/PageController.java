@@ -89,6 +89,22 @@ public class PageController {
         }
     }
 
+    //map.addAttribute를 사용해서 넘기는 방식에 세션정보 같이 담아줌
+    //* 매개변수 첫번째 : HttpServletRequest 객체
+    //* 매개변수 두번째 : ModelMap 객체
+    public ModelMap loginModelInfo(HttpServletRequest request, ModelMap map){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            map.addAttribute("adminIdx",(Long)session.getAttribute("adminIdx"));
+            map.addAttribute("adminId",(String)session.getAttribute("adminId"));
+            map.addAttribute("adminName",(String)session.getAttribute("adminName"));
+            map.addAttribute("adminType",(String)session.getAttribute("adminType"));
+            return map;
+        }else{
+            return null;
+        }
+    }
+
     //로그인 페이지로 이동
     @GetMapping(path="/login")
     public ModelAndView login(HttpServletRequest request){
@@ -175,7 +191,8 @@ public class PageController {
     // qna 리스트
     private final QnaService qnaService;
     @GetMapping(path="/qna")
-    public String qna(ModelMap map){
+    public String qna(ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
         map.addAttribute("qnas", qnaService.searchQnas());
         return "/2_qna/QnA";
     }
@@ -183,7 +200,8 @@ public class PageController {
     // qna 리스트 답글 작성 부분
     final QnaRepository qnaRepository;
     @GetMapping(path="/qna/{qnaIdx}")
-    public String qnadetail(@PathVariable Long qnaIdx, ModelMap map){
+    public String qnadetail(@PathVariable Long qnaIdx, ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);    //세션정보가 여기 map객체에 담겨짐
         Optional<Qna> qna = qnaRepository.findById(qnaIdx);
         QnaResponse qnaResponse = QnaResponse.from(QnaDto.from(qna.get()));
         map.addAttribute("qna", qnaResponse);
@@ -192,20 +210,23 @@ public class PageController {
 
     // qna 답글 완료 부분
     @GetMapping("/qnaview")
-    public String QnaView(ModelMap map){
+    public String QnaView(ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
         map.addAttribute("view" , FormStatus.CREATE);
         return "/2_qna/QnA_View";
     }
 
     @PostMapping ("/qnaview")
-    public String postqnaview(QnaRequest qnaRequest) {
+    public String postqnaview(QnaRequest qnaRequest, ModelMap map, HttpServletRequest request) {
+        loginModelInfo(request,map);
         qnaService.saveQna(qnaRequest.toDto());
         return "redirect:/qna";
     }
 
     // qna 답글 완료 데이터 보내기
     @GetMapping("/qna/{qnaIdx}/qnaview")
-    public String updateQnaVieW(@PathVariable Long qnaIdx, ModelMap map){
+    public String updateQnaVieW(@PathVariable Long qnaIdx, ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
         QnaResponse qna = QnaResponse.from(qnaService.getQna(qnaIdx));
         map.addAttribute("qna", qna);
         map.addAttribute("formStatus", FormStatus.UPDATE);
@@ -214,8 +235,9 @@ public class PageController {
 
     // qna 답글 완료 데이터 보내기
    @PostMapping("/qna/{qnaIdx}/qnaview")
-   public String updateQna(@PathVariable Long qnaIdx, @RequestParam(required = false)String qnaText){
-        qnaService.updateQna(qnaIdx, qnaText);
+   public String updateQna(@PathVariable Long qnaIdx, @RequestParam(required = false)String qnaText, HttpServletRequest request, ModelMap map){
+       loginModelInfo(request,map);
+       qnaService.updateQna(qnaIdx, qnaText);
        return "redirect:/qna/{qnaIdx}/qnaview";
    }
     /*   @RequestParam Spring MVC에서 쿼리 스트링 정보를 쉽게 가져오는데 사용할 수 있다,
@@ -384,6 +406,7 @@ public class PageController {
     private final CommentService commentService;
     @GetMapping(path="/comment/search_list")
     public String comment(HttpServletRequest request, ModelMap map){
+        loginModelInfo(request,map);
         map.addAttribute("comments", commentService.searchComments());
         return "/4_comment/search/commentSearchList";
     }
@@ -391,7 +414,8 @@ public class PageController {
     // commentDetail 출력 (내용, 이미지)
     final CommentRepository commentRepository;
     @GetMapping(path="/comment/{commentIdx}")
-    public String commentdetail(@PathVariable Long commentIdx, ModelMap map){
+    public String commentdetail(@PathVariable Long commentIdx, ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
         Optional<Comment> comment = commentRepository.findById(commentIdx);
         CommentResponse commentResponse = CommentResponse.from(CommentDto.from(comment.get()));
         map.addAttribute("comment", commentResponse);
@@ -423,7 +447,8 @@ public class PageController {
     // 멤버 디테일
     final UserRepository userRepository;
     @GetMapping(path="/member/{userIdx}")
-    public String memberdetail(@PathVariable Long userIdx, ModelMap map){
+    public String memberdetail(@PathVariable Long userIdx, ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
         Optional<User> user = userRepository.findById(userIdx);
         UserResponse userResponse = UserResponse.from(UserDto.from(user.get()));
         map.addAttribute("user", userResponse);
@@ -432,8 +457,10 @@ public class PageController {
 
     // 멤버 리스트
     final UserService userService;
+
     @GetMapping(path="/member")
-    public String membermanage(ModelMap map){
+    public String membermanage(HttpServletRequest request, ModelMap map){
+        loginModelInfo(request,map);
         List<UserResponse> users = userService.searchUsers().stream().map(UserResponse::from).toList();
         map.addAttribute("users", users);
         return "/6_member/membermanage";
@@ -443,7 +470,10 @@ public class PageController {
     @GetMapping("/member/{userIdx}/{userType}")
     public String updateUser(
              @PathVariable Long userIdx,
-             @PathVariable String userType){
+             @PathVariable String userType,
+             ModelMap map,
+             HttpServletRequest request){
+        loginModelInfo(request,map);
         Optional<User> user = userRepository.findById(userIdx);
         user.ifPresent(
                 selectUser -> {
