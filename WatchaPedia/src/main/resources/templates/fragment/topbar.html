@@ -2,7 +2,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org/">
 <script src="https://unpkg.com/vue@3"></script>
-<nav th:fragment="topbar(adminIdx)" class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="topbar">
+<nav th:fragment="topbar(adminIdx, adminType)" class="sb-topnav navbar navbar-expand navbar-dark bg-dark" id="topbar">
   <!-- Navbar Brand-->
   <a class="navbar-brand ps-3" href="/" style="color: #ff4381">Watcha Pedia</a>
   <!-- Sidebar Toggle-->
@@ -19,7 +19,7 @@
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="/admin_myinfo">내정보</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="/hradmin/createaccount">계정생성</a></li>
+        <li th:if="${adminType} == 'hradmin'"><a class="dropdown-item" href="/hradmin/createaccount">계정생성</a></li>
         <li><a class="dropdown-item" href="/hradmin/searchaccount">계정조회</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="/logout">로그아웃</a></li>

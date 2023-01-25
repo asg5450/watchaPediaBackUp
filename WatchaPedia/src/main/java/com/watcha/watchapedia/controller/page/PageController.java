@@ -550,7 +550,4 @@ public class PageController {
         return loginInfo(request, "/8_admin/admin/Myinfomodify");
     }
 
-
-
-
 }

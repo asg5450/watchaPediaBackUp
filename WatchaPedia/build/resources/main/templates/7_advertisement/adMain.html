@@ -25,7 +25,7 @@
 
   <body class="sb-nav-fixed">
     <!-- topbar.html -->
-    <div th:replace="fragment/topbar :: topbar(${adminIdx})"></div>
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
     <!-- topbar.html 끝 -->
     <div id="layoutSidenav">
       <div class="modal-wrap" v-if="v_if_visible">
