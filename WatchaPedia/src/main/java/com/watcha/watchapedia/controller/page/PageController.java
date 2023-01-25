@@ -422,8 +422,8 @@ public class PageController {
         return "/4_comment/search/commentSearchDetail";
     }
     @GetMapping(path="/character_detail")
-    public ModelAndView characterdetail(){
-        return new ModelAndView("/5_character/characterdetail");
+    public ModelAndView characterdetail(HttpServletRequest request){
+        return loginInfo(request, "/5_character/characterdetail");
     }
     @GetMapping(path="/character_manage")
     public ModelAndView charactermanage(HttpServletRequest request){
@@ -485,8 +485,8 @@ public class PageController {
     }
 
     @GetMapping(path="/advertisement_main")
-    public ModelAndView admain(){
-        return new ModelAndView("/7_advertisement/adMain");
+    public ModelAndView admain(HttpServletRequest request){
+        return loginInfo(request, "/7_advertisement/adMain");
     }
     @GetMapping(path="/advertisement_regist")
     public ModelAndView adregist(HttpServletRequest request){
