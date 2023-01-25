@@ -18,11 +18,5 @@ function sendit() {
     return false;
   }
 
-
-
-  //fetch -> then 함수
-  /*const warning = document.querySelector(".hidden_warning");
-    warning.classList.add("visible");*/
-
-  return true;
+  document.getElementById("regform").submit();
 }
