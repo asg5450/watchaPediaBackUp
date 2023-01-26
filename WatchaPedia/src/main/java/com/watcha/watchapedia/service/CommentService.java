@@ -1,6 +1,7 @@
 package com.watcha.watchapedia.service;
 
 
+import com.watcha.watchapedia.model.dto.CommentDto;
 import com.watcha.watchapedia.model.entity.Comment;
 import com.watcha.watchapedia.model.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,10 @@ import java.util.List;
 public class CommentService {
     final CommentRepository commentRepository;
     @Transactional(readOnly = true) //데이터를 불러오기만 할 때(수정X)
-    public List<Comment> searchComments(){
-        return commentRepository.findAll();
+    public List<CommentDto> searchComments(){
+        //return commentRepository.findAll();
+        return commentRepository.findAll().stream().map(CommentDto::from).toList();
+
     }
 
 //    @Transactional(readOnly = true)

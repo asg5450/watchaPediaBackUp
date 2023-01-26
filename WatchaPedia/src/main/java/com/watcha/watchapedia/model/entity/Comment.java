@@ -17,26 +17,23 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commIdx; // 번호
-    private Long commUserIdx; // 문의내용
-    private String commName; // 사용자 번호
+    private Long commUserIdx; // 사용자 고유번호
+    private String commName; // 사용자 이름
     @Column(length = 200)
-    private String commText; // 사용자 이름
-    private String commContentType; // 문의 날짜
+    private String commText; // 코멘트내용
+    private String commContentType; // 콘텐츠유형
     @Column
-    private Long commContentIdx; // qna 등록
+    private Long commContentIdx; // 콘텐츠고유번호
     @Column(length = 200)
-    private LocalDateTime commRegDate; // qna 상태
-    @Column(length = 2000)
-    private String commImg; // qna 상세 페이지 이미지
-    private String commDetext; // qna 상세 페이지 내용
-    private String commUsername; // 코멘트 유저 이름
+    private LocalDateTime commRegDate; // 등록날짜
+
 
 
 
     protected Comment() {}
     private Comment(Long commIdx, Long commUserIdx, String commName, String commText,
                     String commContentType, Long commContentIdx, LocalDateTime commRegDate
-                        , String commImg, String commDetext, String commUsername) {
+                        ) {
         this.commIdx = commIdx;
         this.commUserIdx = commUserIdx;
         this.commName = commName;
@@ -44,17 +41,13 @@ public class Comment {
         this.commContentType = commContentType;
         this.commContentIdx = commContentIdx;
         this.commRegDate = commRegDate;
-        this.commImg = commImg;
-        this.commDetext = commDetext;
-        this.commUsername = commUsername;
-
     }
 
     public static Comment of(Long commIdx, Long commUserIdx, String commName, String commText,
                              String commContentType, Long commContentIdx, LocalDateTime commRegDate
-            ,String commImg, String commDetext, String commUsername) {
+            ) {
         return new Comment(commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate,commImg,commDetext,commUsername );
+                commContentType,commContentIdx,commRegDate);
     }
 
     @Override

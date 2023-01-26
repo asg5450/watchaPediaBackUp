@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 public record CommentResponse(
         Long commIdx, Long commUserIdx, String commName, String commText,
         String commContentType, Long commContentIdx, LocalDateTime commRegDate
-        ,String commImg, String commDetext, String commUsername
+
 )implements Serializable {
     public static CommentResponse of(
             Long commIdx, Long commUserIdx, String commName, String commText,
             String commContentType, Long commContentIdx, LocalDateTime commRegDate
-            ,String commImg, String commDetext, String commUsername){
+            ){
         return new CommentResponse(commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate,commImg,commDetext,commUsername);
+                commContentType,commContentIdx,commRegDate);
     }
 
     public static CommentResponse from (CommentDto dto){
@@ -28,10 +28,7 @@ public record CommentResponse(
                 dto.commText(),
                 dto.commContentType(),
                 dto.commContentIdx(),
-                dto.commRegDate(),
-                dto.commImg(),
-                dto.commDetext(),
-                dto.commUsername()
+                dto.commRegDate()
         );
     }
 }

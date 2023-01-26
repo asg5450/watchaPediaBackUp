@@ -9,6 +9,7 @@ import com.watcha.watchapedia.model.entity.Qna;
 import com.watcha.watchapedia.model.entity.User;
 import com.watcha.watchapedia.model.entity.type.FormStatus;
 import com.watcha.watchapedia.model.network.Header;
+import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
 import com.watcha.watchapedia.model.network.request.QnaRequest;
 import com.watcha.watchapedia.model.network.response.AdminApiResponse;
 import com.watcha.watchapedia.model.network.response.CommentResponse;
@@ -24,10 +25,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +54,9 @@ public class PageController {
 
     @Autowired
     public AdminApiLogicService adminApiLogicService;
+
+    @Autowired
+    public NoticeApiLogicService noticeApiLogicService;
 
     //로그인을 하지 않고 url로 관리페이지로 뚥고 들어오는 것을 방지 (로그인으로 돌려보냄)
     //* 매개변수 첫번째 : HttpServletRequest 객체
@@ -84,7 +92,6 @@ public class PageController {
                     .addObject("adminName",adminName)
                     .addObject("adminType",adminType);
         }else{
-            System.out.println("로그인을 하지 않아서 이름없는 메인화면!");
             return new ModelAndView(view);
         }
     }
@@ -184,9 +191,57 @@ public class PageController {
         if(loginCheck != null){
             return loginCheck;
         }
-
         return loginInfo(request, "/1_notice/Notice_Write");
     }
+
+    //noticeOk 시작!
+    @PostMapping(path = "/noticeOk")
+    public String noticeOk(MultipartFile file, String ntcTitle, String ntcText, String ntcBtnText, String ntcBtnColor){
+
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName : " + fileName);
+        String filePath = "C:\\image\\"+fileName;
+
+
+        try {
+            //폴더 생성
+            String folderPath = "C:\\image";
+            File folder = new File(folderPath);
+
+            if(!folder.exists()){
+                folder.mkdir();
+            }
+
+            FileOutputStream fos = new FileOutputStream(filePath);
+            InputStream is = file.getInputStream();
+            int readCount = 0;
+            byte[] buffer = new byte[1024];
+            while((readCount = is.read(buffer)) != -1){
+                fos.write(buffer, 0, readCount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Catch문은 탈출했어...");
+
+        NoticeApiRequest noticeApiRequest = NoticeApiRequest.builder()
+                .ntcTitle(ntcTitle)
+                .ntcText(ntcText)
+                .ntcImagepath(filePath)
+                .ntcBtnColor(ntcBtnColor)
+                .ntcBtnText(ntcBtnText)
+                .build();
+
+        noticeApiLogicService.create(Header.OK(noticeApiRequest));
+
+
+
+
+
+        return "redirect:/";
+    }
+    //noticeOk 끝!
 
     // qna 리스트
     private final QnaService qnaService;
@@ -284,14 +339,15 @@ public class PageController {
     public ModelAndView movie(HttpServletRequest request){
         return loginInfo(request, "/3_contents/movie/movie").addObject("movies",movieApiLogicService.movieList());
     }
-    @GetMapping(path="/contents/movie_edit")
-    public ModelAndView movieEdit(HttpServletRequest request){
+    @GetMapping(path="/contents/movie_edit/{movIdx}")
+    public ModelAndView movieEdit(@PathVariable Long movIdx, HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/3_contents/movie/movie_edit");
+        Header<MovieApiResponse> api = movieApiLogicService.read(movIdx);
+        return loginInfo(request, "/3_contents/movie/movie_edit").addObject("movie",api.getData());
     }
     @GetMapping(path="/contents/movie_write")
     public ModelAndView movieWrite(HttpServletRequest request){
@@ -405,11 +461,14 @@ public class PageController {
     // comment 리스트 출력
     private final CommentService commentService;
     @GetMapping(path="/comment/search_list")
+
     public String comment(HttpServletRequest request, ModelMap map){
         loginModelInfo(request,map);
+        List<CommentResponse> comments = commentService.searchComments().stream().map(CommentResponse::from).toList();
         map.addAttribute("comments", commentService.searchComments());
         return "/4_comment/search/commentSearchList";
     }
+
 
     // commentDetail 출력 (내용, 이미지)
     final CommentRepository commentRepository;

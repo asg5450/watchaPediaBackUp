@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="tbody" th:remove="all-but-first">
+        <attr sel="tr[0]" th:each="qna : ${qnas}">
+            <attr sel="td.qna-idx" th:text="${qna.qnaIdx}"></attr>
+            <attr sel="td.qna-text/a" th:text="${qna.qnaText}" th:href="@{'/qna/'+${qna.qnaIdx}}"/>
+
+            <attr sel="td.qna-userid" th:text="${qna.qnaUserid}"/>
+            <attr sel="td.qna-auserid" th:text="${qna.qnaAuserid}" />
+            <attr sel="td.qna-regdate" th:date="${qna.qnaRegDate}" th:text="*{#temporals.format(qna.qnaRegDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+            <attr sel="td.qna-dtext" th:text="${qna.qnaDtext}"/>
+        </attr>
+    </attr>
+</thlogic>

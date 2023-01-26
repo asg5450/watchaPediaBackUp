@@ -7,26 +7,24 @@ import java.time.LocalDateTime;
 public record CommentDto(
         Long commIdx, Long commUserIdx, String commName, String commText,
         String commContentType, Long commContentIdx, LocalDateTime commRegDate
-        ,String commImg, String commDetext, String commUsername
 ) {
     public static CommentDto of(
             Long commIdx, Long commUserIdx, String commName, String commText,
             String commContentType, Long commContentIdx, LocalDateTime commRegDate
-            ,String commImg, String commDetext, String commUsername
     ){
 
         return new CommentDto(commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate,commImg,commDetext,commUsername
+                commContentType,commContentIdx,commRegDate
         );
     }
     public static CommentDto of(
             Long commIdx, Long commUserIdx, String commName, String commText,
             String commContentType, LocalDateTime commRegDate
-            ,String commImg, String commDetext, String commUsername
+
     ){
 
         return new CommentDto(commIdx, commUserIdx, commName, commText,
-                commContentType,null,commRegDate,commImg,commDetext,commUsername
+                commContentType,null,commRegDate
         );
     }
 
@@ -38,10 +36,8 @@ public record CommentDto(
                 entity.getCommText(),
                 entity.getCommContentType(),
                 entity.getCommContentIdx(),
-                entity.getCommRegDate(),
-                entity.getCommImg(),
-                entity.getCommDetext(),
-                entity.getCommUsername()
+                entity.getCommRegDate()
+
 
         );
     }
@@ -49,9 +45,6 @@ public record CommentDto(
         return  Comment.of(
                 commIdx, commUserIdx, commName, commText,
                 commContentType,commContentIdx,commRegDate
-                ,commImg,commDetext,commUsername
-
-
         );
     }
 }

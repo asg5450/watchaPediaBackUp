@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="/css/7_advertisement/adMain.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+
+  <body class="sb-nav-fixed">
+    <!-- topbar.html -->
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
+    <!-- topbar.html 끝 -->
+    <div id="layoutSidenav">
+      <div class="modal-wrap" v-if="v_if_visible">
+        <div class="modal1">
+          <div style="font-size: 20px; padding: 10px">알림</div>
+          <br />
+          <div>
+            해당 광고를 정말 <br />
+            삭제하시겠습니까?
+          </div>
+          <div class="button-wrap">
+            <button id="ad_remove_btn" @click="change" class="ok">확인</button>
+            <button @click="this.v_if_visible = !this.v_if_visible" class="no">
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <!-- sidenav.html -->
+          <div th:replace="fragment/sidenav :: sidenav"></div>
+          <!-- sidenav.html 끝 -->
+
+          <!-- sidefooter.html -->
+          <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+          <!-- sidefooter.html 끝 -->
+        </nav>
+      </div>
+
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <h1 class="mt-4">광고</h1>
+            <div class="row"></div>
+            <div class="card mb-4">
+              <div class="card-header">
+                <i class="fas fa-table me-1"></i> 광고
+                <!--이미지-->
+              </div>
+              <div class="card-body">
+                <!-- 테이블 제거-->
+                <div class="advertise" action="">
+                  <div>
+                    <form action="">
+                      <div class="adbody">
+                        <div id="optad">
+                          <input
+                            id="file2"
+                            type="file"
+                            accept="image/*,video/*"
+                          />
+                          <div id="sentence">
+                            <div id="advertise_container">
+                              <div id="advertise_empty">
+                                등록된 광고가 없습니다
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="text_content">
+                        <div>
+                          <input
+                            type="text"
+                            class="advertise_font"
+                            name="advertise_title"
+                            placeholder="광고의 제목을 입력하세요"
+                          />
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            class="advertise_font"
+                            name="advertise_content"
+                            placeholder="광고의 내용을 입력하세요"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                    <div id="button_container">
+                      <button>
+                        <a class="a_font_hide" href="/">등록</a>
+                      </button>
+                      <button @click="this.v_if_visible = !this.v_if_visible;">
+                        제거
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script defer src="/js/adMain.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/demo/chart-area-demo.js"></script>
+    <script src="./assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/datatables-simple-demo.js"></script>
+    <script>
+      const { createApp } = Vue;
+      createApp({
+        data() {
+          return {
+            v_if_visible: false,
+            isModal: false,
+            message1: "일반유저",
+            message2: "인플루언서 전환",
+          };
+        },
+
+        methods: {
+          change: function () {
+            this.isModal = !this.isModal;
+            this.v_if_visible = !this.v_if_visible;
+          },
+        },
+      }).mount("#layoutSidenav");
+    </script>
+  </body>
+</html>

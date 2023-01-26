@@ -16,11 +16,16 @@
   <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
     <li class="nav-item dropdown">
       <a th:if="${adminIdx} != null" class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <ul  th:if="${adminType} == 'hradmin'" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="/admin_myinfo">내정보</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li th:if="${adminType} == 'hradmin'"><a class="dropdown-item" href="/hradmin/createaccount">계정생성</a></li>
+        <li><a class="dropdown-item" href="/hradmin/createaccount">계정생성</a></li>
         <li><a class="dropdown-item" href="/hradmin/searchaccount">계정조회</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item" href="/logout">로그아웃</a></li>
+      </ul>
+      <ul  th:if="${adminType} == 'admin'" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/admin_myinfo">내정보</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="/logout">로그아웃</a></li>
       </ul>

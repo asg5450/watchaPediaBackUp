@@ -15,7 +15,7 @@
     </head>
     <body class="sb-nav-fixed">
     <!-- topbar.html -->
-    <div th:replace="fragment/topbar :: topbar"></div>
+    <div th:replace="fragment/topbar :: topbar(${adminIdx}, ${adminType})"></div>
     <!-- topbar.html 끝 -->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -25,7 +25,7 @@
                 <!-- sidenav.html 끝 -->
 
                 <!-- sidefooter.html -->
-                <div th:replace="fragment/sidefooter :: sidefooter"></div>
+                <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
                 <!-- sidefooter.html 끝 -->
             </nav>
         </div>
