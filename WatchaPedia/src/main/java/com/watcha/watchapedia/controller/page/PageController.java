@@ -195,53 +195,68 @@ public class PageController {
     }
 
     //noticeOk 시작!
-    @PostMapping(path = "/noticeOk")
-    public String noticeOk(MultipartFile file, String ntcTitle, String ntcText, String ntcBtnText, String ntcBtnColor){
-
-        String fileName = file.getOriginalFilename();
-        System.out.println("fileName : " + fileName);
-        String filePath = "C:\\image\\"+fileName;
-
-
-        try {
-            //폴더 생성
-            String folderPath = "C:\\image";
-            File folder = new File(folderPath);
-
-            if(!folder.exists()){
-                folder.mkdir();
-            }
-
-            FileOutputStream fos = new FileOutputStream(filePath);
-            InputStream is = file.getInputStream();
-            int readCount = 0;
-            byte[] buffer = new byte[1024];
-            while((readCount = is.read(buffer)) != -1){
-                fos.write(buffer, 0, readCount);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Catch문은 탈출했어...");
-
-        NoticeApiRequest noticeApiRequest = NoticeApiRequest.builder()
-                .ntcTitle(ntcTitle)
-                .ntcText(ntcText)
-                .ntcImagepath(filePath)
-                .ntcBtnColor(ntcBtnColor)
-                .ntcBtnText(ntcBtnText)
-                .build();
-
-        noticeApiLogicService.create(Header.OK(noticeApiRequest));
-
-
-
-
-
-        return "redirect:/";
-    }
+//    @PostMapping(path = "/noticeOk")
+//    public String noticeOk(MultipartFile file, String ntcTitle, String ntcText, String ntcBtnText, String ntcBtnColor){
+//
+//        String fileName = file.getOriginalFilename();
+//        System.out.println("fileName : " + fileName);
+//        String filePath = "C:\\image\\"+fileName;
+//
+//
+//        try {
+//            //폴더 생성
+//            String folderPath = "C:\\image";
+//            File folder = new File(folderPath);
+//
+//            if(!folder.exists()){
+//                folder.mkdir();
+//            }
+//
+//            FileOutputStream fos = new FileOutputStream(filePath);
+//            InputStream is = file.getInputStream();
+//            int readCount = 0;
+//            byte[] buffer = new byte[1024];
+//            while((readCount = is.read(buffer)) != -1){
+//                fos.write(buffer, 0, readCount);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("Catch문은 탈출했어...");
+//
+//        NoticeApiRequest noticeApiRequest = NoticeApiRequest.builder()
+//                .ntcTitle(ntcTitle)
+//                .ntcText(ntcText)
+//                .ntcImagepath(filePath)
+//                .ntcBtnColor(ntcBtnColor)
+//                .ntcBtnText(ntcBtnText)
+//                .build();
+//
+//        noticeApiLogicService.create(Header.OK(noticeApiRequest));
+//
+//
+//
+//
+//
+//        return "redirect:/";
+//    }
     //noticeOk 끝!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // qna 리스트
     private final QnaService qnaService;
