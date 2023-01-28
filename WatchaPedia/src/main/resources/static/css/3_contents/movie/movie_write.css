@@ -564,16 +564,72 @@ img {
   width: 20px;
 }
 
+/* 인물검색 결과 틀 박스 효과 */
+.onePersonBigBox{
+  display: flex;
+  width: 580px;
+  height: 100px;
+  margin: 8px auto;
+  border-bottom: 1px solid darkgray;
+}
+
+.onePersonBigBox.visible{
+  display: flex;
+}
+
+.profileBox{
+  width: 20%;
+  height: 97%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+}
+
+.appearBoxes{
+  display: flex;
+  justify-content: left;
+}
+
+.appearBoxes > div{
+  background-color: darkgray;
+  border-radius: 5px;
+  margin: auto 5px;
+  padding: 3px;
+}
+
+.contentBox{
+  width: 60%;
+  overflow: hidden;
+}
+
+.chooseBtnBox{
+  width: 20%;
+  padding-left: 50px;
+}
+
+.chooseBtn{
+  margin: 40px auto;
+}
+
+.personSimg{
+  position: initial;
+  width: 100px;
+  height: 90px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
 
 /* 인물검색 모달창 */
 #person_search_modal {
   display: none;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 60px;
   width: 100%;
   height: 100%;
   background-color: rgba(209, 209, 209, 0.4);
+
 }
 
 #person_search_modal.visible {

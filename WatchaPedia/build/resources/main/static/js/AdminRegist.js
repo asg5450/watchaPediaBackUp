@@ -98,11 +98,11 @@ createApp({
             this.noDupl = false
             const adminId = document.getElementById("adminId")
 
-            if(adminId.value.length <= 5){
-                alert('아이디는 6자 이상 입력하셔야 합니다.')
-                adminId.focus()
-                return false
-            }
+            // if(adminId.value.length <= 5){
+            //     alert('아이디는 6자 이상 입력하셔야 합니다.')
+            //     adminId.focus()
+            //     return false
+            // }
 
             //tb_admin_user에서 해당 값과 같은 값이 있는지 비교하는 api 개발
             fetch('http://localhost:9090/api/admin/idCheck', {

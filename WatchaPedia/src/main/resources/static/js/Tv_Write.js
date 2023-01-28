@@ -19,30 +19,41 @@
 
 const { createApp } = Vue;
 
-createApp({
+let searchVue = createApp({
   data() {
     return {
       search_msg: "",
+      photoBind:"",
+      itemlist: {},
     };
   },
-  methods: {
-    search_db() {
-      console.log(this.search_msg);
-
-      //이전 검색 데이터 내용을 지우기
-      const person_box = document.getElementById("modal_search_result");
-      const child_all = document.querySelectorAll("#modal_search_result > *");
-      for (i = 0; i < child_all.length; i++) {
-        person_box.removeChild(child_all[i]);
-      }
-
-      // unfilled : 리턴값에 의해 반복 돌려야함
-      for (i = 0; i < 5; i++) {
-        search_person(this.search_msg);
-      }
-    },
-  },
 }).mount(".sb-nav-fixed");
+
+function search_db() {
+  console.log(searchVue.search_msg);
+  //이전 검색 데이터 내용을 지우기
+  const person_box = document.getElementById("modal_search_result");
+  const child_all = document.querySelectorAll("#modal_search_result > *");
+
+  // ajax로 정보 받아오기
+  $.ajax({
+    url: "/api/movie/searchKey",
+    type: "GET",
+    dataType: "json",
+    processData: true,
+    contentType: "application/json; charset=UTF-8",
+    data: {searchKey : searchVue.search_msg},
+    success: function(result){
+      console.log('ajax 정보교환 성공!')
+      console.log(result)
+      searchVue.itemlist = result.data;
+      console.log(searchVue.itemlist);
+    },
+    error: function(){
+      console.log("에러발생")
+    }
+  })
+}
 
 // ------------------------------------------------------------------------------
 let fileLists = []; // 전체 파일 리스트 객체
@@ -404,6 +415,7 @@ function person_search_visible() {
 function search_cancel() {
   const person_search_modal = document.getElementById("person_search_modal");
   person_search_modal.classList.remove("visible");
+  searchVue.itemlist = ""
 }
 
 // ----------------------------------------------------------------------

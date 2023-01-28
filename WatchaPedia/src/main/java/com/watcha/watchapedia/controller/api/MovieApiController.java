@@ -5,8 +5,11 @@ import com.watcha.watchapedia.model.entity.Movie;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.MovieApiRequest;
 import com.watcha.watchapedia.model.network.response.MovieApiResponse;
+import com.watcha.watchapedia.model.network.response.PersonApiResponse;
 import com.watcha.watchapedia.service.MovieApiLogicService;
+import com.watcha.watchapedia.service.PersonApiLogicService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +47,15 @@ public class MovieApiController extends CrudController<MovieApiRequest, MovieApi
     @DeleteMapping("{id}") // http://localhost:8888/api/movie/{id} (delete)
     public Header<MovieApiResponse> delete(@PathVariable Long id) {
         return movieApiLogicService.delete(id);
+    }
+
+    @Autowired
+    private final PersonApiLogicService personApiLogicService;
+
+    @GetMapping("/searchKey")
+    public Header<List<PersonApiResponse>> searchPerson(@RequestParam("searchKey") String searchKey){
+        System.out.println("searchPerson까지는 잘 들어옴");
+        return personApiLogicService.search(searchKey);
     }
 }
 

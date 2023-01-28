@@ -63,10 +63,26 @@
       <input
               id="modal_search_bar"
               v-model="search_msg"
-              @change="search_db"
+              onchange="search_db()"
               placeholder="예) 박찬욱, 손현주, 이성민"
       />
-      <div id="modal_search_result"></div>
+      <div id="modal_search_result">
+        <!--     검색결과 반복틀 시작!      -->
+        <div class="onePersonBigBox" v-for="person in itemlist">
+          <div hidden>{{person.perIdx}}</div>
+          <div class="profileBox">
+            <img :src=`${person.perPhoto}` class="personSimg"></div>
+          <div class="contentBox">
+            <b>{{person.perName}}</b>
+            <p>{{person.perRole}}</p>
+            <div class="appearBoxes">
+              <div v-for="appear in person.appearance">{{appear}}</div>
+            </div>
+          </div>
+          <div class="chooseBtnBox"><button class="chooseBtn" onclick="choosing">선택</button></div>
+        </div>
+        <!--     검색결과 반복틀 시작!      -->
+      </div>
       <div id="person_search_cancel" onclick="search_cancel()">취소</div>
     </div>
   </div>
