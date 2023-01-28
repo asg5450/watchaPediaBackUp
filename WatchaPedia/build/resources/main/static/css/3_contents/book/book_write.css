@@ -254,7 +254,7 @@ img {
 #Mbtn {
   width: 200px;
   height: 30px;
-  background: url(../image/watch.png) no-repeat 95% 50% #c4c4c4;
+  background: url(/image/watch.png) no-repeat 95% 50% #c4c4c4;
   background-size: contain;
   border: 1px solid rgb(255, 255, 255);
   margin: 5px 10px;
@@ -264,9 +264,11 @@ img {
 #authorBox {
   margin: 5px 10px;
   width: 95%;
-  height: 105px;
+  height: 115px;
   border: 1px solid rgb(228, 223, 223);
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* --------------------------------------- */
@@ -693,7 +695,7 @@ img {
 }
 #bookPubSummary {
   width: 95%;
-  height: 130px;
+  height: 100px;
   overflow: auto;
   border: 1px solid rgb(228, 223, 223);
 }

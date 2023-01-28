@@ -118,7 +118,7 @@ img {
 #Mbtn {
   width: 200px;
   height: 30px;
-  background: url(../image/watch.png) no-repeat 95% 50% #c4c4c4;
+  background: url(/image/watch.png) no-repeat 95% 50% #c4c4c4;
   background-size: contain;
   border: 1px solid rgb(255, 255, 255);
   margin: 5px 10px;
@@ -127,9 +127,11 @@ img {
 #authorBox {
   margin: 5px 10px;
   width: 95%;
-  height: 115px;
+  height: 155px;
   border: 1px solid rgb(228, 223, 223);
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* --------------------------------------- */
@@ -711,4 +713,9 @@ label{
 
 #btn1, #btn2{
   border: solid 1px black;
+}
+
+/* 선택된 인물박스 CSS */
+.onePersonSmallBox{
+
 }

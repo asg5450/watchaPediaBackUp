@@ -23,7 +23,6 @@ let searchVue = createApp({
   data() {
     return {
       search_msg: "",
-      photoBind:"",
       itemlist: {},
     };
   },

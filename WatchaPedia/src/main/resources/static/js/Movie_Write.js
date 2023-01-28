@@ -21,8 +21,8 @@ let searchVue = createApp({
   data() {
     return {
       search_msg: "",
-      photoBind:"",
       itemlist: {},
+      itemlist2: {},
     };
   },
 }).mount(".sb-nav-fixed");
