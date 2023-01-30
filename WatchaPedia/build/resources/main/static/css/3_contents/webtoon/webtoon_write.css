@@ -662,7 +662,6 @@ label{
   margin: 0 1%;
 }
 
-/* 모달창 및 검색결과 CSS */
 /* 인물검색 결과 틀 박스 효과 */
 .onePersonBigBox{
   display: flex;
@@ -670,10 +669,6 @@ label{
   height: 100px;
   margin: 8px auto;
   border-bottom: 1px solid darkgray;
-}
-
-.onePersonBigBox.visible{
-  display: flex;
 }
 
 .profileBox{
@@ -701,8 +696,8 @@ label{
 }
 
 .chooseBtnBox{
-  width: 20%;
-  padding-left: 50px;
+  width: 25%;
+  padding-left: 30px;
 }
 
 .chooseBtn{
@@ -796,4 +791,59 @@ label{
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.bg-dark{
+  background-color: #343a40;
+}
+label{
+  border: solid 1px black;
+}
+
+#Mbtn{
+  border: solid 1px black;
+}
+
+#btn1, #btn2{
+  border: solid 1px black;
+}
+
+/* 선택된 인물박스 CSS */
+.onePersonSmallBox{
+  display: flex;
+  align-items: center;
+  width: 45%;
+  height: 70px;
+  margin: 5px 10px;
+}
+
+.smallProfileBox{
+  width: 38%;
+  height: 97%;
+}
+
+.smallPersonSimg{
+  position: initial;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.smallContentBox{
+  width: 50%;
+  overflow: hidden;
+}
+
+.smallContentBox > b{
+  font-size: 16px;
+}
+
+.smallContentBox > p{
+  font-size: 12px;
+}
+
+.minus_button{
+  position: relative;
+  top: -10px;
 }

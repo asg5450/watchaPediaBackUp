@@ -20,4 +20,5 @@ public class PersonApiResponse {
     private String perPhoto;
     private String perRole;
     private List<String> appearance;
+    private String chooseCheck;
 }

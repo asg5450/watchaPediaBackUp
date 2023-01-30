@@ -6,8 +6,22 @@ let searchVue = createApp({
     return {
       search_msg: "",
       itemlist: {},
+      itemlist2: {},
     };
   },
+  methods:{
+    chosen(idx){
+      let flag = true
+
+      for( let i of searchVue.itemlist2){
+        if(idx == i.perIdx){
+          personsArr.push(i)
+        }
+      }
+
+      return flag
+    }
+  }
 }).mount(".sb-nav-fixed");
 
 function search_db() {
@@ -26,14 +40,96 @@ function search_db() {
     data: {searchKey : searchVue.search_msg},
     success: function(result){
       console.log('ajax 정보교환 성공!')
-      console.log(result)
+      for(let i of result.data){
+        if(searchVue.itemlist2.length > 0){
+          for(let j of searchVue.itemlist2){
+            if(i.perIdx == j.perIdx){
+              i.chooseCheck = "chosen";
+            }
+          }
+        }
+      }
+      console.log(result.data);
       searchVue.itemlist = result.data;
-      console.log(searchVue.itemlist);
     },
     error: function(){
       console.log("에러발생")
     }
   })
+}
+
+let personsArr = [];
+
+function choosePerson(e){
+
+  //버튼에 chosen 클래스 부여하기
+  if(e.innerText == "선택"){
+    e.innerText = "✔️선택됨"
+    //선택을 누른 인물의 큰 박스
+    const chooseBigBox = e.parentNode.parentNode;
+
+    //큰 박스의 자식객체배열을 얻어옴
+    const childArr = chooseBigBox.childNodes;
+
+    //인물의 idx값 추출
+    const perIdx = childArr[0].innerText
+
+    //사진 src값을 추출
+    const perPhoto = childArr[1].firstChild.getAttribute('src');
+
+    //인물의 이름을 추출
+    const perName = childArr[2].firstChild.innerText
+    console.log(perName)
+
+    //인물의 지위?
+    const perRole = childArr[2].childNodes[1].innerText
+
+    const person = {
+      perIdx: childArr[0].innerText,
+      perPhoto: childArr[1].firstChild.getAttribute('src'),
+      perName: childArr[2].firstChild.innerText,
+      perRole: childArr[2].childNodes[1].innerText
+    }
+    console.log(person)
+
+    personsArr.push(person)
+
+    searchVue.itemlist2 = personsArr
+
+  }else{
+    e.innerText = "선택"
+    const idx = e.parentNode.parentNode.childNodes[0].innerText;
+
+    //대입 배열 초기화
+    personsArr = []
+
+    //선택 인물 idx가 아닌 것들로 배열 재구성
+    for( let i of searchVue.itemlist2){
+      if(idx != i.perIdx){
+        personsArr.push(i)
+      }
+    }
+    //배열을 itemlist2에 삽입
+    searchVue.itemlist2 = personsArr
+
+  }
+
+
+}
+
+function minusItemlist2(e){
+  //클릭한 인물의 idx 추출
+  const idx = e.parentNode.firstChild.innerText;
+
+  //대입 배열 초기화
+  personsArr = []
+
+  for( let i of searchVue.itemlist2){
+    if(idx != i.perIdx){
+      personsArr.push(i)
+    }
+  }
+  searchVue.itemlist2 = personsArr
 }
 
 // ------------------------------------------------------------------------------
@@ -263,13 +359,8 @@ function pop_out(e) {
 
 // ----------------------------------------------------------------------
 function person_search_visible() {
-  const search_bar = document.getElementById("modal_search_bar");
-  search_bar.value = "";
-  const remove_container = document.getElementById("modal_search_result");
-  const remove_result = document.querySelectorAll("#modal_search_result > *");
-  for (let i = 0; i < remove_result.length; i++) {
-    remove_container.removeChild(remove_result[i]);
-  }
+  const search_input = document.getElementById("modal_search_bar")
+  search_input.value = ""
 
   const person_search_modal = document.getElementById("person_search_modal");
   person_search_modal.classList.add("visible");

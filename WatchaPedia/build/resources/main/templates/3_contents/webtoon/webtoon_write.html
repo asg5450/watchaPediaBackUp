@@ -70,11 +70,14 @@
                 <div v-for="appear in person.appearance">{{appear}}</div>
               </div>
             </div>
-            <div class="chooseBtnBox"><button class="chooseBtn" onclick="choosing">선택</button></div>
+            <div class="chooseBtnBox">
+              <button v-if="person.chooseCheck == null" class="chooseBtn" onclick="choosePerson(this)">선택</button>
+              <button v-if="person.chooseCheck != null" class="chooseBtn" onclick="choosePerson(this)">✔️선택됨</button>
+            </div>
           </div>
           <!--     검색결과 반복틀 시작!      -->
         </div>
-        <div id="person_search_cancel" onclick="search_cancel()">취소</div>
+        <div id="person_search_cancel" onclick="search_cancel()">선택완료</div>
       </div>
     </div>
     <!-- topbar.html -->
@@ -260,7 +263,25 @@
                       </button>
                     </p>
                   </div>
-                  <div id="authorBox"></div>
+                  <div id="authorBox">
+                    <div class="onePersonSmallBox" v-for="person in itemlist2">
+                      <div hidden>{{person.perIdx}}</div>
+                      <div class="smallProfileBox">
+                        <img :src=`${person.perPhoto}` class="smallPersonSimg">
+                      </div>
+                      <div class="smallContentBox">
+                        <b>{{person.perName}}</b>
+                        <p>{{person.perRole}}</p>
+                      </div>
+                      <div onclick="minusItemlist2(this)" type="button">
+                        <img
+                                class="minus_button"
+                                src="/assets/img/x_icon.png"
+                                alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
             
                 <div id="inputbox2">

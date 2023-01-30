@@ -131,6 +131,7 @@ img {
   border: 1px solid rgb(228, 223, 223);
   overflow: auto;
   display: flex;
+  justify-content: left;
   flex-wrap: wrap;
 }
 
@@ -575,10 +576,6 @@ img {
   border-bottom: 1px solid darkgray;
 }
 
-.onePersonBigBox.visible{
-  display: flex;
-}
-
 .profileBox{
   width: 20%;
   height: 97%;
@@ -604,8 +601,8 @@ img {
 }
 
 .chooseBtnBox{
-  width: 20%;
-  padding-left: 50px;
+  width: 25%;
+  padding-left: 30px;
 }
 
 .chooseBtn{
@@ -717,5 +714,41 @@ label{
 
 /* 선택된 인물박스 CSS */
 .onePersonSmallBox{
+  display: flex;
+  align-items: center;
+  width: 45%;
+  height: 70px;
+  margin: 5px 10px;
+}
 
+.smallProfileBox{
+  width: 38%;
+  height: 97%;
+}
+
+.smallPersonSimg{
+  position: initial;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.smallContentBox{
+  width: 50%;
+  overflow: hidden;
+}
+
+.smallContentBox > b{
+  font-size: 16px;
+}
+
+.smallContentBox > p{
+  font-size: 12px;
+}
+
+.minus_button{
+  position: relative;
+  top: -10px;
 }

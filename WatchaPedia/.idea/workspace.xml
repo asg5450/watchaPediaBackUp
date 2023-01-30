@@ -10,10 +10,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/book/book_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/book/book_write.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/movie/movie_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/movie/movie_write.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/tv/tv_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/tv/tv_write.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/webtoon/webtoon_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/3_contents/webtoon/webtoon_write.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/Movie_Write.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/Movie_Write.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/3_contents/movie/movie_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/3_contents/movie/movie_write.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/network/response/PersonApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/watcha/watchapedia/model/network/response/PersonApiResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/book/book_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/book/book_write.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/movie/movie_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/movie/movie_write.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/tv/tv_write.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/3_contents/tv/tv_write.css" afterDir="false" />
@@ -22,7 +27,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/Movie_Write.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Movie_Write.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/Tv_Write.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Tv_Write.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/Webtoon_Write.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Webtoon_Write.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/3_contents/book/book_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/3_contents/book/book_write.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/3_contents/movie/movie_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/3_contents/movie/movie_write.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/3_contents/tv/tv_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/3_contents/tv/tv_write.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/3_contents/webtoon/webtoon_write.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/3_contents/webtoon/webtoon_write.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,37 +94,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelOrder2": "2",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RequestMappingsPanelWidth2": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/USER/Desktop/watchPedia_User",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.27733028",
-    "spring.configuration.checksum": "00e360083269827b22a4c08d28b9a267",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Desktop/watchPedia_User&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.27733028&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;00e360083269827b22a4c08d28b9a267&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.watcha.watchapedia.model.network.response" />
@@ -206,7 +214,9 @@
       <workItem from="1674778679589" duration="8312000" />
       <workItem from="1674787329286" duration="17145000" />
       <workItem from="1674821983779" duration="2060000" />
-      <workItem from="1674875196490" duration="6374000" />
+      <workItem from="1674875196490" duration="18024000" />
+      <workItem from="1674967723464" duration="4666000" />
+      <workItem from="1675038408961" duration="4895000" />
     </task>
     <servers />
   </component>

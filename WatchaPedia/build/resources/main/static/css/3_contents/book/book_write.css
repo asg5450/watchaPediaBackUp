@@ -56,9 +56,6 @@ select:visited {
   border-bottom: 1px solid darkgray;
 }
 
-.onePersonBigBox.visible{
-  display: flex;
-}
 
 .profileBox{
   width: 20%;
@@ -786,4 +783,190 @@ label{
 
 #btn1, #btn2{
   border: solid 1px black;
+}
+
+/* 인물검색 결과 틀 박스 효과 */
+.onePersonBigBox{
+  display: flex;
+  width: 580px;
+  height: 100px;
+  margin: 8px auto;
+  border-bottom: 1px solid darkgray;
+}
+
+.profileBox{
+  width: 20%;
+  height: 97%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+}
+
+.appearBoxes{
+  display: flex;
+  justify-content: left;
+}
+
+.appearBoxes > div{
+  background-color: darkgray;
+  border-radius: 5px;
+  margin: auto 5px;
+  padding: 3px;
+}
+
+.contentBox{
+  width: 60%;
+  overflow: hidden;
+}
+
+.chooseBtnBox{
+  width: 25%;
+  padding-left: 30px;
+}
+
+.chooseBtn{
+  margin: 40px auto;
+}
+
+.personSimg{
+  position: initial;
+  width: 100px;
+  height: 90px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+
+/* 인물검색 모달창 */
+#person_search_modal {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(209, 209, 209, 0.4);
+
+}
+
+#person_search_modal.visible {
+  display: block;
+  z-index: 1000;
+}
+
+#person_modal_bigbox {
+  background-color: rgb(209, 209, 209);
+  width: 600px;
+  height: 545px;
+  position: relative;
+  left: 40%;
+  top: 25%;
+  border-radius: 5px;
+}
+
+.modal_big_title {
+  color: white;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#modal_search_bar {
+  position: relative;
+  left: 4px;
+  width: 98.5%;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  margin: 5px auto;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#modal_search_result {
+  width: 98.5%;
+  height: 403px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin: 3px auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#person_search_cancel {
+  color: white;
+  width: 20%;
+  height: 35px;
+  margin: 6px auto;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.bg-dark{
+  background-color: #343a40;
+}
+label{
+  border: solid 1px black;
+}
+
+#Mbtn{
+  border: solid 1px black;
+}
+
+#btn1, #btn2{
+  border: solid 1px black;
+}
+
+/* 선택된 인물박스 CSS */
+.onePersonSmallBox{
+  display: flex;
+  align-items: center;
+  width: 45%;
+  height: 70px;
+  margin: 5px 10px;
+}
+
+.smallProfileBox{
+  width: 38%;
+  height: 97%;
+}
+
+.smallPersonSimg{
+  position: initial;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.smallContentBox{
+  width: 50%;
+  overflow: hidden;
+}
+
+.smallContentBox > b{
+  font-size: 16px;
+}
+
+.smallContentBox > p{
+  font-size: 12px;
+}
+
+.minus_button{
+  position: relative;
+  top: -10px;
 }
