@@ -5,8 +5,14 @@ import com.watcha.watchapedia.model.entity.Comment;
 import java.time.LocalDateTime;
 
 public record CommentDto(
-        Long commIdx, Long commUserIdx, String commName, String commText,
-        String commContentType, Long commContentIdx, LocalDateTime commRegDate
+        Long commIdx,
+        Long commUserIdx,
+        String commName,
+        String commText,
+        String commContentType,
+        Long commContentIdx,
+        LocalDateTime commRegDate
+
 ) {
     public static CommentDto of(
             Long commIdx, Long commUserIdx, String commName, String commText,

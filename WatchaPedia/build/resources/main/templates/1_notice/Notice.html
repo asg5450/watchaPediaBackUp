@@ -16,7 +16,7 @@
             rel="stylesheet"
     />
     <link href="/css/styles.css" rel="stylesheet" />
-    <link href="/css/Notice.css" rel="stylesheet" />
+    <link href="/css/1_notice/Notice.css" rel="stylesheet" />
     <script
             defer
             src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
@@ -73,21 +73,27 @@
                                 <th>등록여부</th>
                             </tr>
                             </tfoot>
-                            <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td onclick="location.href='/notice_view'">
-                                    System Architect
-                                </td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>
+                            <tbody id="noticebody" th:remove="all-but-first">
+                            <tr id="noticetr" th:each="notice : ${notices}">
+                                <td id="ntcIdx" ><a th:text="${notice.ntcIdx}" th:href="@{/notice_view/{id}(id=${notice.ntcIdx})}"></a></td>
+                                <td id="ntcTitle" ><a th:text="${notice.ntcTitle}" th:href="@{/notice_view/{id}(id=${notice.ntcIdx})}"></a></td>
+                                <td id="ntcRegBy" ><a th:text="${notice.ntcRegBy}" th:href="@{/notice_view/{id}(id=${notice.ntcIdx})}"></a></td>
+                                <td id="RegDate" ><a th:text="${notice.RegDate}" th:href="@{/notice_view/{id}(id=${notice.ntcIdx})}"></a></td>
+
+                                <td id="ntcStatusBtn" th:if="${notice.ntcStatus}=='미등록'">
                                     <button
-                                            onclick="change_status()"
+                                            th:onclick="|change_status(${notice.ntcIdx},'등록')|"
                                             id="status_btn"
-                                    ></button>
+                                    >등록</button>
                                 </td>
-                                <td id="status_text"></td>
+                                <td th:if="${notice.ntcStatus}=='등록'">
+                                    <button
+                                            th:onclick="|change_status(${notice.ntcIdx},'미등록')|"
+                                            id="status_btn_active"
+                                    >등록해제</button>
+                                </td>
+                                <td id="ntcStatus" th:text="${notice.ntcStatus}"></td>
+
                             </tr>
                             <tr>
                                 <td>Garrett Winters</td>
@@ -96,14 +102,6 @@
                                 <td>63</td>
                                 <td>2011/07/25</td>
                                 <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
                             </tr>
                             </tbody>
                         </table>
@@ -117,28 +115,6 @@
         </main>
     </div>
 </div>
-<script>
-    const { createApp } = Vue;
-
-    createApp({
-        data() {
-            return {
-                status: false,
-                message: "미등록",
-            };
-        },
-        methods: {
-            change_status: function () {
-                this.status = !this.status;
-                if (this.status == true) {
-                    this.message = "등록";
-                } else {
-                    this.message = "미등록";
-                }
-            },
-        },
-    }).mount("#layoutSidenav");
-</script>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,10 +9,10 @@
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link href="../../css/styles.css" rel="stylesheet" />
-    <link href="../../css/4_comment/commentSearchDetail.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/4_comment/commentSearchDetail.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!--        <link rel="stylesheet" href="../../css/search/commentSearchDetail.css">-->
+    <link rel="stylesheet" href="/css/search/commentSearchDetail.css">
 </head>
 
 <body class="sb-nav-fixed">
@@ -49,20 +49,25 @@
                         <div><img id="comment_movie_poster" class="commImg"></div>
 
                         <div id="photoiddetail">
-                            <!--사용자 이미지 -->   <span><img class="commImg" id="search_comment_photo"src="https://an2-img.amz.wtchn.net/image/v2/Rdrmg0oO_E_meUg0TbP1sQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1UQXdlREV3TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZaR3BoZUdJME5IcE5ka3gzT0M5d2NtOW1hV3hsTHpFMk1qazRNamswT1RJME9UUTJNVEEwTXpJaWZRLjNkX0MzQkZEWGxVSWFPdTFQcHdOTWNybGx2NlAyLTlxRWxEdE43RFRyOVE">
-                                </span>
-                            <!-- 사용자 아이디 -->       <span class="commUsername" >박준영 (영화 담다)</span>
+                            <!--사용자 이미지 -->
+                            <span>
+                                <img class="commImg" id="search_comment_photo"src="https://an2-img.amz.wtchn.net/image/v2/Rdrmg0oO_E_meUg0TbP1sQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1UQXdlREV3TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZaR3BoZUdJME5IcE5ka3gzT0M5d2NtOW1hV3hsTHpFMk1qazRNamswT1RJME9UUTJNVEEwTXpJaWZRLjNkX0MzQkZEWGxVSWFPdTFQcHdOTWNybGx2NlAyLTlxRWxEdE43RFRyOVE">
+                            </span>
+                            <!-- 사용자 아이디 -->
+                            <span class="commUsername" >박준영 (영화 담다)</span>
                             <!-- 인플루언서일 경우 -->
                             <span id="influencer">✅</span>
-                            <!-- 댓글 입력 날짜-->       <span class="movielikereply" id="commRegDate">19일 전</span>
+                            <!-- 댓글 입력 날짜-->
+                            <span class="movielikereply" id="commRegDate">19일 전</span>
 
                         </div>
                         <div class="commText">올빼미</div>
 
-                        <!-- 콘텐츠 종류, 개봉년도--> <div class="movielikereply">
-                        <span>영화</span>
-                        <span>2022</span>
-                    </div>
+                        <!-- 콘텐츠 종류, 개봉년도-->
+                        <div class="movielikereply">
+                            <span>영화</span>
+                            <span>2022</span>
+                        </div>
 
 
 
@@ -109,7 +114,7 @@
             </div>
 
             <div id="searchBackBtn">
-                <button onclick="location.href='/comment/search_list'">뒤로가기</button>
+                <button onclick="history.back()">뒤로가기</button>
             </div>
 
     </div>
@@ -122,11 +127,11 @@
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="../../js/scripts.js"></script>
+<script src="/js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="/assets/demo/chart-area-demo.js"></script>
+<script src="/assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-<script src="../../js/datatables-simple-demo.js"></script>
+<script src="/js/datatables-simple-demo.js"></script>
 </body>
 </html>

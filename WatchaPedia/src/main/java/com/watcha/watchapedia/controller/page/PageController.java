@@ -4,20 +4,13 @@ import com.watcha.watchapedia.dto.UserDto;
 import com.watcha.watchapedia.dto.response.UserResponse;
 import com.watcha.watchapedia.model.dto.CommentDto;
 import com.watcha.watchapedia.model.dto.QnaDto;
-import com.watcha.watchapedia.model.entity.Comment;
-import com.watcha.watchapedia.model.entity.Qna;
-import com.watcha.watchapedia.model.entity.User;
+import com.watcha.watchapedia.model.entity.*;
 import com.watcha.watchapedia.model.entity.type.FormStatus;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
 import com.watcha.watchapedia.model.network.request.QnaRequest;
-import com.watcha.watchapedia.model.network.response.AdminApiResponse;
-import com.watcha.watchapedia.model.network.response.CommentResponse;
-import com.watcha.watchapedia.model.network.response.MovieApiResponse;
-import com.watcha.watchapedia.model.network.response.QnaResponse;
-import com.watcha.watchapedia.model.repository.CommentRepository;
-import com.watcha.watchapedia.model.repository.QnaRepository;
-import com.watcha.watchapedia.model.repository.UserRepository;
+import com.watcha.watchapedia.model.network.response.*;
+import com.watcha.watchapedia.model.repository.*;
 import com.watcha.watchapedia.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +51,12 @@ public class PageController {
 
     @Autowired
     public NoticeApiLogicService noticeApiLogicService;
+
+    @Autowired
+    public final GlobalMethodService globalMethodService;
+
+    @Autowired
+    public QnaService qnaService;
 
     //로그인을 하지 않고 url로 관리페이지로 뚥고 들어오는 것을 방지 (로그인으로 돌려보냄)
     //* 매개변수 첫번째 : HttpServletRequest 객체
@@ -166,23 +166,28 @@ public class PageController {
     //공지사항
     @GetMapping(path="/notice")
     public ModelAndView notice(HttpServletRequest request){
-        return loginInfo(request, "/1_notice/Notice");
+        return loginInfo(request, "/1_notice/Notice").addObject("notices",noticeApiLogicService.noticeList());
     }
 
-    @GetMapping(path="/notice_edit")
-    public ModelAndView notice_edit(HttpServletRequest request){
+
+    @GetMapping(path="/notice_edit/{ntcIdx}")
+    public ModelAndView notice_edit(@PathVariable Long ntcIdx,HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/1_notice/Notice_Edit");
+        Header<NoticeApiResponse> api = noticeApiLogicService.read(ntcIdx);
+        return loginInfo(request, "/1_notice/Notice_Edit").addObject("notice",api.getData());
     }
 
-    @GetMapping(path="/notice_view")
-    public ModelAndView notice_view(HttpServletRequest request){
-        return loginInfo(request, "/1_notice/Notice_View");
+    @GetMapping(path="/notice_view/{ntcIdx}")
+    public ModelAndView notice_view(@PathVariable Long ntcIdx, HttpServletRequest request){
+        Header<NoticeApiResponse> api = noticeApiLogicService.read(ntcIdx);
+        return loginInfo(request, "/1_notice/Notice_View").addObject("notice",api.getData());
     }
+
+
 
     @GetMapping(path="/notice_write")
     public ModelAndView notice_write(HttpServletRequest request){
@@ -259,7 +264,6 @@ public class PageController {
 
 
     // qna 리스트
-    private final QnaService qnaService;
     @GetMapping(path="/qna")
     public String qna(ModelMap map, HttpServletRequest request){
         loginModelInfo(request,map);
@@ -304,12 +308,11 @@ public class PageController {
     }
 
     // qna 답글 완료 데이터 보내기
-   @PostMapping("/qna/{qnaIdx}/qnaview")
-   public String updateQna(@PathVariable Long qnaIdx, @RequestParam(required = false)String qnaText, HttpServletRequest request, ModelMap map){
-       loginModelInfo(request,map);
-       qnaService.updateQna(qnaIdx, qnaText);
-       return "redirect:/qna/{qnaIdx}/qnaview";
-   }
+
+
+
+
+
     /*   @RequestParam Spring MVC에서 쿼리 스트링 정보를 쉽게 가져오는데 사용할 수 있다,
     적용된 필드가 없으면 에러가 발생할 수 있지만 @RequestParam(required = false)를 사용하여
     required 속성을 추가하면 해당 필드가 쿼리스트링에 존재하지 않아도 예외가 발생하지 않는다
@@ -320,16 +323,16 @@ public class PageController {
     public ModelAndView book(HttpServletRequest request){
         return loginInfo(request, "/3_contents/book/book").addObject("books",bookApiLogicService.bookList());
     }
-    @GetMapping(path="/contents/book_edit")
-    public ModelAndView bookEdit(HttpServletRequest request){
+    @GetMapping(path="/contents/book_edit/{bookIdx}")
+    public ModelAndView bookEdit(@PathVariable Long bookIdx,HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
         // 로그인 Check 끝!
-
-        return loginInfo(request, "/3_contents/book/book_edit");
+        Header<BookApiResponse> api = bookApiLogicService.read(bookIdx);
+        return loginInfo(request, "/3_contents/book/book_edit").addObject("book",api.getData());
 //        return new ModelAndView("/3_contents/book/book_edit");
     }
 
@@ -343,9 +346,10 @@ public class PageController {
         // 로그인 Check 끝!
         return loginInfo(request, "/3_contents/book/book_write");
     }
-    @GetMapping(path="/contents/book_detail")
-    public ModelAndView bookDetail(HttpServletRequest request){
-        return loginInfo(request, "/3_contents/book/book_detail");
+    @GetMapping(path="/contents/book_detail/{bookIdx}")
+    public ModelAndView bookDetail(@PathVariable Long bookIdx,HttpServletRequest request){
+        Header<BookApiResponse> api = bookApiLogicService.read(bookIdx);
+        return loginInfo(request, "/3_contents/book/book_detail").addObject("book",api.getData());
     }
 
 
@@ -385,14 +389,15 @@ public class PageController {
         return loginInfo(request, "/3_contents/tv/tv").addObject("tvs",tvApiLogicService.tvList());
     }
 
-    @GetMapping(path="/contents/tv_edit")
-    public ModelAndView tvEdit(HttpServletRequest request){
+    @GetMapping(path="/contents/tv_edit/{tvIdx}")
+    public ModelAndView tvEdit(@PathVariable Long tvIdx,HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/3_contents/tv/tv_edit");
+        Header<TvApiResponse> api = tvApiLogicService.read(tvIdx);
+        return loginInfo(request, "/3_contents/tv/tv_edit").addObject("tv",api.getData());
     }
     @GetMapping(path="/contents/tv_write")
     public ModelAndView tvWrite(HttpServletRequest request){
@@ -403,9 +408,10 @@ public class PageController {
         }
         return loginInfo(request, "/3_contents/tv/tv_write");
     }
-    @GetMapping(path="/contents/tv_detail")
-    public ModelAndView tvDetail(HttpServletRequest request){
-        return loginInfo(request, "/3_contents/tv/tv_detail");
+    @GetMapping(path="/contents/tv_detail/{tvIdx}")
+    public ModelAndView tvDetail(@PathVariable Long tvIdx,HttpServletRequest request){
+        Header<TvApiResponse> api = tvApiLogicService.read(tvIdx);
+        return loginInfo(request, "/3_contents/tv/tv_detail").addObject("tv",api.getData());
     }
 
 
@@ -415,14 +421,15 @@ public class PageController {
         return loginInfo(request, "/3_contents/webtoon/webtoon").addObject("webtoons",webtoonApiLogicService.webtoonList());
 
     }
-    @GetMapping(path="/contents/webtoon_edit")
-    public ModelAndView webtoonEdit(HttpServletRequest request){
+    @GetMapping(path="/contents/webtoon_edit/{webIdx}")
+    public ModelAndView webtoonEdit(@PathVariable Long webIdx,HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/3_contents/webtoon/webtoon_edit");
+        Header<WebtoonApiResponse> api = webtoonApiLogicService.read(webIdx);
+        return loginInfo(request, "/3_contents/webtoon/webtoon_edit").addObject("webtoon",api.getData());
     }
     @GetMapping(path="/contents/webtoon_write")
     public ModelAndView webtoonWrite(HttpServletRequest request){
@@ -433,9 +440,10 @@ public class PageController {
         }
         return loginInfo(request, "/3_contents/webtoon/webtoon_write");
     }
-    @GetMapping(path="/contents/webtoon_detail")
-    public ModelAndView webtoonDetail(HttpServletRequest request){
-        return loginInfo(request, "/3_contents/webtoon/webtoon_detail");
+    @GetMapping(path="/contents/webtoon_detail/{webIdx}")
+    public ModelAndView webtoonDetail(@PathVariable Long webIdx,HttpServletRequest request){
+        Header<WebtoonApiResponse> api = webtoonApiLogicService.read(webIdx);
+        return loginInfo(request, "/3_contents/webtoon/webtoon_detail").addObject("webtoon",api.getData());
     }
 
 
@@ -480,7 +488,13 @@ public class PageController {
     public String comment(HttpServletRequest request, ModelMap map){
         loginModelInfo(request,map);
         List<CommentResponse> comments = commentService.searchComments().stream().map(CommentResponse::from).toList();
-        map.addAttribute("comments", commentService.searchComments());
+
+        //글로벌메소드
+        //매개변수 : List<CommentResponse>
+        //본인 content_type(movie, tv, book, webtoon)에 해당하는 테이블에서만 select해서 제목을 빠르게 받아옴
+        //List<CommentResponse> 반환
+        comments = globalMethodService.getListTitle(comments);
+        map.addAttribute("comments", comments);
         return "/4_comment/search/commentSearchList";
     }
 
@@ -492,6 +506,16 @@ public class PageController {
         loginModelInfo(request,map);
         Optional<Comment> comment = commentRepository.findById(commentIdx);
         CommentResponse commentResponse = CommentResponse.from(CommentDto.from(comment.get()));
+
+
+        //글로벌메소드
+        // 매개변수 : CommentResponse
+        // 0번째 리턴 : postUrl
+        // 1번째 리턴 : title
+        List<String> str = globalMethodService.getPostUrlAndTitle(commentResponse);
+
+        commentResponse = CommentResponse.inserPosterUrl(commentResponse, str.get(0));  //메소드로 받아온 postUrl
+        commentResponse = CommentResponse.insertTitle(commentResponse, str.get(1)); //메소드로 받아온 title
         map.addAttribute("comment", commentResponse);
         return "/4_comment/search/commentSearchDetail";
     }
@@ -531,6 +555,10 @@ public class PageController {
 
     // 멤버 리스트
     final UserService userService;
+    private final MovieRepository movieRepository;
+    private final TvRepository tvRepository;
+    private final BookRepository bookRepository;
+    private final WebtoonRepository webtoonRepository;
 
     @GetMapping(path="/member")
     public String membermanage(HttpServletRequest request, ModelMap map){
@@ -573,8 +601,10 @@ public class PageController {
     }
 
     @GetMapping(path="/hradmin/accountdetail")
-    public ModelAndView hradminaccountdetail(HttpServletRequest request){
-        return loginInfo(request, "/8_admin/hradmin/accountdetail");
+    public String hradminaccountdetail(@PathVariable Long idx, ModelMap map, HttpServletRequest request){
+        loginModelInfo(request,map);
+        //idx로 관리자회원 상세정부를 가져와서 map에 저장하는 내용
+        return "/8_admin/hradmin/accountdetail";
     }
     @GetMapping(path="/hradmin/createaccount")
     public ModelAndView hradmincreateaccount(HttpServletRequest request){
@@ -594,14 +624,18 @@ public class PageController {
         }
         return loginInfo(request, "/8_admin/hradmin/modifyaccount");
     }
+
+    @Autowired
+    private final AdminService adminService;
     @GetMapping(path="/hradmin/searchaccount")
-    public ModelAndView hradminsearchaccount(HttpServletRequest request){
-        // 로그인 Check 시작!
-        ModelAndView loginCheck = loginCheck(request);
-        if(loginCheck != null){
-            return loginCheck;
-        }
-        return loginInfo(request, "/8_admin/hradmin/searchaccount");
+    public String hradminsearchaccount(HttpServletRequest request, ModelMap map){
+        //로그인 세션정보 전달!
+        loginModelInfo(request,map);
+
+        // admin계정 리스트 전달!
+        List<AdminUserResponse> admins = adminService.findAdmins().stream().map(AdminUserResponse::from).toList();
+        map.addAttribute("admins",admins);
+        return "/8_admin/hradmin/searchaccount";
     }
 
     @GetMapping(path="/admin_myinfo")

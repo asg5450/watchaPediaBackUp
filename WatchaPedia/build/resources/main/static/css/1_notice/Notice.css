@@ -22,3 +22,13 @@
 .drag-file{
 
 }
+
+#status_btn{
+    width:100px;
+    height:30px;
+}
+
+#status_btn_active{
+    width:100px;
+    height:30px;
+}

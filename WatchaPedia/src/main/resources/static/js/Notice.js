@@ -1,29 +1,65 @@
-window.onload = () => {
-  const status_btn = document.getElementById("status_btn");
-  const status_text = document.getElementById("status_text");
 
-  if (status_text.textContent == "") {
-    const btnText = document.createTextNode("등록하기");
-    status_btn.appendChild(btnText);
-    const newText = document.createTextNode("미등록");
-    status_text.appendChild(newText);
-  }
-};
 
-function change_status() {
-  if (status_text.textContent == "미등록") {
-    status_text.textContent = "";
-    const newText = document.createTextNode("등록");
-    status_text.appendChild(newText);
-    status_btn.textContent = "";
-    const newText2 = document.createTextNode("해제하기");
-    status_btn.appendChild(newText2);
-  } else {
-    status_text.textContent = "";
-    const newText = document.createTextNode("미등록");
-    status_text.appendChild(newText);
-    status_btn.textContent = "";
-    const newText2 = document.createTextNode("등록하기");
-    status_btn.appendChild(newText2);
+
+function change_status(ntcIdx,ntcStatus) {
+  if(ntcStatus=='등록'){
+    let a = confirm("등록하시겠습니까?");
+    if(a){
+      fetch('http://localhost:9090/api/notice/statusupdate', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "transaction_time":`${new Date()}`,
+          "resultCode":"ok",
+          "description":"정상",
+          "data":{
+            "ntcIdx":ntcIdx,
+            "ntcStatus":ntcStatus
+          }
+        }),
+      })
+          .then((res) => {
+            alert('수정성공')
+            location.reload();
+            return;
+          })
+          .catch((err) => {
+            alert('에러!!');
+            //location.reload();
+            return;
+          });
+    }else{
+      return false;
+    }
+  }else{
+    let a = confirm("등록해제하시겠습니까?")
+    if(a){
+      console.log(ntcIdx+ntcStatus);
+      fetch('http://localhost:9090/api/notice/statusupdate', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "transaction_time":`${new Date()}`,
+          "resultCode":"ok",
+          "description":"정상",
+          "data":{
+            "ntcIdx":`${ntcIdx}`,
+            "ntcStatus":`${ntcStatus}`
+          }
+        }),
+      })
+          .then((res) => {
+            alert('수정성공')
+            location.reload();
+            return;
+          })
+          .catch((err) => {
+            alert('에러!!');
+            //location.reload();
+            return;
+          });
+    }else{
+      return false;
+    }
   }
 }

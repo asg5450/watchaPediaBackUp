@@ -8,8 +8,5 @@
         <attr sel=".qna-atext" th:text="'설명 : '+${qna.qnaAtext}"/>
         <attr sel=".qna-status" th:text="'알림 이메일 주소 : '+${qna.qnaName}"/>
     </attr>
-
-    <attr sel="#QQ" th:action="'/qna/' + ${qna.qnaIdx} + '/qnaview'" th:method="post">
-      <attr sel="#QBox" th:value="${qna?.qnaDtext} ? ${qna?.qnaDtext} :_"/>
-    </attr>
+    <attr sel="#btn1" th:onclick="|submitreply(${qna.qnaIdx})|"/>
 </thlogic>

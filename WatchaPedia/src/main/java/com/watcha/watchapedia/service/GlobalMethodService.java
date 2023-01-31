@@ -1,12 +1,19 @@
 package com.watcha.watchapedia.service;
 
-import com.watcha.watchapedia.model.entity.Person;
+import com.watcha.watchapedia.model.entity.*;
+import com.watcha.watchapedia.model.network.response.CommentResponse;
 import com.watcha.watchapedia.model.network.response.PersonApiResponse;
+import com.watcha.watchapedia.model.repository.BookRepository;
+import com.watcha.watchapedia.model.repository.MovieRepository;
+import com.watcha.watchapedia.model.repository.TvRepository;
+import com.watcha.watchapedia.model.repository.WebtoonRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +23,18 @@ public class GlobalMethodService {
     private final TvApiLogicService tvApiLogicService;
     private final BookApiLogicService bookApiLogicService;
     private final WebtoonApiLogicService webtoonApiLogicService;
+
+    @Autowired
+    private final MovieRepository movieRepository;
+
+    @Autowired
+    private final TvRepository tvRepository;
+
+    @Autowired
+    private final BookRepository bookRepository;
+
+    @Autowired
+    private final WebtoonRepository webtoonRepository;
 
     public PersonApiResponse serachResponse(Person person){
 
@@ -124,4 +143,79 @@ public class GlobalMethodService {
         System.out.println("PersonApiResponse형태로 뽑아낸 결과 : " + personApiResponse);
         return personApiResponse;
     }
+
+    //코멘트 상세보기 페이지에서 사용되는 포스터 src주소 + 해당 코멘트의 컨텐츠 제목을 리턴하는 메소드
+    // 매개변수 = CommentResponse
+    // 0번째 인덱스 리턴 = postUrl
+    // 1번째 인덱스 리턴 = title
+    public List<String> getPostUrlAndTitle(CommentResponse commentResponse){
+
+        //리턴해줄 List<String>
+        List<String> str = new ArrayList<>();
+
+        String posterUrl = "";
+        String title = "";
+
+        switch (commentResponse.commContentType()){
+            case "movie":
+                //select문을 한 번 찾아서 변수 2개 추출
+                Optional<Movie> movie = movieRepository.findByMovIdx(commentResponse.commContentIdx());
+                title = movie.get().getMovTitle();
+                posterUrl = movie.get().getMovThumbnail();
+
+                break;
+            case "tv":
+                Optional<Tv> tv = tvRepository.findByTvIdx(commentResponse.commContentIdx());
+                title = tv.get().getTvTitle();
+                posterUrl = tv.get().getTvThumbnail();
+                break;
+            case "book":
+                //select문을 한 번 찾아서 변수 2개 추출
+                Optional<Book> book = bookRepository.findByBookIdx(commentResponse.commContentIdx());
+                title = book.get().getBookTitle();
+                posterUrl = book.get().getBookThumbnail();
+                break;
+            case "webtoon","웹툰":
+                //select문을 한 번 찾아서 변수 2개 추출
+                Optional<Webtoon> webtoon = webtoonRepository.findByWebIdx(commentResponse.commContentIdx());
+                title = webtoon.get().getWebTitle();
+                posterUrl = webtoon.get().getWebThumbnail();
+        }
+
+        str.add(posterUrl);
+        str.add(title);
+
+        return str;
+    }
+
+    public List<CommentResponse> getListTitle(List<CommentResponse> comments){
+
+        List<CommentResponse> data = new ArrayList<>();
+
+        for(CommentResponse c : comments){
+            switch (c.commContentType()){
+                case "movie":
+                    String movieTitle = movieRepository.findTitleByMovIdx(c.commContentIdx()).getMovTitle();
+                    data.add(c.insertTitle(c, movieTitle));
+                    break;
+                case "tv":
+                    String tvTitle = tvRepository.findTitleByTvIdx(c.commContentIdx()).getTvTitle();
+                    data.add(c.insertTitle(c, tvTitle));
+                    break;
+                case "book":
+                    String bookTitle = bookRepository.findTitleByBookIdx(c.commContentIdx()).getBookTitle();
+                    data.add(c.insertTitle(c, bookTitle));
+                    break;
+                case "webtoon","웹툰":
+                    String webtoonTitle = webtoonRepository.findTitleByWebIdx(c.commContentIdx()).getWebTitle();
+                    data.add(c.insertTitle(c, webtoonTitle));
+            }
+
+        }
+        return data;
+    }
+
+
+
+
 }

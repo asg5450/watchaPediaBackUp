@@ -9,4 +9,5 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface TvRepository extends JpaRepository<Tv, Long> {
     Optional<Tv> findByTvIdx(Long TvIdx);
+    Tv findTitleByTvIdx(Long TvIdx);
 }

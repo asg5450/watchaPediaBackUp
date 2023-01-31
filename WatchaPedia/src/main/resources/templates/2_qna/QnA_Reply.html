@@ -50,15 +50,15 @@
                                 <p class="qna-atext">설명 : </p>
                                 <p class="qna-status">알림 이메일 주소 : </p>
                             </div>
-<!--                            <form id="QQ" th:action="'/qna/' + ${qna.qnaIdx} + '/qnaview'" th:object="${qna}" method="post" value="put">-->
-                            <form id="QQ">
-                                답변:
-                                <input type="text" id="QBox" style="width: 100%; height: 250px;" class="Qna_answer" name="qnaText"  required >
-                                <div id="btn0">
-                                    <button id="btn1" type="submit">답변완료</button>
-                                    <button id="btn2" onclick="location.href='/qna'">뒤로가기</button>
-                                </div>
-                            </form>
+                            <!--                            <form id="QQ" th:action="'/qna/' + ${qna.qnaIdx} + '/qnaview'" th:object="${qna}" method="post" value="put">-->
+
+                            답변:
+                            <input type="text" id="QBox" style="width: 100%; height: 250px;" class="Qna_answer" name="qnaText"  required >
+                            <div id="btn0">
+                                <button id="btn1" >답변완료</button>
+                                <button id="btn2" onclick="location.href='/qna'">뒤로가기</button>
+                            </div>
+
 
                         </div>
                     </div>

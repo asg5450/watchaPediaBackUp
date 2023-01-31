@@ -2,10 +2,15 @@
 
 #search_comment_photo { width: 25px; height: 25px; border-radius: 50px;}
 form > div:nth-child(3) { font-size: 80%; font-size: large;}
-#comment_movie_poster { width: 5%; float:right; }
+#comment_movie_poster { width: 10%; float:right; }
 
 #commentdetail { width: 100%; margin-bottom: 3%;}
 .movielikereply { font-size: small; margin-bottom: 2%;}
+
+.commText{
+    width: 90%;
+}
+
 
 #room { width: 1.2%;}
 #like_reply {
@@ -31,10 +36,9 @@ form > div:nth-child(3) { font-size: 80%; font-size: large;}
 
 }
 #date {
-    border: 1px solid black;
-    height: 25px;
-    width: 50px;
-    font-size: 10px;
+    font-size: 14px;
+    padding: 3px;
+    margin-right: 10px;
     color: rgb(130, 129, 129);
 }
 

@@ -33,6 +33,12 @@ public class Header<T> {
                 .resultCode("ERROR").description(description).build();
     }
 
+    public static <T> Header<T> ERROR(){
+        return (Header<T>)Header.builder().transactionTime(LocalDateTime.now())
+                .resultCode("ERROR").build();
+    }
+
+
 
 
 }

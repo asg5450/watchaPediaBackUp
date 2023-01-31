@@ -182,7 +182,7 @@ createApp({
             })
                 .then((header) => {
                     alert('등록성공')
-                    location.href='/login';
+                    location.href='/hradmin/searchaccount';
                     return;
                 })
                 .catch((err) => {

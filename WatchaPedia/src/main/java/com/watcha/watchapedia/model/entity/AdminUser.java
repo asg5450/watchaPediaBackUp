@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity(name = "tbAdminUser")
@@ -27,5 +28,35 @@ public class AdminUser extends BaseEntity implements Auditable {
     private String adminPw ;
     private String adminNumber;
     private String adminType ;
+
+    public AdminUser(String adminName, String adminId,
+                     String adminPw, String adminNumber,
+                     String adminType){
+
+        this.adminName = adminName;
+        this.adminId = adminId;
+        this.adminPw = adminPw;
+        this.adminNumber = adminNumber;
+        this.adminNumber = adminType;
+    }
+
+    public static AdminUser of(String adminName, String adminId,
+                               String adminPw, String adminNumber,
+                               String adminType){
+        return new AdminUser(adminName, adminId, adminPw, adminNumber, adminType);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(adminIdx);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(!(obj instanceof AdminUser adminUser)) return false;
+        return adminIdx != null;
+    }
 
 }

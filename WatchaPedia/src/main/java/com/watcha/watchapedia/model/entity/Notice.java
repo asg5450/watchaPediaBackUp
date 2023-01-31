@@ -19,12 +19,13 @@ import javax.persistence.Id;
 public class Notice extends BaseEntity implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ntcIdx;
     private String ntcTitle;
     private String ntcText;
-    private int ntcRegBy;
+    private String ntcRegBy;
     private String ntcStatus;
     private String ntcImagepath;
     private String ntcBtnColor;
     private String ntcBtnText;
+    private String ntcBtnLink;
 }

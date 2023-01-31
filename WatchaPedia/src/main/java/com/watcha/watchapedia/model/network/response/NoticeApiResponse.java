@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NoticeApiResponse {
-    private Long id;
+    private Long ntcIdx;
     private String ntcTitle;
     private String ntcText;
     private String ntcRegBy;
@@ -18,4 +18,5 @@ public class NoticeApiResponse {
     private String ntcImagepath;
     private String ntcBtnColor;
     private String ntcBtnText;
+    private String ntcBtnLink;
 }

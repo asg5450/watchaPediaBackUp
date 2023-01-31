@@ -8,4 +8,5 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface WebtoonRepository extends JpaRepository<Webtoon, Long> {
     Optional<Webtoon> findByWebIdx(Long WebIdx);
+    Webtoon findTitleByWebIdx(Long WebIdx);
 }
