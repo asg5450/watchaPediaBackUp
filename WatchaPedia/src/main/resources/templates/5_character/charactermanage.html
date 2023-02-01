@@ -15,13 +15,29 @@
       href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
       rel="stylesheet"
     />
-    <link href="../../css/styles.css" rel="stylesheet" />
-    <link href="../../css/5_character/character_manage.css" rel="stylesheet" />
-    <script
+    <link defer href="../../css/styles.css" rel="stylesheet" />
+    <link defer href="../../css/5_character/character_manage.css" rel="stylesheet" />
+    <script defer
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://unpkg.com/vue@3"></script>
+    <script defer src="https://unpkg.com/vue@3"></script>
+    <script defer
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"
+    ></script>
+    <script defer src="../js/scripts.js"></script>
+    <script defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+            crossorigin="anonymous"
+    ></script>
+    <script defer src="assets/demo/chart-area-demo.js"></script>
+    <script defer src="assets/demo/chart-bar-demo.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
+            crossorigin="anonymous"
+    ></script>
+    <script defer src="../../js/datatables-simple-demo.js"></script>
   </head>
 
   <body class="sb-nav-fixed">
@@ -41,76 +57,62 @@
       </nav>
     </div>
 
-        <div id="layoutSidenav_content">
-          <main>
-            <div class="container-fluid px-4">
-              <h1 class="mt-4">인물관리</h1>
-              <div class="card mb-4">
-                <div class="card-header">
-                  <i class="fas fa-table me-1"></i> 인물관리
-                </div>
-                <div class="card-body">
-                  <table id="datatablesSimple">
-                    <thead></thead>
-                    <tfoot></tfoot>
-                    <tbody>
-                      <tr onclick="location.href='/character_detail'" v-for="line of lines">
-                        <td class="td_flex">
-                          <div v-for="item of items" id="nemonemo">
-                            <div id="nemo">
-                              <a href="#"
-                                ><img
-                                  src="https://an2-img.amz.wtchn.net/image/v2/ZLCTI9X9ZhfqBKwxS6r8Cw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qUXdlREkwTUNKZExDSndJam9pTDNZeEwzQmxiM0JzWlM5dFpXUnBkVzB2T0dOaU9ETTFNMlV6WldJeVpUYzRaREF4TVdFdWFuQm5JbjAuQkh1SE5MRUtNV1FLaGZRWDhuN1UwTENvcDZqc3N2eVRkSjNBVnJDS0J0aw"
-                              /></a>
-                            </div>
-                            <div id="nemotext">
-                              <h5>트위스트 김</h5>
-                              <div id="ex1">1</div>
-                              <div id="ex2">
-                                <div class="exBox">무야호</div>
-                                <div class="exBox">나야나</div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <button class="dataTable-pagination"  onclick = "location.href = '/character_register'">등록하기</button>
-                </div>
-              </div>
+    <div id="layoutSidenav_content">
+      <main>
+        <div class="container-fluid px-4">
+          <h1 class="mt-4">인물관리</h1>
+
+          <div class="card mb-4">
+            <div class="card-header">
+              <i class="fas fa-table me-1"></i>
+              인물관리
             </div>
-          </main>
+            <div class="card-body">
+              <table id="datatablesSimple">
+                <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>사진</th>
+                  <th>이름</th>
+                  <th>역할</th>
+
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                  <th>번호</th>
+                  <th>사진</th>
+                  <th>이름</th>
+                  <th>역할</th>
+
+                </tr>
+                </tfoot>
+                <tbody id="charactertbody" th:remove="all-but-first">
+                <tr id="charactertr" th:each="character : ${characters}">
+                  <td id="perIdx" ><a th:text="${character.perIdx}" th:href="@{/character_detail/{id}(id=${character.perIdx})}"></a></td>
+                  <td id="perPhoto" ><a th:href="@{/character_detail/{id}(id=${character.perIdx})}"><img th:src="${character.perPhoto}"></a></td>
+                  <td id="perName" ><a th:text="${character.perName}" th:href="@{/character_detail/{id}(id=${character.perIdx})}"></a></td>
+                  <td id="perRole" ><a th:text="${character.perRole}" th:href="@{/character_detail/{id}(id=${character.perIdx})}"></a></td>
+                </tr>
+                <tr>
+                  <th>번호</th>
+                  <td>Tiger Nixon</td>
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="MBox">
+              <button id="btn1" onclick="location.href='/character_register'">등록</button>
+            </div>
+          </div>
         </div>
+      </main>
+
+    </div>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="../js/scripts.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
-      crossorigin="anonymous"
-    ></script>
-    <script src="../../js/datatables-simple-demo.js"></script>
-    <script>
-      const { createApp } = Vue;
-
-      createApp({
-        data() {
-          return {
-            items: [1, 2, 3],
-            lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-          };
-        },
-      }).mount("#layoutSidenav_content");
-    </script>
   </body>
 </html>

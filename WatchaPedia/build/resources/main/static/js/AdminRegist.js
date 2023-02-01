@@ -180,16 +180,21 @@ createApp({
                     }
                 })
             })
-                .then((header) => {
-                    alert('등록성공')
-                    location.href='/hradmin/searchaccount';
-                    return;
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.resultCode == 'OK') {
+                        alert('등록성공');
+                        location.href='/login';
+                    } else {
+                        alert('등록에 실패하였습니다. 다시한번 확인해주세요')
+                    }
                 })
                 .catch((err) => {
-                    alert('에러!!')
-                    location.reload()
-                    return;
-                })
+                    alert('에러발생');
+                    location.reload();
+                });
+
+
         }
     }
 }).mount('#main_box')

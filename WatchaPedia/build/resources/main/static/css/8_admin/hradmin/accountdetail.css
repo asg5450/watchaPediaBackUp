@@ -11833,3 +11833,31 @@ body{
 button{
   border: solid 1px;
 }
+
+#admin-name{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+}
+
+#admin-number{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+}
+
+#admin-type{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+}
+
+#admin-id{
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+}

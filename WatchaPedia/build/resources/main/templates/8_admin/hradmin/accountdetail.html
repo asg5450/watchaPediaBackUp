@@ -36,7 +36,7 @@
                     <div>정말로 삭제 하시겠습니까?</div>
                     <div class="button-wrap">
                       <button @click="isModal=!isModal" class="ok">취소</button>
-                      <button @click="isModal=!isModal" class="no">확인</button>
+                      <button onclick="deleteAccount()" class="no">확인</button>
                     </div>
                   </div>
                 </div>
@@ -50,22 +50,23 @@
                         <div id = "content_side_center_box">
                             <form id = "content_updown_center_box">
                                 <div id = "input_box">
-                                    <table id="detail_table">
+                                    <table id="account-table">
+                                        <div id="admin-adminIdx" hidden></div>
                                         <tr>
                                             <td class="graytd">이름</td>
-                                            <td>자바왕</td>
+                                            <td id="admin-name">자바왕</td>
                                         </tr>
                                         <tr>
                                             <td class="graytd">사원번호</td>
-                                            <td>111111</td>
+                                            <td id="admin-number">111111</td>
                                         </tr>
                                         <tr>
                                             <td class="graytd">관리자유형</td>
-                                            <td>인사관리자</td>
+                                            <td id="admin-type">인사관리자</td>
                                         </tr>
                                         <tr>
                                             <td class="graytd">아이디</td>
-                                            <td>amy1228</td>
+                                            <td id="admin-id">amy1228</td>
                                         </tr>
                                     </table>
 
@@ -87,13 +88,40 @@
 
         <script>
             const { createApp } = Vue;
-            createApp({
+
+            let modalVue = createApp({
               data() {
                 return {
                   isModal: false,
                 };
               },
             }).mount("#app");
+
+            function deleteAccount(){
+                modalVue.isModal = false;
+
+                const adminIdx = document.getElementById("admin-adminIdx")
+
+                console.log(adminIdx)
+
+                fetch('http://localhost:9090/api/admin/delete',{
+                    method: 'POST',
+                    headers: { 'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        "transaction_time":`${new Date()}`,
+                        "resultCode":"ok",
+                        "data":{
+                            "adminIdx":`${adminIdx.innerText}`
+                        },
+                        "description":"정상"
+                    })
+                })
+                    .then((res) => {
+                        alert('삭제성공!');
+                        location.href = '/hradmin/searchaccount';
+                    })
+            }
+
           </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/js/scripts.js"></script>

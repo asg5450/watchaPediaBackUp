@@ -11,10 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AdminService {
-
     final AdminRepository adminRepository;
-
-    @Transactional
     public List<AdminUserDto> findAdmins(){
         return adminRepository.findAllByOrderByAdminIdxDesc().stream().map(AdminUserDto::from).toList();
     }

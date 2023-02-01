@@ -22,7 +22,7 @@ import java.util.Objects;
 public class AdminUser extends BaseEntity implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminIdx ;
+    private Long adminIdx;
     private String adminName ;
     private String adminId ;
     private String adminPw ;

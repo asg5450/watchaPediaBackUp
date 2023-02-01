@@ -188,15 +188,20 @@ function submitCheck() {
       }
     }),
   })
-      .then((res) => {
-        alert('등록성공')
-        //location.href='/notice';
-        return;
+
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.resultCode == 'OK') {
+          alert('등록성공');
+          location.href='/notice';
+        } else {
+          alert('등록에 실패하였습니다. 다시한번 확인해주세요')
+        }
       })
       .catch((err) => {
-        alert('에러!!');
+        alert('에러발생');
         location.reload();
-        return;
       });
+
 
 }

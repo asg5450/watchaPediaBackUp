@@ -1,12 +1,17 @@
 package com.watcha.watchapedia.service;
 
 import com.watcha.watchapedia.model.entity.AdminUser;
+import com.watcha.watchapedia.model.entity.Notice;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.AdminApiRequest;
+import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
 import com.watcha.watchapedia.model.network.response.AdminApiResponse;
+import com.watcha.watchapedia.model.network.response.NoticeApiResponse;
 import com.watcha.watchapedia.model.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +21,7 @@ public class AdminApiLogicService extends BaseService<AdminApiRequest, AdminApiR
 
     private AdminApiResponse response(AdminUser admin){
         AdminApiResponse adminApiResponse = AdminApiResponse.builder()
-                .id(admin.getAdminIdx())
+                .adminIdx(admin.getAdminIdx())
                 .adminId(admin.getAdminId())
                 .adminName(admin.getAdminName())
                 .adminNumber(admin.getAdminNumber())
@@ -62,7 +67,8 @@ public class AdminApiLogicService extends BaseService<AdminApiRequest, AdminApiR
 
     @Override
     public Header<AdminApiResponse> read(Long id) {
-        return null;
+        return adminRepository.findById(id).map(admin -> response(admin))
+                .map(Header::OK).orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
     public Header<AdminApiResponse> read(String userid, String userpw) {
@@ -72,12 +78,40 @@ public class AdminApiLogicService extends BaseService<AdminApiRequest, AdminApiR
     }
 
     @Override
-    public Header<AdminApiResponse> update(Header<AdminApiRequest> request) {
-        return null;
+    public Header<AdminApiResponse> update(Header<AdminApiRequest> request){
+        System.out.println("adminapilogicservice update 실행");
+        AdminApiRequest adminApiRequest = request.getData();
+        Optional<AdminUser> admin = adminRepository.findById(adminApiRequest.getAdminIdx());
+        System.out.println("request.getData().getOldPw()"+request.getData().getOldPw());
+        System.out.println("admin.get().getAdminPw()"+admin.get().getAdminPw());
+        if(request.getData().getOldPw().equals(admin.get().getAdminPw())){
+            System.out.println("입력한비번이 기존비번과 같음");
+            return admin.map(
+                            admins -> {
+                                admins.setAdminPw(adminApiRequest.getAdminPw());
+                                return admins;
+                            })
+                    .map(ad -> adminRepository.save(ad))
+                    .map(adm -> response(adm))
+                    .map(Header::OK)
+                    .orElseGet(() -> Header.ERROR("데이터 없음")
+                    );
+        }else{
+            System.out.println("입력한비번이 기존비번과 다름");
+            return Header.ERROR("데이터 없음");
+        }
     }
 
     @Override
-    public Header<AdminApiResponse> delete(Long id) {
-        return null;
+    public Header delete(Long id) {
+        System.out.println("로직서비스에 delete 진입");
+        Optional<AdminUser> users = adminRepository.findById(id);
+        return users.map(user -> {
+            adminRepository.delete(user);
+            System.out.println("delete메소드 뒤!");
+            return Header.OK();
+        }).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
+
+
 }

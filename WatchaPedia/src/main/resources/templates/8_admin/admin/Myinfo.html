@@ -39,22 +39,23 @@
                       <table>
                         <tr class="itr">
                           <th class="ith">이름</th>
-                          <td class="itd">진용진</th>
+                          <td class="itd" th:text="${myinfo.adminName}">진용진</th>
                         </tr>
                         <tr class="itr">
                           <th class="ith">사원번호</th>
-                          <td class="itd">1827457290</td>
+                          <td class="itd" th:text="${myinfo.adminNumber}">1827457290</td>
                         </tr>
                         <tr class="itr">
                           <th class="ith">관리자유형</th>
-                          <td class="itd">일반관리자</td>
+                          <td class="itd" th:text="${myinfo.adminType}">일반관리자</td>
                         </tr>
                         <tr class="itr">
                           <th class="ith">아이디</th>
-                          <td class="itd">spring01</td>
+                          <td class="itd" th:text="${myinfo.adminId}">spring01</td>
                         </tr>
                       </table>
-                      <div class="ok_btn"><button onclick="location.href='/admin_myinfomodify'" >비밀번호 수정</button></div>
+                      <div class="ok_btn"><button th:onclick="|location.href='/admin_myinfomodify/${myinfo.adminIdx}'|">비밀번호 수정</button></div>
+
                     </div>
                   </div>
                 </div>

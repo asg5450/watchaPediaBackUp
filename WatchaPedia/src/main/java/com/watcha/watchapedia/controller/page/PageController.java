@@ -2,6 +2,7 @@ package com.watcha.watchapedia.controller.page;
 
 import com.watcha.watchapedia.dto.UserDto;
 import com.watcha.watchapedia.dto.response.UserResponse;
+import com.watcha.watchapedia.model.dto.AdminUserDto;
 import com.watcha.watchapedia.model.dto.CommentDto;
 import com.watcha.watchapedia.model.dto.QnaDto;
 import com.watcha.watchapedia.model.entity.*;
@@ -57,6 +58,9 @@ public class PageController {
 
     @Autowired
     public QnaService qnaService;
+
+    @Autowired
+    public CharacterApiLogicService characterApiLogicService;
 
     //로그인을 하지 않고 url로 관리페이지로 뚥고 들어오는 것을 방지 (로그인으로 돌려보냄)
     //* 매개변수 첫번째 : HttpServletRequest 객체
@@ -133,7 +137,7 @@ public class PageController {
         //일치하는 계정의 data가 있으면 세션 저장!
         if(accountCheck.getData() != null){
             HttpSession session = request.getSession();
-            Long adminIdx = accountCheck.getData().getId();
+            Long adminIdx = accountCheck.getData().getAdminIdx();
             String adminName = accountCheck.getData().getAdminName();
             String adminType = accountCheck.getData().getAdminType();
             session.setAttribute("adminIdx", adminIdx); //해당 관리자의 행적을 기록하기 위한 관리자Idx
@@ -519,27 +523,50 @@ public class PageController {
         map.addAttribute("comment", commentResponse);
         return "/4_comment/search/commentSearchDetail";
     }
-    @GetMapping(path="/character_detail")
-    public ModelAndView characterdetail(HttpServletRequest request){
-        return loginInfo(request, "/5_character/characterdetail");
+    @GetMapping(path="/character_detail/{perIdx}")
+
+
+    public ModelAndView characterdetail(@PathVariable Long perIdx, HttpServletRequest
+
+            request){
+        Header<CharacterApiResponse> api = characterApiLogicService.read(perIdx);
+
+
+        return loginInfo(request, "/5_character/characterdetail").addObject("character",api.getData());
+
     }
     @GetMapping(path="/character_manage")
     public ModelAndView charactermanage(HttpServletRequest request){
-        // 로그인 Check 시작!
+// 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/5_character/charactermanage");
+        System.out.println("페이지컨트롤러에는 잘들어오는데");
+
+        return loginInfo(request, "/5_character/charactermanage").addObject("characters",characterApiLogicService.characterList());
+
     }
+
+    //인물 시작
     @GetMapping(path="/character_register")
     public ModelAndView characterregister(HttpServletRequest request){
-        // 로그인 Check 시작!
+// 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
         return loginInfo(request, "/5_character/characterregister");
+    }
+    @GetMapping(path="/character_modify/{perIdx}")
+    public ModelAndView charactermodify(@PathVariable Long perIdx,HttpServletRequest request){
+// 로그인 Check 시작!
+        ModelAndView loginCheck = loginCheck(request);
+        if(loginCheck != null){
+            return loginCheck;
+        }
+        Header<CharacterApiResponse> api = characterApiLogicService.read(perIdx);
+        return loginInfo(request, "/5_character/charactermodify").addObject("character",api.getData());
     }
 
     // 멤버 디테일
@@ -600,10 +627,15 @@ public class PageController {
         return loginInfo(request, "/7_advertisement/adRegist");
     }
 
-    @GetMapping(path="/hradmin/accountdetail")
-    public String hradminaccountdetail(@PathVariable Long idx, ModelMap map, HttpServletRequest request){
+    final AdminRepository adminRepository;
+
+    @GetMapping(path="/hradmin/{adminIdx}")
+    public String hradminaccountdetail(@PathVariable Long adminIdx, ModelMap map, HttpServletRequest request){
         loginModelInfo(request,map);
         //idx로 관리자회원 상세정부를 가져와서 map에 저장하는 내용
+        Optional<AdminUser> adminUser = adminRepository.findById(adminIdx);
+        AdminUserResponse adminUserResponse = AdminUserResponse.from(AdminUserDto.from(adminUser.get()));
+        map.addAttribute("adminUser", adminUserResponse);
         return "/8_admin/hradmin/accountdetail";
     }
     @GetMapping(path="/hradmin/createaccount")
@@ -640,22 +672,23 @@ public class PageController {
 
     @GetMapping(path="/admin_myinfo")
     public ModelAndView myinfo(HttpServletRequest request){
-        // 로그인 Check 시작!
+// 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/8_admin/admin/Myinfo");
+        HttpSession session = request.getSession();
+        Header<AdminApiResponse> api = adminApiLogicService.read((Long)session.getAttribute("adminIdx"));
+        return loginInfo(request, "/8_admin/admin/Myinfo").addObject("myinfo",api.getData());
     }
 
-    @GetMapping(path="/admin_myinfomodify")
-    public ModelAndView myinfomodify(HttpServletRequest request){
-        // 로그인 Check 시작!
+    @GetMapping(path="/admin_myinfomodify/{adminIdx}")
+    public ModelAndView myinfomodify(HttpServletRequest request,@PathVariable Long adminIdx){
+// 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/8_admin/admin/Myinfomodify");
+        return loginInfo(request, "/8_admin/admin/Myinfomodify").addObject("adminIdx",adminIdx);
     }
-
 }

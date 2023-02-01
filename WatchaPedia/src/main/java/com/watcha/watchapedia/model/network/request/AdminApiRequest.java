@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class AdminApiRequest {
+    private Long adminIdx;
     private String adminName;
-    private String adminId; // asg
+    private String adminId;
     private String adminPw;
     private String adminNumber;
     private String adminType;
+    private String oldPw;
 }

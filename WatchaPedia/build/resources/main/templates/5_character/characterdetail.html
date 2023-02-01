@@ -43,20 +43,20 @@
                             <!-- <div class="card-body"> -->
                                 <table id="">
 
-                                    <img src="./images/camera.png"></img>
-                                    <input type="text" name="name" id="name" value="이름을 입력하는 곳" size="50">
-                                    <input type="text" name="job" id="job" value="직업군" size="1000">
-                                    <input type="text" name="bio" id="bio" value="있으면 바이오그래피">
-                                    <input type="text" name="bio_content" id="bio_content" value="바이오그래피 내용칸" >
+                                    <img th:src="${character.perPhoto}">
+                                    <p th:text="${character.perName}" name="name" id="name" ></p>
+
+                                    <p id="biotitle">바이오그래피</p>
+                                    <p th:text="${character.perBiography}" name="bio" id="bio" ></p>
+
                                     <thead>
                                 </table>
                             </div>
                         </div>
                         <div class="push">
-                            <button id="ch_fix" onclick = "location.href = '/character_manage'">수정하기</button>  <button id="ch_list" onclick = "location.href = '/character_manage'">목록으로</button>
+                            <button id="ch_fix" th:onclick="|location.href='/character_modify/${character.perIdx}'|">수정하기</button>
+                            <button id="ch_list" onclick = "location.href = '/character_manage'">목록으로</button>
                         </div>
-                    </div>
-                    
                 </main>
               
             </div>

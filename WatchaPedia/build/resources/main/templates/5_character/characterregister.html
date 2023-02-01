@@ -12,6 +12,18 @@
         <link href="/css/styles.css" rel="stylesheet" />
         <link href="/css/5_character/character_enroll.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link
+                rel="stylesheet"
+                href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        />
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" />
         <link rel="stylesheet" href="/css/5_character/jsuites.css" type="text/css" />
         <link rel="stylesheet" href="/css/5_character/cropper.css" type="text/css" />
@@ -19,9 +31,7 @@
 
 
         <script  src="https://cdn.jsdelivr.net/npm/jsuites/dist/jsuites.min.js"></script>
-        <script  src="/js/jcropper.js"></script>
-        <script  src="/js/lemonade.js"></script>
-        <script  src='/js/cropper.js'></script>
+        <script defer src="/js/CharacterEnroll.js"></script>
     </head>
     <body class="sb-nav-fixed">
     <!-- topbar.html -->
@@ -51,45 +61,52 @@
                                 인물관리
                             </div>
                             <div class="card-body">
-
                                     프로필사진(240x240)
-                                    <div id='root'></div>
-                                    <script>
-                                        var App = (function() {
-                                            var self = {};
-                                            self.save = function() {
-                                                console.log(self.cropper.getValue());
-                                            }
-                                            var template = `<>
-        <div style="border:1px solid #ccc;">
-            <Cropper @ref="self.cropper" />
-        </div>
-        <input type="button" value="console.log()" onclick="self.save()" />
-    </>`
-                                            return lemonade.element(template, self, { Cropper: Cropper });
-                                        });
-                                        lemonade.render(App, document.getElementById('root'));
-                                    </script>
-                                    <div>
+                                <div class="conBox2">
+                                    <div id="po">
+                                        <span
+                                                style="color: red; font-size: smaller;"
+                                        >*1개의 파일만 등록가능합니다.</span
+                                        >
+                                        <div id="poBox">
+                                            <label for="pobtn">파일 선택 </label>
+                                            <!--당겼을때 출력-->
+                                            <input
+                                                    type="file"
+                                                    accept=".jpg, .jpeg, .png, .gif"
+                                                    id="pobtn"
+                                                    onchange="readLink(this);"
+                                            />
+                                            <div id="poBox2">
+                                                <p class="file">파일 끌어다 추가하기</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
                                     <div>
                                     이름<br> <input type="text" name="name" id="name" size="50"></div>
                                     <div>바이오그래피<br>
                                     <input type="text" name="bio" id="bio" size="10000"></div>
                                 </div>
-                                    <thead>
+
                                 </table>
                             </div>
                         </div>
                         <div class="push">
-                            <button id="ch_regis"  onclick="location.href='/character_detail'">등록하기</button>
+                            <button id="ch_regis"  onclick="sendit()">등록하기</button>
                             <button id="ch_cancel" onclick="location.href='/character_manage'">취소하기</button>
                         </div>
-                    </div>
+
                     
                 </main>
                
             </div>
         </div>
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -97,5 +114,6 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="../js/datatables-simple-demo.js"></script>
+
     </body>
 </html>

@@ -14,5 +14,8 @@ public interface AdminRepository extends JpaRepository<AdminUser, Long> {
     Optional<AdminUser> findByAdminNumber(String adminNumber);
     Optional<AdminUser> findByAdminIdAndAdminPw(String userid, String userpw);
 
+    AdminUser findAppleByAdminIdx(Long id);
+
     List<AdminUser> findAllByOrderByAdminIdxDesc();
+
 }
