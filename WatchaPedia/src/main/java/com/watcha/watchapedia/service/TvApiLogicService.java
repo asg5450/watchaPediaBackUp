@@ -60,7 +60,7 @@ public class TvApiLogicService extends BaseService<TvApiRequest, TvApiResponse, 
                 .tvWatch(tvApiRequest.getTvWatch())
                 .build();
 
-        Tv newTv = baseRepository.save(tv);
+        Tv newTv = tvRepository.save(tv);
         return Header.OK(response(newTv));
     }
 
@@ -68,7 +68,7 @@ public class TvApiLogicService extends BaseService<TvApiRequest, TvApiResponse, 
 
     @Override
     public Header<TvApiResponse> read(Long id) {
-        return baseRepository.findById(id).map(tv -> response(tv))
+        return tvRepository.findById(id).map(tv -> response(tv))
                 .map(Header::OK).orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
@@ -102,14 +102,14 @@ public class TvApiLogicService extends BaseService<TvApiRequest, TvApiResponse, 
     }
     @Override
     public Header delete(Long tvIdx) {
-        Optional<Tv> tv = baseRepository.findById(tvIdx);
+        Optional<Tv> tv = tvRepository.findById(tvIdx);
         return tv.map(tv1 -> {
-            baseRepository.delete(tv1);
+            tvRepository.delete(tv1);
             return Header.OK();
         }).orElseGet(() -> Header.ERROR("데이터 없음"));
     }
     public Header<List<TvApiResponse>> search(){
-        List<Tv> tvs = baseRepository.findAll();
+        List<Tv> tvs = tvRepository.findAll();
         List<TvApiResponse> tvApiResponse = tvs.stream().map(
                 tv -> response(tv)).collect(Collectors.toList());
         return Header.OK(tvApiResponse);

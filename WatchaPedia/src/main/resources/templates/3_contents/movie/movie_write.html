@@ -72,13 +72,16 @@
                     </div>
                 </div>
                 <div class="chooseBtnBox">
-                    <button v-if="person.chooseCheck == null" class="chooseBtn" onclick="choosePerson(this)">선택</button>
-                    <button v-if="person.chooseCheck != null" class="chooseBtn" onclick="choosePerson(this)">✔️선택됨</button>
+                    <button v-if="person.chooseCheck == null" class="chooseBtn" onclick="choseCheck(this)">선택</button>
+                    <button v-if="person.chooseCheck != null" class="chooseBtn" onclick="choseCheck(this)">✔️선택됨</button>
                 </div>
             </div>
-            <!--     검색결과 반복틀 시작!      -->
         </div>
-        <div id="person_search_cancel" onclick="search_cancel()">선택완료</div>
+        <div v-if="modalInnerBtn" id="person_search_cancel" onclick="search_cancel()">선택완료</div>
+        <div v-if="!modalInnerBtn" class="flexCenterCenter">
+            <div class="btn_css" onclick="choosePerson(this)">추가하기</div>
+            <div class="btn_css" onclick="goBackList()">뒤로가기</div>
+        </div>
     </div>
 </div>
 
@@ -555,7 +558,7 @@
                                     </div>
                                     <div class="smallContentBox">
                                         <b>{{person.perName}}</b>
-                                        <p>{{person.perRole}}</p>
+                                        <p>{{person.perJob}}/{{person.perCasting}}</p>
                                     </div>
                                     <div onclick="minusItemlist2(this)" type="button">
                                         <img
@@ -564,6 +567,8 @@
                                                 alt=""
                                         />
                                     </div>
+                                    <div hidden>{{person.perJob}}</div>
+                                    <div hidden>{{person.perCasting}}</div>
                                 </div>
                             </div>
                         </div>

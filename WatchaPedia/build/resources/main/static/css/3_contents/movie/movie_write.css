@@ -577,6 +577,11 @@ img {
   border-bottom: 1px solid darkgray;
 }
 
+.onePersonBigBox.none{
+  display: none;
+  border-bottom: none;
+}
+
 .profileBox{
   width: 20%;
   height: 97%;
@@ -697,6 +702,26 @@ img {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.btn_css{
+  color: white;
+  width: 100px;
+  height: 35px;
+  margin: 6px auto;
+  background-color: rgb(158, 158, 158);
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.flexCenterCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .bg-dark{
   background-color: #343a40;

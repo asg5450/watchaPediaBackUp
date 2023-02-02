@@ -74,11 +74,8 @@ public class GlobalMethodService {
 
         //Webtoon 연출작 ","기준으로 스플릿해서 appearWeb에 담기
         if(person.getPerWebtoon() != null){
-            System.out.println("웹툰 이프문 진입!");
             String[] webArr = person.getPerWebtoon().split(",");
-            System.out.println("webArr에 담긴 값들은 : "+webArr);
             for(String s : webArr){
-                System.out.println("for문 s의 값 : " + s);
                 appearWeb.add(s);
             }
         }
@@ -109,7 +106,6 @@ public class GlobalMethodService {
             if(appearFinal.size() >= 2){
                 break;
             }
-            System.out.println("appearBook이 존재해서 appearFinal + 1");
             appearFinal.add(bookApiLogicService.read(Long.valueOf(s)).getData().getBookTitle());
         }
 
@@ -117,7 +113,6 @@ public class GlobalMethodService {
             if(appearFinal.size() >= 2){
                 break;
             }
-            System.out.println("appearWeb이 존재해서 appearFinal + 1");
             appearFinal.add(webtoonApiLogicService.read(Long.valueOf(s)).getData().getWebTitle());
         }
 
