@@ -524,16 +524,10 @@ public class PageController {
         return "/4_comment/search/commentSearchDetail";
     }
     @GetMapping(path="/character_detail/{perIdx}")
-
-
-    public ModelAndView characterdetail(@PathVariable Long perIdx, HttpServletRequest
-
-            request){
+    public ModelAndView characterdetail(@PathVariable Long perIdx, HttpServletRequest request){
         Header<CharacterApiResponse> api = characterApiLogicService.read(perIdx);
 
-
         return loginInfo(request, "/5_character/characterdetail").addObject("character",api.getData());
-
     }
     @GetMapping(path="/character_manage")
     public ModelAndView charactermanage(HttpServletRequest request){
@@ -654,7 +648,9 @@ public class PageController {
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/8_admin/hradmin/modifyaccount");
+        HttpSession session = request.getSession();
+        Header<AdminApiResponse> api = adminApiLogicService.read((Long)session.getAttribute("adminIdx"));
+        return loginInfo(request, "/8_admin/admin/Myinfo").addObject("myinfo",api.getData());
     }
 
     @Autowired
@@ -672,7 +668,7 @@ public class PageController {
 
     @GetMapping(path="/admin_myinfo")
     public ModelAndView myinfo(HttpServletRequest request){
-// 로그인 Check 시작!
+        // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
@@ -684,7 +680,7 @@ public class PageController {
 
     @GetMapping(path="/admin_myinfomodify/{adminIdx}")
     public ModelAndView myinfomodify(HttpServletRequest request,@PathVariable Long adminIdx){
-// 로그인 Check 시작!
+        // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;

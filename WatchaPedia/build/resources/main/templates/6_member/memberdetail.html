@@ -26,18 +26,14 @@
                 <!-- sidenav.html 끝 -->
 
                 <!-- sidefooter.html -->
-                <div th:replac
-
-
-
-                      e="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
+                <div th:replace="fragment/sidefooter :: sidefooter(${adminId}, ${adminName})"></div>
                 <!-- sidefooter.html 끝 -->
             </nav>
         </div>
         <div id="app">
             <div class="modal-wrap" v-if="v_if_visible">
                 <div class="modal1">
-                    <div style=". font-size: 20px; padding: 10px">알림</div>
+                    <div style="font-size: 20px; padding: 10px">알림</div>
                     <div>이 유저를 인플루언서(유저)로 <br />
                         변경하시겠습니까?
                     </div>
@@ -116,7 +112,6 @@
                     <div id="button">
                     <button  onclick="location.href='/member'">목록으로</button></div>
                 </main>
-
             </div>
         </div>
     </div>

@@ -104,11 +104,9 @@ public class AdminApiLogicService extends BaseService<AdminApiRequest, AdminApiR
 
     @Override
     public Header delete(Long id) {
-        System.out.println("로직서비스에 delete 진입");
         Optional<AdminUser> users = adminRepository.findById(id);
         return users.map(user -> {
             adminRepository.delete(user);
-            System.out.println("delete메소드 뒤!");
             return Header.OK();
         }).orElseGet(() -> Header.ERROR("데이터 없음"));
     }

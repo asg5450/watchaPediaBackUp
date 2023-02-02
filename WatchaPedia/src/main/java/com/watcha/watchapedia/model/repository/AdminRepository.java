@@ -17,5 +17,4 @@ public interface AdminRepository extends JpaRepository<AdminUser, Long> {
     AdminUser findAppleByAdminIdx(Long id);
 
     List<AdminUser> findAllByOrderByAdminIdxDesc();
-
 }

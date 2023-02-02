@@ -5,7 +5,6 @@ import com.watcha.watchapedia.model.entity.AdminUser;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.AdminApiRequest;
 import com.watcha.watchapedia.model.network.request.AdminJustIdxRequest;
-import com.watcha.watchapedia.model.network.request.NoticeApiRequest;
 import com.watcha.watchapedia.model.network.response.AdminApiResponse;
 import com.watcha.watchapedia.service.AdminApiLogicService;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +51,8 @@ public class AdminApiController extends CrudController<AdminApiRequest, AdminApi
         System.out.println("delete메소드 진입");
         Long idx = Long.valueOf(request.getData().getAdminIdx());
         return adminApiLogicService.delete(idx);
+
+
     }
 
     @Override
