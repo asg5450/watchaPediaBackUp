@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "tbUser")
@@ -41,6 +43,11 @@ public class User {
     private String userLikeDirector;
     @Column(length =100)
     private String userLikeGenre;
+
+    @ToString.Exclude
+    @OrderBy("likeIdx DESC")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Like> likeList = new ArrayList<>();
 
     protected User() {}
 

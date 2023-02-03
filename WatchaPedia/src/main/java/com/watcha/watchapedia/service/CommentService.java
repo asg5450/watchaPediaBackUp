@@ -18,7 +18,6 @@ public class CommentService {
     public List<CommentDto> searchComments(){
         //return commentRepository.findAll();
         return commentRepository.findAll().stream().map(CommentDto::from).toList();
-
     }
 
 //    @Transactional(readOnly = true)

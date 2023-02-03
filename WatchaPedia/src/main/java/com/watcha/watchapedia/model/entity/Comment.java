@@ -1,18 +1,18 @@
 package com.watcha.watchapedia.model.entity;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.*;
 
 @Entity(name = "tbComment")
 @Builder
 @Data
 @ToString(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +27,31 @@ public class Comment {
     @Column(length = 200)
     private LocalDateTime commRegDate; // 등록날짜
 
+    //Recomment Entity의 comment컬럼("recomm_comm_idx")가 우리 Long id와 같은 걸 담은 List
+    @ToString.Exclude
+    @OrderBy("recommIdx DESC")
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    private final List<Recomment> recommentList = new ArrayList<>();
+
+    @ToString.Exclude
+    @OrderBy("likeIdx DESC")
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    private final List<Like> likeList = new ArrayList<>();
 
 
 
-    protected Comment() {}
-    private Comment(Long commIdx, Long commUserIdx, String commName, String commText,
-                    String commContentType, Long commContentIdx, LocalDateTime commRegDate
-                        ) {
-        this.commIdx = commIdx;
-        this.commUserIdx = commUserIdx;
-        this.commName = commName;
-        this.commText = commText;
-        this.commContentType = commContentType;
-        this.commContentIdx = commContentIdx;
-        this.commRegDate = commRegDate;
-    }
+//    protected Comment() {}
+//    private Comment(Long commIdx, Long commUserIdx, String commName, String commText,
+//                    String commContentType, Long commContentIdx, LocalDateTime commRegDate
+//                        ) {
+//        this.commIdx = commIdx;
+//        this.commUserIdx = commUserIdx;
+//        this.commName = commName;
+//        this.commText = commText;
+//        this.commContentType = commContentType;
+//        this.commContentIdx = commContentIdx;
+//        this.commRegDate = commRegDate;
+//    }
 
     public static Comment of(Long commIdx, Long commUserIdx, String commName, String commText,
                              String commContentType, Long commContentIdx, LocalDateTime commRegDate

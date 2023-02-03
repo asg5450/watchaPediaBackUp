@@ -1,6 +1,6 @@
 package com.watcha.watchapedia.dto.request;
 
-import com.watcha.watchapedia.dto.UserDto;
+import com.watcha.watchapedia.model.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

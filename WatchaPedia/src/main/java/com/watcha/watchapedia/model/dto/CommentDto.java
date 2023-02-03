@@ -1,8 +1,11 @@
 package com.watcha.watchapedia.model.dto;
 
 import com.watcha.watchapedia.model.entity.Comment;
+import com.watcha.watchapedia.model.entity.Like;
+import com.watcha.watchapedia.model.entity.Recomment;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record CommentDto(
         Long commIdx,
@@ -11,16 +14,18 @@ public record CommentDto(
         String commText,
         String commContentType,
         Long commContentIdx,
-        LocalDateTime commRegDate
+        LocalDateTime commRegDate,
+        List<Recomment> recommentList,
+        List<Like> likeList
 
 ) {
     public static CommentDto of(
             Long commIdx, Long commUserIdx, String commName, String commText,
-            String commContentType, Long commContentIdx, LocalDateTime commRegDate
+            String commContentType, Long commContentIdx, LocalDateTime commRegDate, List<Recomment> recommentList, List<Like> likeList
     ){
 
         return new CommentDto(commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate
+                commContentType,commContentIdx,commRegDate,recommentList,likeList
         );
     }
     public static CommentDto of(
@@ -30,7 +35,7 @@ public record CommentDto(
     ){
 
         return new CommentDto(commIdx, commUserIdx, commName, commText,
-                commContentType,null,commRegDate
+                commContentType,null,commRegDate,null,null
         );
     }
 
@@ -42,9 +47,9 @@ public record CommentDto(
                 entity.getCommText(),
                 entity.getCommContentType(),
                 entity.getCommContentIdx(),
-                entity.getCommRegDate()
-
-
+                entity.getCommRegDate(),
+                entity.getRecommentList(),
+                entity.getLikeList()
         );
     }
     public Comment toEntity(){

@@ -1,8 +1,10 @@
-package com.watcha.watchapedia.dto;
+package com.watcha.watchapedia.model.dto;
 
+import com.watcha.watchapedia.model.entity.Like;
 import com.watcha.watchapedia.model.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record UserDto (
     Long userIdx,
@@ -21,20 +23,21 @@ public record UserDto (
     String userName,
     String userLikeActor,
     String userLikeDirector,
-    String userLikeGenre
+    String userLikeGenre,
+    List<Like> likeList
 ){
     public static UserDto of(
             Long userIdx, String userId, String userPw, Long userSsn1, Long userSsn2,
             String userEmail, String userStatus, Long userCautionCnt, Long userWarningCnt,
             Long userSuspensionCnt, LocalDateTime userLatelyStop, LocalDateTime userReleaseDate,
             String userType, String userName, String userLikeActor, String userLikeDirector,
-            String userLikeGenre
+            String userLikeGenre,List<Like> likeList
     ){
         return new UserDto(
                 userIdx, userId, userPw, userSsn1, userSsn2, userEmail, userStatus,
                 userCautionCnt, userWarningCnt, userSuspensionCnt, userLatelyStop,
                 userReleaseDate, userType, userName, userLikeActor, userLikeDirector,
-                userLikeGenre
+                userLikeGenre,likeList
         );
     }
 
@@ -45,7 +48,7 @@ public record UserDto (
         return new UserDto(
                 null, userId, userPw, userSsn1, userSsn2, userEmail, null,
                 null, null, null, null, null, null, userName, null, null,
-                null
+                null,null
         );
     }
 
@@ -67,7 +70,8 @@ public record UserDto (
                 entity.getUserName(),
                 entity.getUserLikeActor(),
                 entity.getUserLikeDirector(),
-                entity.getUserLikeGenre()
+                entity.getUserLikeGenre(),
+                entity.getLikeList()
         );
     }
 

@@ -210,6 +210,11 @@ public class GlobalMethodService {
         return data;
     }
 
+    public List<Recomment> getComment(){
+
+        return null;
+    }
+
 
 
 

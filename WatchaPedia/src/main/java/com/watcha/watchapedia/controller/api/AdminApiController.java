@@ -48,7 +48,6 @@ public class AdminApiController extends CrudController<AdminApiRequest, AdminApi
 
     @PostMapping("/delete")
     public Header delete(@RequestBody Header<AdminJustIdxRequest> request) {
-        System.out.println("delete메소드 진입");
         Long idx = Long.valueOf(request.getData().getAdminIdx());
         return adminApiLogicService.delete(idx);
 

@@ -3,11 +3,14 @@ package com.watcha.watchapedia.model.network.response;
 
 
 import com.watcha.watchapedia.model.dto.CommentDto;
+import com.watcha.watchapedia.model.entity.Like;
+import com.watcha.watchapedia.model.entity.Recomment;
 import com.watcha.watchapedia.model.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record CommentResponse(
         Long commIdx,
@@ -18,16 +21,18 @@ public record CommentResponse(
         Long commContentIdx,
         LocalDateTime commRegDate,
         String commTitle,
-        String commPosterUrl
+        String commPosterUrl,
+        List<Recomment> recommentList,
+        List<Like> likeList
 
 )implements Serializable {
     //of : 값들을 매개변수로 받아서 => Record형으로 만듬
     public static CommentResponse of(
             Long commIdx, Long commUserIdx, String commName, String commText,
-            String commContentType, Long commContentIdx, LocalDateTime commRegDate,String commTitle,String commPosterUrl
+            String commContentType, Long commContentIdx, LocalDateTime commRegDate,String commTitle,String commPosterUrl,List<Recomment> recommentList,List<Like> likeList
             ){
         return new CommentResponse(commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate,commTitle,commPosterUrl);
+                commContentType,commContentIdx,commRegDate,commTitle,commPosterUrl,recommentList,likeList);
     }
 
     //from : dto를 매개변수로 받아서 => Record형으로 만듬
@@ -42,7 +47,9 @@ public record CommentResponse(
                 dto.commContentIdx(),
                 dto.commRegDate(),
                 null,
-                null
+                null,
+                dto.recommentList(),
+                dto.likeList()
         );
     }
 
@@ -58,7 +65,9 @@ public record CommentResponse(
                 dto.commContentIdx(),
                 dto.commRegDate(),
                 str,
-                dto.commPosterUrl()
+                dto.commPosterUrl(),
+                dto.recommentList(),
+                dto.likeList
         );
     }
 
@@ -72,7 +81,9 @@ public record CommentResponse(
                 dto.commContentIdx(),
                 dto.commRegDate(),
                 dto.commTitle(),
-                str
+                str,
+                dto.recommentList(),
+                dto.likeList()
         );
     }
 

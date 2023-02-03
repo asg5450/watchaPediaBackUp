@@ -1,14 +1,13 @@
 package com.watcha.watchapedia.model.repository;
 
-import com.watcha.watchapedia.model.dto.UserDto;
-import com.watcha.watchapedia.model.entity.User;
+import com.watcha.watchapedia.model.entity.Like;
+import com.watcha.watchapedia.model.entity.Recomment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
-import java.util.Optional;
 
 @RepositoryRestResource
-public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findAllByOrderByUserIdxDesc();
+public interface LikeRepository extends JpaRepository<Like, Long> {
+    List<Like> findByComment_CommIdx(Long id);
 }

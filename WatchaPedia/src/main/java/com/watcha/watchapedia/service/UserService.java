@@ -1,6 +1,6 @@
 package com.watcha.watchapedia.service;
 
-import com.watcha.watchapedia.dto.UserDto;
+import com.watcha.watchapedia.model.dto.UserDto;
 import com.watcha.watchapedia.dto.response.UserResponse;
 import com.watcha.watchapedia.model.entity.User;
 import com.watcha.watchapedia.model.repository.UserRepository;

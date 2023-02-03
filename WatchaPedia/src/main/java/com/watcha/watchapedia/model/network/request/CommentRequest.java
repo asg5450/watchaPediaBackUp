@@ -21,7 +21,7 @@ public record CommentRequest(
     public CommentDto toDto() {
         return CommentDto.of(
                 commIdx, commUserIdx, commName, commText,
-                commContentType,commContentIdx,commRegDate
+                commContentType,commContentIdx,commRegDate,null,null
         );
     }
 }

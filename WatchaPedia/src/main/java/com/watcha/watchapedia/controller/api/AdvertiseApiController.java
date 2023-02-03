@@ -22,7 +22,7 @@ public class AdvertiseApiController extends CrudController<AdvertiseApiRequest, 
     }
 
     @Override
-    @GetMapping("{ntcIdx}")    
+    @GetMapping("{ntcIdx}")
     public Header<AdvertiseApiResponse> read(@PathVariable(name="ntcIdx") Long ntcIdx) {
         return advertiseApiLogicService.read(ntcIdx);
     }

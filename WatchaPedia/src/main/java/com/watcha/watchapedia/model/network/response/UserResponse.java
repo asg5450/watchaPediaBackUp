@@ -1,7 +1,7 @@
 package com.watcha.watchapedia.dto.response;
 
 
-import com.watcha.watchapedia.dto.UserDto;
+import com.watcha.watchapedia.model.dto.UserDto;
 import com.watcha.watchapedia.model.entity.User;
 
 import java.io.Serializable;

@@ -1,10 +1,7 @@
 package com.watcha.watchapedia.controller.page;
 
-import com.watcha.watchapedia.dto.UserDto;
+import com.watcha.watchapedia.model.dto.*;
 import com.watcha.watchapedia.dto.response.UserResponse;
-import com.watcha.watchapedia.model.dto.AdminUserDto;
-import com.watcha.watchapedia.model.dto.CommentDto;
-import com.watcha.watchapedia.model.dto.QnaDto;
 import com.watcha.watchapedia.model.entity.*;
 import com.watcha.watchapedia.model.entity.type.FormStatus;
 import com.watcha.watchapedia.model.network.Header;
@@ -27,6 +24,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -509,22 +508,47 @@ public class PageController {
 
     // commentDetail 출력 (내용, 이미지)
     final CommentRepository commentRepository;
+
+    final RecommentRepository recommentRepository;
+
+    final LikeRepository likeRepository;
+
     @GetMapping(path="/comment/{commentIdx}")
     public String commentdetail(@PathVariable Long commentIdx, ModelMap map, HttpServletRequest request){
+        //로그인 세션정보 전달
         loginModelInfo(request,map);
+        //Comment 테이블에 해당 idx 열을 받아와서 CommentResponseDto에 담음
         Optional<Comment> comment = commentRepository.findById(commentIdx);
         CommentResponse commentResponse = CommentResponse.from(CommentDto.from(comment.get()));
 
-
         //글로벌메소드
         // 매개변수 : CommentResponse
-        // 0번째 리턴 : postUrl
-        // 1번째 리턴 : title
+        // List<String>객체.get(0) 리턴 : postUrl (컨텐츠 포스터 이미지주소)
+        // List<String>객체.get(1) 리턴 : title (컨텐츠 제목)
         List<String> str = globalMethodService.getPostUrlAndTitle(commentResponse);
+
+        //현재일자 - 댓글 등록일자 구하기
+        List<RecommentResponseDto> recommentResponseDtoList = new ArrayList<>();
+        List<Recomment> recommentList = comment.get().getRecommentList();
+        for(Recomment r : recommentList){
+            LocalDateTime today = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
+            LocalDateTime regDay = r.getRecommRegDate().truncatedTo(ChronoUnit.DAYS);
+            Long sicha = ChronoUnit.DAYS.between(regDay,today);
+            String dayAgo = "";
+            if(sicha > 0){
+                dayAgo = sicha + "일전";
+            }else{
+                dayAgo = "오늘";
+            }
+            recommentResponseDtoList.add(RecommentResponseDto.dayAgo(RecommentDto.from(r),dayAgo));
+            System.out.println(RecommentResponseDto.dayAgo(RecommentDto.from(r),dayAgo));
+        }
 
         commentResponse = CommentResponse.inserPosterUrl(commentResponse, str.get(0));  //메소드로 받아온 postUrl
         commentResponse = CommentResponse.insertTitle(commentResponse, str.get(1)); //메소드로 받아온 title
         map.addAttribute("comment", commentResponse);
+        map.addAttribute("recomment", recommentResponseDtoList);
+
         return "/4_comment/search/commentSearchDetail";
     }
     @GetMapping(path="/character_detail/{perIdx}")
