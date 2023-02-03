@@ -188,12 +188,16 @@ public class GlobalMethodService {
         List<CommentResponse> data = new ArrayList<>();
 
         for(CommentResponse c : comments){
+            System.out.println(c);
             switch (c.commContentType()){
                 case "movie":
                     String movieTitle = movieRepository.findTitleByMovIdx(c.commContentIdx()).getMovTitle();
                     data.add(c.insertTitle(c, movieTitle));
                     break;
                 case "tv":
+                    System.out.println(c.commUserIdx());
+                    System.out.println(c.commContentType());
+                    System.out.println(c.commContentIdx());
                     String tvTitle = tvRepository.findTitleByTvIdx(c.commContentIdx()).getTvTitle();
                     data.add(c.insertTitle(c, tvTitle));
                     break;

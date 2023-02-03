@@ -79,6 +79,11 @@ let personsArr = [];
 
 function choseCheck(e){
   if(e.innerText == "선택"){
+    //검색창에 배역입력할 동안 readonly주기
+    const readOnlyAttr = document.createAttribute("readonly")
+    const modal_searchbar = document.getElementById("modal_search_bar")
+    modal_searchbar.setAttributeNode(readOnlyAttr);
+    //배역을 입력하게 해주는 창으로 변경
     personRegist(e);
   }else{
 
@@ -201,6 +206,9 @@ function goBackList(){
 
 //원래는 블록 클릭이였기 때문에 살짝 바꿔줘야 함
 function choosePerson(e){
+  //검색창 readonly 해제
+  const modal_searchbar = document.getElementById("modal_search_bar")
+  modal_searchbar.removeAttribute("readonly")
 
   //모달 하단 버튼 변경
   searchVue.modalInnerBtn = true;
@@ -1137,7 +1145,7 @@ function readLinks(input) {
         return false;
       }
 
-      fetch('http://localhost:8888/api/movie', {
+      fetch('http://localhost:9090/api/movie', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
