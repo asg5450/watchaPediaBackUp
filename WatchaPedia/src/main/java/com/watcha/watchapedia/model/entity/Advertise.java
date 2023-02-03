@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity(name="tbAdvertise")
 @NoArgsConstructor
@@ -19,8 +20,16 @@ import javax.persistence.Id;
 public class Advertise extends BaseEntity implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long adIdx;
     private String adTitle;
-    private String adContent;
+    private String adDescription;
     private String adStatus;
+    private String adVideosource;
+    private String adImagesource;
+    private String adBtnLink;
+    private String adBtnColor;
+    private String adBtnText;
+    private String adClient;
+    private String adClientLogoimage;
+    private LocalDateTime endDate;
 }

@@ -62,6 +62,10 @@ public class PageController {
     @Autowired
     public CharacterApiLogicService characterApiLogicService;
 
+    @Autowired
+    public AdvertiseApiLogicService advertiseApiLogicService;
+
+
     //로그인을 하지 않고 url로 관리페이지로 뚥고 들어오는 것을 방지 (로그인으로 돌려보냄)
     //* 매개변수 첫번째 : HttpServletRequest 객체
     public ModelAndView loginCheck(HttpServletRequest request){
@@ -607,21 +611,47 @@ public class PageController {
         return "redirect:/member/"+userIdx;
     }
 
-    @GetMapping(path="/advertisement_main")
+
+    //광고
+    @GetMapping(path="/advertisement")
     public ModelAndView admain(HttpServletRequest request){
-        return loginInfo(request, "/7_advertisement/adMain");
+        return loginInfo(request, "/7_advertisement/Advertisement").addObject("advertises",advertiseApiLogicService.advertiseList());
     }
-    @GetMapping(path="/advertisement_regist")
-    public ModelAndView adregist(HttpServletRequest request){
+
+    @GetMapping(path="/advertisement_write")
+    public ModelAndView adwrite(HttpServletRequest request){
         // 로그인 Check 시작!
         ModelAndView loginCheck = loginCheck(request);
         if(loginCheck != null){
             return loginCheck;
         }
-        return loginInfo(request, "/7_advertisement/adRegist");
+        return loginInfo(request, "/7_advertisement/Advertisement_Write");
     }
 
-    final AdminRepository adminRepository;
+
+    @GetMapping(path="/advertisement_edit/{adIdx}")
+    public ModelAndView adedit(@PathVariable Long adIdx, HttpServletRequest request){
+        // 로그인 Check 시작!
+        ModelAndView loginCheck = loginCheck(request);
+        if(loginCheck != null){
+            return loginCheck;
+        }
+        Header<AdvertiseApiResponse> api = advertiseApiLogicService.read(adIdx);
+        return loginInfo(request, "/7_advertisement/Advertisement_Edit").addObject("advertise",api.getData());
+    }
+
+
+    @GetMapping(path="/advertisement_view/{adIdx}")
+    public ModelAndView adview(@PathVariable Long adIdx, HttpServletRequest request){
+        // 로그인 Check 시작!
+        ModelAndView loginCheck = loginCheck(request);
+        if(loginCheck != null){
+            return loginCheck;
+        }
+        Header<AdvertiseApiResponse> api = advertiseApiLogicService.read(adIdx);
+        return loginInfo(request, "/7_advertisement/Advertisement_View").addObject("advertise",api.getData());
+    }
+
 
     @GetMapping(path="/hradmin/{adminIdx}")
     public String hradminaccountdetail(@PathVariable Long adminIdx, ModelMap map, HttpServletRequest request){
@@ -655,6 +685,8 @@ public class PageController {
 
     @Autowired
     private final AdminService adminService;
+    private final AdminRepository adminRepository;
+
     @GetMapping(path="/hradmin/searchaccount")
     public String hradminsearchaccount(HttpServletRequest request, ModelMap map){
         //로그인 세션정보 전달!

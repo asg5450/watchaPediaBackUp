@@ -3,10 +3,14 @@ package com.watcha.watchapedia.service;
 import com.watcha.watchapedia.model.entity.Advertise;
 import com.watcha.watchapedia.model.network.Header;
 import com.watcha.watchapedia.model.network.request.AdvertiseApiRequest;
+import com.watcha.watchapedia.model.network.request.AdvertiseStatusApiRequest;
 import com.watcha.watchapedia.model.network.response.AdvertiseApiResponse;
 import com.watcha.watchapedia.model.repository.AdvertiseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,12 +18,19 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
 
     private final AdvertiseRepository advertiseRepository;
 
-    private AdvertiseApiResponse response(Advertise tb_advertise) {
+    private AdvertiseApiResponse response(Advertise advertise) {
         AdvertiseApiResponse advertiseApiResponse = AdvertiseApiResponse.builder()
-                .id(tb_advertise.getId())
-                .adTitle(tb_advertise.getAdTitle())
-                .adContent(tb_advertise.getAdContent())
-                .adStatus(tb_advertise.getAdStatus())
+                .adIdx(advertise.getAdIdx())
+                .adTitle(advertise.getAdTitle())
+                .adDescription(advertise.getAdDescription())
+                .adStatus(advertise.getAdStatus())
+                .adVideosource(advertise.getAdVideosource())
+                .adImagesource(advertise.getAdImagesource())
+                .adBtnColor(advertise.getAdBtnColor())
+                .adBtnLink(advertise.getAdBtnLink())
+                .adBtnText(advertise.getAdBtnText())
+                .adClient(advertise.getAdClient())
+                .adClientLogoimage(advertise.getAdClientLogoimage())
                 .build();
         return advertiseApiResponse;
     }
@@ -31,11 +42,17 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
         System.out.println(advertiseApiRequest);
 
         Advertise tbAdvertise = Advertise.builder()
-                .adTitle(advertiseApiRequest.getAd_title())
-                .adContent(advertiseApiRequest.getAd_content())
-                .adStatus("미등록")
+                .adTitle(advertiseApiRequest.getAdTitle())
+                .adDescription(advertiseApiRequest.getAdDescription())
+                .adStatus(advertiseApiRequest.getAdStatus())
+                .adVideosource(advertiseApiRequest.getAdVideosource())
+                .adImagesource(advertiseApiRequest.getAdImagesource())
+                .adBtnColor(advertiseApiRequest.getAdBtnColor())
+                .adBtnLink(advertiseApiRequest.getAdBtnLink())
+                .adBtnText(advertiseApiRequest.getAdBtnText())
+                .adClient(advertiseApiRequest.getAdClient())
+                .adClientLogoimage(advertiseApiRequest.getAdClientLogoimage())
                 .build();
-
         Advertise newTbAdvertise = advertiseRepository.save(tbAdvertise);
 
         return Header.OK(response(newTbAdvertise));
@@ -43,16 +60,62 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
 
     @Override
     public Header<AdvertiseApiResponse> read(Long id) {
-        return null;
+        return baseRepository.findById(id).map(ad -> response(ad))
+                .map(Header::OK).orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
     @Override
     public Header<AdvertiseApiResponse> update(Header<AdvertiseApiRequest> request) {
-        return null;
+        AdvertiseApiRequest advertiseApiRequest = request.getData();
+        Optional<Advertise> advertises = advertiseRepository.findById(advertiseApiRequest.getAdIdx());
+        return advertises.map(
+                        ad -> {
+                            ad.setAdTitle(advertiseApiRequest.getAdTitle());
+                            ad.setAdDescription(advertiseApiRequest.getAdDescription());
+                            ad.setAdStatus(advertiseApiRequest.getAdStatus());
+                            ad.setAdVideosource(advertiseApiRequest.getAdVideosource());
+                            ad.setAdImagesource(advertiseApiRequest.getAdImagesource());
+                            ad.setAdBtnColor(advertiseApiRequest.getAdBtnColor());
+                            ad.setAdBtnLink(advertiseApiRequest.getAdBtnLink());
+                            ad.setAdBtnText(advertiseApiRequest.getAdBtnText());
+                            ad.setAdClient(advertiseApiRequest.getAdClient());
+                            ad.setAdClientLogoimage(advertiseApiRequest.getAdClientLogoimage());
+                            return ad;
+                        }).map(ad -> advertiseRepository.save(ad))
+                .map(ad -> response(ad))
+                .map(Header::OK)
+                .orElseGet(() -> Header.ERROR("데이터 없음")
+                );
     }
 
+
     @Override
-    public Header<AdvertiseApiResponse> delete(Long id) {
-        return null;
+    public Header delete(Long adIdx) {
+        Optional<Advertise> advertise = baseRepository.findById(adIdx);
+        return advertise.map(advertise1 -> {
+            baseRepository.delete(advertise1);
+            return Header.OK();
+        }).orElseGet(() -> Header.ERROR("데이터 없음"));
+    }
+
+
+    public Header<AdvertiseApiResponse> statusupdate(Header<AdvertiseStatusApiRequest> request) {
+        AdvertiseStatusApiRequest advertiseStatusApiRequest = request.getData();
+        Optional<Advertise> advertises = advertiseRepository.findById(advertiseStatusApiRequest.getAdIdx());
+        return advertises.map(
+                        ad -> {
+                            ad.setAdStatus(advertiseStatusApiRequest.getAdStatus());
+                            return ad;
+                        }).map(ad -> baseRepository.save(ad))
+                .map(ad -> response(ad))
+                .map(Header::OK)
+                .orElseGet(() -> Header.ERROR("데이터 없음")
+                );
+
+
+    }
+
+    public List<Advertise> advertiseList(){
+        return advertiseRepository.findAll();
     }
 }
