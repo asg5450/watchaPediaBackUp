@@ -1,12 +1,15 @@
 package com.watcha.watchapedia.model.network.response;
 
 import com.watcha.watchapedia.model.dto.RecommentDto;
+import com.watcha.watchapedia.model.dto.RelikeDto;
 import com.watcha.watchapedia.model.entity.Comment;
 import com.watcha.watchapedia.model.entity.Recomment;
+import com.watcha.watchapedia.model.entity.Relike;
 import com.watcha.watchapedia.model.entity.User;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public record RecommentResponseDto(
         Long id,
@@ -14,10 +17,11 @@ public record RecommentResponseDto(
         User user,
         String recommName,
         String recommText,
-        String regDateAgo
+        String regDateAgo,
+        List<Relike> relikeList
 ) {
-    public static RecommentResponseDto of(Long id, Comment comment, User user, String recommName, String recommText, String regDateAgo){
-        return new RecommentResponseDto(id, comment, user,recommName, recommText, regDateAgo);
+    public static RecommentResponseDto of(Long id, Comment comment, User user, String recommName, String recommText, String regDateAgo,List<Relike> relikeList){
+        return new RecommentResponseDto(id, comment, user,recommName, recommText, regDateAgo, relikeList);
     }
 
     public static RecommentResponseDto from(RecommentDto recomment){
@@ -34,7 +38,7 @@ public record RecommentResponseDto(
           recomment.id(),
           recomment.comment(),
           recomment.user(),
-          recomment.recommName(), recomment.recommText(), regDateAgo
+          recomment.recommName(), recomment.recommText(), regDateAgo, recomment.relikeList()
         );
     }
 
@@ -43,7 +47,7 @@ public record RecommentResponseDto(
                 recomment.id(),
                 recomment.comment(),
                 recomment.user(),
-                recomment.recommName(), recomment.recommText(), dayAgo
+                recomment.recommName(), recomment.recommText(), dayAgo, recomment.relikeList()
         );
     }
 

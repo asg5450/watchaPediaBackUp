@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @ToString(callSuper=true)
@@ -23,5 +25,10 @@ public class Recomment {
     @Setter @Column(length = 20) private String recommName;
     @Setter private String recommText;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @CreatedDate @Column(nullable = false) private LocalDateTime recommRegDate;
+
+    @ToString.Exclude
+    @OrderBy("relikeIdx DESC")
+    @OneToMany(mappedBy = "recomment", cascade = CascadeType.ALL)
+    private final List<Relike> relikeList = new ArrayList<>();
 
 }

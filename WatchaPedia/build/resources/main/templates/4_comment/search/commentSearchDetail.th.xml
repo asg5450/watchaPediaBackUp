@@ -10,12 +10,12 @@
         <attr sel=".commContentIdx" th:text="'댓글 : '+${#lists.size(comment.recommentList)}"/>
     </attr>
 
-
-
-
     <attr sel="#cocomment" th:each="recomm: ${recomment}">
         <attr sel="#userid" th:text="${recomm.user.userId}"></attr>
         <attr sel="#text" th:text="${recomm.recommText}"></attr>
         <attr sel="#date" th:text="${recomm.regDateAgo}"></attr>
+        <attr sel=".relikeNum" th:text="${#lists.size(recomm.relikeList)}"></attr>
+
     </attr>
+
 </thlogic>
