@@ -1,8 +1,6 @@
 package com.watcha.watchapedia.service;
 
-import com.watcha.watchapedia.model.dto.AdminUserDto;
 import com.watcha.watchapedia.model.dto.ReportDto;
-import com.watcha.watchapedia.model.repository.NoticeRepository;
 import com.watcha.watchapedia.model.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

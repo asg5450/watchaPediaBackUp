@@ -17,8 +17,11 @@ public class AdvertiseApiController extends CrudController<AdvertiseApiRequest, 
     private final AdvertiseApiLogicService advertiseApiLogicService;
 
     @Override
-    public Header<AdvertiseApiResponse> create(Header<AdvertiseApiRequest> request) {
-        return super.create(request);
+    @PostMapping("")
+    public Header<AdvertiseApiResponse> create(@RequestBody Header<AdvertiseApiRequest> request) {
+        System.out.println(request.getData());
+        return advertiseApiLogicService.create(request);
+
     }
 
     @Override
@@ -35,9 +38,9 @@ public class AdvertiseApiController extends CrudController<AdvertiseApiRequest, 
     }
 
     @Override
-    @DeleteMapping("{ntcIdx}") 
-    public Header<AdvertiseApiResponse> delete(@PathVariable(name="ntcIdx") Long ntcIdx) {
-        return advertiseApiLogicService.delete(ntcIdx);
+    @DeleteMapping("{adIdx}")
+    public Header<AdvertiseApiResponse> delete(@PathVariable(name="adIdx") Long adIdx) {
+        return advertiseApiLogicService.delete(adIdx);
     }
 
 

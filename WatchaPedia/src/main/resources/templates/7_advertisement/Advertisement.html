@@ -4,24 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
-    <link
-            href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-            rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <link href="/css/7_advertisement/Advertise.css" rel="stylesheet" />
-    <script
-            defer
-            src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-            crossorigin="anonymous"
-    ></script>
+    <script defer src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <script defer src="/js/Notice.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
 </head>
@@ -56,44 +46,45 @@
                             <thead>
                             <tr>
                                 <th>번호</th>
-                                <th>제목</th>
                                 <th>클라이언트</th>
                                 <th>등록날짜</th>
                                 <th>종료날짜</th>
+                                <th>등록설정</th>
                                 <th>등록여부</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>번호</th>
-                                <th>제목</th>
                                 <th>클라이언트</th>
                                 <th>등록날짜</th>
                                 <th>종료날짜</th>
+                                <th>등록설정</th>
                                 <th>등록여부</th>
                             </tr>
                             </tfoot>
                             <tbody id="advertisebody" th:remove="all-but-first">
                             <tr id="advertisetr" th:each="ad : ${advertises}">
-                                <td id="adIdx" ><a th:text="${ad.adIdx}" th:href="@{/advertisement_view/{adIdx}(id=${ad.adIdx})}"></a></td>
-                                <td id="adTitle" ><a th:text="${ad.adTitle}" th:href="@{/advertisement_view/{adIdx}(id=${ad.adIdx})}"></a></td>
-                                <td id="adClient" ><a th:text="${ad.adRegBy}" th:href="@{/advertisement_view/{adIdx}(id=${ad.adIdx})}"></a></td>
-                                <td id="regDate" ><a th:text="${ad.regDate}" th:href="@{/advertisement_view/{adIdx}(id=${ad.adIdx})}"></a></td>
-                                <td id="endDate" ><a th:text="${ad.endDate}" th:href="@{/advertisement_view/{adIdx}(id=${ad.adIdx})}"></a></td>
-                                <td id="adStatus" th:if="${ad.Status}=='미등록'">
+                                <td id="adIdx" ><a th:text="${ad.adIdx}" th:href="@{/advertisement_view/{adIdx}(adIdx=${ad.adIdx})}"></a></td>
+                                <td id="adTitle" ><a th:text="${ad.adTitle}" th:href="@{/advertisement_view/{adIdx}(adIdx=${ad.adIdx})}"></a></td>
+                                <td id="adClient" ><a th:text="${ad.adClient}" th:href="@{/advertisement_view/{adIdx}(adIdx=${ad.adIdx})}"></a></td>
+                                <td id="regDate" ><a th:text="${ad.regDate}" th:href="@{/advertisement_view/{adIdx}(adIdx=${ad.adIdx})}"></a></td>
+                                <td id="endDate" ><a th:text="${ad.endDate}" th:href="@{/advertisement_view/{adIdx}(adIdx=${ad.adIdx})}"></a></td>
+                                <td id="adStatusBtn">
                                     <button
-                                            th:onclick="|change_status(${ad.ntcIdx},'등록')|"
+                                            th:if="${ad.adStatus}=='미등록'"
+                                            th:onclick="|change_status(${ad.adIdx},'등록')|"
                                             id="status_btn"
                                     >등록</button>
                                 </td>
                                 <td th:if="${ad.Status}=='등록'">
                                     <button
-                                            th:onclick="|change_status(${ad.ntcIdx},'미등록')|"
+                                            th:if="${ad.adStatus}=='등록'"
+                                            th:onclick="|change_status(${ad.adIdx},'미등록')|"
                                             id="status_btn_active"
                                     >등록해제</button>
                                 </td>
-
-
+                                <td id="adStatus" th:text="${ad.adStatus}"></td>
                             </tr>
                             <tr>
                                 <td>Garrett Winters</td>
@@ -101,6 +92,7 @@
                                 <td>Tokyo</td>
                                 <td>63</td>
                                 <td>2011/07/25</td>
+                                <td>$170,750</td>
                                 <td>$170,750</td>
                             </tr>
                             </tbody>

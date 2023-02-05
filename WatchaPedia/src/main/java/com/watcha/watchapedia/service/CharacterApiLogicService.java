@@ -84,6 +84,8 @@ public class CharacterApiLogicService extends BaseService<CharacterApiRequest, C
         List<Character> characters = baseRepository.findAll();
         List<CharacterApiResponse> characterApiResponse = characters.stream().map(
                 character -> response(character)).collect(Collectors.toList());
+
+
         return Header.OK(characterApiResponse);
     }
 

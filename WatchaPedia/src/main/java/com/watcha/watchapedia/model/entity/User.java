@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity(name = "tbUser")
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString(callSuper = true)
@@ -48,8 +47,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Like> likeList = new ArrayList<>();
 
-//    protected User() {}
-//
+    protected User() {}
+
     public User(String userPw, Long userSsn1, Long userSsn2, String userEmail, String userName) {
         this.userPw = userPw;
         this.userSsn1 = userSsn1;

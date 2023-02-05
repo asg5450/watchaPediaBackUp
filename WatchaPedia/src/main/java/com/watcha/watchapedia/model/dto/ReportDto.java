@@ -1,10 +1,9 @@
 package com.watcha.watchapedia.model.dto;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import com.watcha.watchapedia.model.entity.*;
+import com.watcha.watchapedia.model.entity.Report;
+import com.watcha.watchapedia.model.entity.User;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record ReportDto(
         Long reportIdx,

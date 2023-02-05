@@ -457,6 +457,8 @@ public class PageController {
 
     private final ReportApiLogicService reportApiLogicService;
     private final ReportRepository reportRepository;
+
+
     @GetMapping(path="/comment/report_page")
     public ModelAndView report(HttpServletRequest request){
         // 로그인 Check 시작!
@@ -499,7 +501,6 @@ public class PageController {
         if(loginCheck != null){
             return loginCheck;
         }
-
         Report report = reportRepository.getReferenceById(reportId);
 
         return loginInfo(request, "/4_comment/reported/reportdetail_comment").addObject("report", report);
@@ -512,6 +513,7 @@ public class PageController {
         if(loginCheck != null){
             return loginCheck;
         }
+        characterApiLogicService.characterList();
         return loginInfo(request, "/4_comment/reported/reportdetail_reply");
     }
 
@@ -591,8 +593,7 @@ public class PageController {
         if(loginCheck != null){
             return loginCheck;
         }
-
-        characterApiLogicService.characterList();
+        System.out.println("페이지컨트롤러에는 잘들어오는데");
 
         return loginInfo(request, "/5_character/charactermanage").addObject("characters",characterApiLogicService.characterList());
 

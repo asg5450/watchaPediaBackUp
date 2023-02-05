@@ -31,6 +31,7 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
                 .adBtnText(advertise.getAdBtnText())
                 .adClient(advertise.getAdClient())
                 .adClientLogoimage(advertise.getAdClientLogoimage())
+                .endDate(advertise.getEndDate())
                 .build();
         return advertiseApiResponse;
     }
@@ -52,6 +53,7 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
                 .adBtnText(advertiseApiRequest.getAdBtnText())
                 .adClient(advertiseApiRequest.getAdClient())
                 .adClientLogoimage(advertiseApiRequest.getAdClientLogoimage())
+                .endDate(advertiseApiRequest.getEndDate())
                 .build();
         Advertise newTbAdvertise = advertiseRepository.save(tbAdvertise);
 
@@ -80,6 +82,7 @@ public class AdvertiseApiLogicService extends BaseService<AdvertiseApiRequest, A
                             ad.setAdBtnText(advertiseApiRequest.getAdBtnText());
                             ad.setAdClient(advertiseApiRequest.getAdClient());
                             ad.setAdClientLogoimage(advertiseApiRequest.getAdClientLogoimage());
+                            ad.setEndDate(advertiseApiRequest.getEndDate());
                             return ad;
                         }).map(ad -> advertiseRepository.save(ad))
                 .map(ad -> response(ad))

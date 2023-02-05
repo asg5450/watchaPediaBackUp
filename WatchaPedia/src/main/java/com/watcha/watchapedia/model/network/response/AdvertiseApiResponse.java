@@ -23,5 +23,5 @@ public class AdvertiseApiResponse {
     private String adBtnText;
     private String adClient;
     private String adClientLogoimage;
-    private LocalDateTime endDate;
+    private String endDate;
 }

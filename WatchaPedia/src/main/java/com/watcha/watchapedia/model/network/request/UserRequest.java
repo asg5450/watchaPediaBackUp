@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 public record UserRequest(
-
         String userPw,
         Long userSsn1,
         Long userSsn2,

@@ -36,7 +36,7 @@ public record UserResponse(
 ) implements Serializable {
     public static UserResponse of(
             Long userIdx,
-            String userName, String userType, String userStatus, Long userSsn1,
+            String userName, String userType, String userId, String userStatus, Long userSsn1,
             Long userSsn2, Long userCautionCnt, Long userWarningCnt, Long userSuspensionCnt,
             LocalDateTime userLatelyStop, LocalDateTime userReleaseDate){
         return new UserResponse(userIdx,userName, userType, userStatus, userSsn1, userSsn2,
@@ -44,7 +44,6 @@ public record UserResponse(
     }
 
     public static UserResponse from(UserDto dto){
-
         return new UserResponse(
                 dto.userIdx(),
                 dto.userName(),
