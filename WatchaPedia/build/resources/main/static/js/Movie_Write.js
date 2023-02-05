@@ -280,7 +280,6 @@ function minusItemlist2(e){
   //클릭한 인물의 idx 추출
   const str = e.parentNode.querySelector(".hiddenBox").innerText;
   let indexArr = str.split("(")
-  console.log(indexArr)
 
   //대입 배열 초기화
   personsArr = []

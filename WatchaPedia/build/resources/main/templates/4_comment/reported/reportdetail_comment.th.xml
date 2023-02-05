@@ -1,15 +1,10 @@
-        <?xml version="1.0"?>
+<?xml version="1.0"?>
 <thlogic>
-    <attr sel="#reported_comment" th:object="${report}">
-        <attr sel="#username" th:text="*{user.userName}"/>
-        <attr sel="#influencer" th:if="*{user.userType == '인플루언서'}"/>
-        <attr sel="#date" th:text="*{#temporals.format(reportRegDate, 'yyyy-MM-dd')}"/>
-        <attr sel="#user-ssn" th:text="*{userSsn1} + '-' + *{userSsn2}"/>
-        <attr sel="#user-status" th:text="*{userStatus}"/>
-        <attr sel="#user-caution" th:text="*{userCautionCnt}"/>
-        <attr sel="#user-warning" th:text="*{userWarningCnt}"/>
-        <attr sel="#user-suspension" th:text="*{userSuspensionCnt}"/>
-        <attr sel="#user-lately" th:datetime="*{userLatelyStop}" th:text="*{#temporals.format(userLatelyStop, 'yyyy-MM-dd')}"/>
-        <attr sel="#user-release" th:datetime="*{userReleaseDate}" th:text="*{#temporals.format(userReleaseDate, 'yyyy-MM-dd')}"/>
+    <attr sel=".reported_comment" th:object="${report}">
+        <attr sel="#username" th:text="${report.user.userName}"/>
+        <attr sel="#influencer" th:if="${report.user.userType == '인플루언서'}"/>
+        <attr sel="#date" th:text="${#temporals.format(report.reportRegDate, 'yyyy-MM-dd')}"/>
+        <attr sel="#users_cautionCnt" th:text="'주의 : ' + ${report.user.userCautionCnt} + ', 경고 : ' + ${report.user.userWarningCnt} + ', 정지 : ' + ${report.user.userSuspensionCnt}"/>
+        <attr sel="#comment_main" th:text="${report.reportText}"/>
     </attr>
 </thlogic>
