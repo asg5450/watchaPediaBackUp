@@ -51,7 +51,7 @@
 
                     <img th:src="${advertise.adImagesource}" />
 
-                    <textarea id="box2" disabled th:text="${notice.ntcText}">
+                    <textarea id="box2" disabled th:text="${advertise.adDescription}">
                                 내용
                             </textarea>
                     <button
@@ -68,6 +68,7 @@
                     <div id="btn0" >
                         <button class='btn1' id="btn1" th:onclick="|location.href='/advertisement_edit/${advertise.adIdx}'|">수정</button>
                         <button class='btn1' id="btn2" th:onclick="|delntc(${advertise.adIdx})|">삭제</button>
+                        <button class='btn1' id="btn3" onclick="location.href='/advertisement'">목록</button>
                     </div>
 
 

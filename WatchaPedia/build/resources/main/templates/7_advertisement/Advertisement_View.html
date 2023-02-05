@@ -49,16 +49,16 @@
                         제목
                     </div>
 
-                    <img th:src="${notice.ntcImagepath}" />
+                    <img th:src="${advertise.adImagesource}" />
 
-                    <textarea id="box2" disabled th:text="${notice.ntcText}">
+                    <textarea id="box2" disabled th:text="${advertise.adDescription}">
                                 내용
                             </textarea>
                     <button
-                            id="ntcbtn"
-                            th:text="${notice.ntcBtnText}"
-                            th:onclick="|location.href='@{{itemId}(itemId=${advertise.ntcBtnLink})}'|"
-                            th:style="|background-color:@{${notice.ntcBtnColor}}|"
+                            id="adbtn"
+                            th:text="${advertise.adBtnText}"
+                            th:onclick="|location.href='@{{itemId}(itemId=${advertise.adBtnLink})}'|"
+                            th:style="|background-color:@{${advertise.adBtnColor}}|"
 
                     >
                         버튼
@@ -66,8 +66,8 @@
 
 
                     <div id="btn0" >
-                        <button class='btn1' id="btn1" th:onclick="|location.href='/advertise_edit/${advertise.adIdx}'|">수정</button>
-                        <button class='btn1' id="btn2" th:onclick="|delntc(${notice.ntcIdx})|">삭제</button>
+                        <button class='btn1' id="btn1" th:onclick="|location.href='/advertisement_edit/${advertise.adIdx}'|">수정</button>
+                        <button class='btn1' id="btn2" th:onclick="|delntc(${advertise.adIdx})|">삭제</button>
                         <button class='btn1' id="btn3" onclick="location.href='/advertisement'">목록</button>
                     </div>
 

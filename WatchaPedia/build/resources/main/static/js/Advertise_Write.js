@@ -127,9 +127,12 @@ function readLink1(input) {
 
 //----------------------------------------------------------
 
+const spoid = document.getElementById('spoid')
+spoid.addEventListener('change', pastel)
+
 function pastel(){
-  ntcBtnColor = document.getElementById("ntcBtnColor");
-  ntcBtnColor.value = spoid.value;
+  adBtnColor = document.getElementById("adBtnColor");
+  adBtnColor.value = spoid.value;
   //console.log(`ntcBtnColor에 담은 값 : ${ntcBtnColor.value}`);
 }
 
@@ -138,6 +141,7 @@ function sendit(){
   let adDescription = document.querySelector("#adDescription");
   let adVideoSource = document.querySelector("#adVideoSource");
   let adClient = document.querySelector("#adClient");
+  let endDate = document.querySelector("#endDate");
   let adBtnColor;
   let adBtnLink;
   let adBtnText;
@@ -153,7 +157,7 @@ function sendit(){
   spoid.addEventListener('change', pastel)
 
   try{
-    adBtnColor=document.getElementById('ntcBtnColor').value;
+    adBtnColor=document.getElementById('adBtnColor').value;
     if(adBtnColor==''){
       adBtnColor=null;
     }
@@ -162,16 +166,7 @@ function sendit(){
   }
 
   try{
-    adBtnColor=document.getElementById('ntcBtnColor').value;
-    if(adBtnColor==''){
-      adBtnColor=null;
-    }
-  }catch (exception){
-    adBtnColor=null;
-  }
-
-  try{
-    adBtnLink= document.getElementById('ntcBtnLink');
+    adBtnLink= document.getElementById('adBtnLink').value;
     if(adBtnLink==''){
       adBtnLink=null;
     }
@@ -180,7 +175,7 @@ function sendit(){
   }
 
   try{
-    adBtnText=document.getElementById('ntcBtnText').value;
+    adBtnText=document.getElementById('adBtnText').value;
     if(adBtnText==''){
       adBtnText=null;
     }
@@ -216,6 +211,7 @@ function sendit(){
   console.log('버튼텍스트'+adBtnText);
   console.log('광고이미지'+adImagesource);
   console.log('클라인트로고이미지'+adClientLogoimage);
+  console.log('광고종료날짜'+endDate.value);
 
 
 
@@ -223,21 +219,21 @@ function sendit(){
     alert('타이틀을 입력하세요');
     return false;
   }
+  if(adVideoSource.value!=''){
+    if(adImagesource!=null){
+      alert('비디오와 사진 중 하나만 등록 가능합니다')
+      return false;
+    }
+  }else if(adImagesource!=null){
+    if(adVideoSource.value!=''){
+      alert('비디오와 사진 중 하나만 등록 가능합니다')
+      return false;
+    }
+  }
   if(adDescription.value == ''){
     alert('내용을 입력하세요');
     return false;
   }
-if(adVideoSource.value!=null){
-  if(adImagesource!=null){
-    alert('비디오와 사진 중 하나만 등록 가능합니다')
-    return false;
-  }
-}else if(adImagesource.value!=null){
-  if(adVideoSource!=null){
-    alert('비디오와 사진 중 하나만 등록 가능합니다')
-    return false;
-  }
-}
   if(adClient.value==null){
     alert('클라이언트를 입력하세요');
     return false;
@@ -258,6 +254,14 @@ if(adVideoSource.value!=null){
     alert('버튼텍스트를 입력하세요');
     return false;
   }
+  if(adBtnText==null){
+    alert('버튼텍스트를 입력하세요');
+    return false;
+  }
+  if(endDate.value==''){
+    alert('종료날짜를 입력하세요');
+    return false;
+  }
 
 
   fetch('http://localhost:9090/api/advertise', {
@@ -275,8 +279,10 @@ if(adVideoSource.value!=null){
         "adBtnColor":`${adBtnColor}`,
         "adBtnLink":`${adBtnLink}`,
         "adBtnText":`${adBtnText}`,
-        "adImagesource":`${adImagesource}`,
-        "adClientLogoimage":`${adClientLogoimage}`
+        "adImagesource":adImagesource,
+        "adClientLogoimage":adClientLogoimage,
+        "endDate":`${endDate.value}`,
+        "adStatus":'미등록'
       }
     }),
   })
@@ -284,7 +290,7 @@ if(adVideoSource.value!=null){
       .then((data) => {
         if (data.resultCode == 'OK') {
           alert('등록성공');
-          location.href='/character_manage';
+          location.href='/advertisement';
         } else {
           alert('등록에 실패하였습니다. 다시한번 확인해주세요')
         }

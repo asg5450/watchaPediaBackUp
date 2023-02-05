@@ -4,7 +4,7 @@
     <attr sel="#user-table" th:object="${user}">
         <attr sel="#user-name" th:text="*{userName}"/>
         <attr sel="#user-type" th:text="*{userType}"/>
-        <attr sel="#user-id" th:text="*{userId}"/>
+        <attr sel="#user-id" th:text="*{userName}"/>
         <attr sel="#user-ssn" th:text="*{userSsn1} + '-' + *{userSsn2}"/>
         <attr sel="#user-status" th:text="*{userStatus}"/>
         <attr sel="#user-caution" th:text="*{userCautionCnt}"/>
