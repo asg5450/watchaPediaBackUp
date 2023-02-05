@@ -275,14 +275,18 @@ function choosePerson(e){
 }
 
 function minusItemlist2(e){
+  console.log("x버튼 눌렀을때 메소드 실행!")
+
   //클릭한 인물의 idx 추출
-  const idx = e.parentNode.firstChild.innerText;
+  const str = e.parentNode.querySelector(".hiddenBox").innerText;
+  let indexArr = str.split("(")
+  console.log(indexArr)
 
   //대입 배열 초기화
   personsArr = []
 
   for( let i of searchVue.itemlist2){
-    if(idx != i.perIdx){
+    if(indexArr[0] != i.perIdx){
       personsArr.push(i)
     }
   }
