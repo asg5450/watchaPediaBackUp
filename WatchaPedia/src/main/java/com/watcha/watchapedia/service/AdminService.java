@@ -13,7 +13,7 @@ import java.util.List;
 public class AdminService {
 
     final AdminRepository adminRepository;
-    public List<AdminUserDto> findAdmins(){
+    public List<AdminUserDto> findAllReport(){
         return adminRepository.findAllByOrderByAdminIdxDesc().stream().map(AdminUserDto::from).toList();
     }
 }

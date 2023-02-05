@@ -11,7 +11,7 @@
     </attr>
 
     <attr sel="#cocomment" th:each="recomm: ${recomment}">
-        <attr sel="#userid" th:text="${recomm.user.userId}"></attr>
+        <attr sel="#userid" th:text="${recomm.user.userName}"></attr>
         <attr sel="#text" th:text="${recomm.recommText}"></attr>
         <attr sel="#date" th:text="${recomm.regDateAgo}"></attr>
         <attr sel=".relikeNum" th:text="${#lists.size(recomm.relikeList)}"></attr>

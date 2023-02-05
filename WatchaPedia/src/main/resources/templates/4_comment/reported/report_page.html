@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,6 +20,7 @@
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+    <script defer src="/js/report_page.js"></script>
     <style>
       .middle_word {
         margin-top: 20px;
@@ -148,37 +149,37 @@
                   <thead>
                     <tr>
                       <th>번호</th>
+                      <th>idx</th>
                       <th>피신고자</th>
-                      <th>컨텐츠</th>
-                      <th>신고시간</th>
+                      <th>댓글유형</th>
                       <th>스포일러</th>
                       <th>부적절</th>
-                      <th>처리여부</th>
-                      <th>댓글유형</th>
+                      <th>신고일시</th>
+                      <th>처리상태</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>번호</th>
+                      <th>idx</th>
                       <th>피신고자</th>
-                      <th>컨텐츠</th>
-                      <th>신고시간</th>
+                      <th>댓글유형</th>
                       <th>스포일러</th>
                       <th>부적절</th>
-                      <th>처리여부</th>
-                      <th>댓글유형</th>
+                      <th>신고일시</th>
+                      <th>처리상태</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr onclick="location.href='/comment/reportdetail_comment'">
-                      <td>1</td>
-                      <td>영화에 진심인 망고✅</td>
-                      <td>아바타</td>
-                      <td>2022-05-27</td>
-                      <td>0</td>
-                      <td>30</td>
-                      <td>대기중</td>
-                      <td>대댓글</td>
+                    <tr class="forTr1">
+                      <td class="wait_cnt">1</td>
+                      <td class="reportIdx">신고idx</td>
+                      <td><a class="reportedPerson">영화에 진심인 망고✅</a></td>
+                      <td class="comm_type">대댓글</td>
+                      <td class="spoiler">0</td>
+                      <td class="inappropriate">30</td>
+                      <td class="reportDate">2022-05-27</td>
+                      <td class="Processing">대기중</td>
                     </tr>
                   </tbody>
                 </table>
@@ -191,37 +192,37 @@
                   <thead>
                     <tr>
                       <th>번호</th>
+                      <th>idx</th>
                       <th>피신고자</th>
-                      <th>컨텐츠</th>
-                      <th>신고시간</th>
+                      <th>댓글유형</th>
                       <th>스포일러</th>
                       <th>부적절</th>
-                      <th>처리여부</th>
-                      <th>댓글유형</th>
+                      <th>신고일시</th>
+                      <th>처리상태</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>번호</th>
+                      <th>idx</th>
                       <th>피신고자</th>
-                      <th>컨텐츠</th>
-                      <th>신고시간</th>
+                      <th>댓글유형</th>
                       <th>스포일러</th>
                       <th>부적절</th>
-                      <th>처리여부</th>
-                      <th>댓글유형</th>
+                      <th>신고일시</th>
+                      <th>처리상태</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr onclick="location.href='/comment/reportdetail_reply'">
-                      <td>1</td>
-                      <td>영화에 진심인 망고✅</td>
-                      <td>아바타</td>
-                      <td>2022-05-27</td>
-                      <td>0</td>
-                      <td>30</td>
-                      <td>대기중</td>
-                      <td>대댓글</td>
+                    <tr class="forTr2">
+                      <td class="complete_cnt">1</td>
+                      <td class="reportIdx2">신고idx</td>
+                      <td><a class="reportedPerson2">피신고자이름</a></td>
+                      <td class="comm_type2">대댓글</td>
+                      <td class="spoiler2">0</td>
+                      <td class="inappropriate2">30</td>
+                      <td class="reportDate2">2022-05-27</td>
+                      <td class="Processing2">대기중</td>
                     </tr>
                   </tbody>
                 </table>

@@ -11709,14 +11709,16 @@ width: 30px;
 
 #iwantthis{
   box-sizing: border-box;
-  width: 125px;
+  width: 110px;
   height: 30px;
+  font-size: 14px;
   background-color: white;
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: solid var(--bs-gray-400) 2px;
+  margin-bottom: 10px;
 }
 .wannaseethisicon{
   width: 30px;

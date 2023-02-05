@@ -206,12 +206,3 @@ for(let i=0; i <100; i++){
 }
 
 console.log(`등록된 사원번호 : ${employee}`)
-
-
-
-
-/*const adminId = document.getElementById("adminId")
-    const adminPw = document.getElementById("adminPw")
-    const adminNumber = document.getElementById("adminNumber")
-    const adminName = document.getElementById("adminName")
-    const adminType = document.getElementById("adminType")*/

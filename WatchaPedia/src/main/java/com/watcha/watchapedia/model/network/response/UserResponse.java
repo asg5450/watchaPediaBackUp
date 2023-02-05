@@ -15,8 +15,6 @@ public record UserResponse(
      String userName,
     // 회원 유형(인플루언서)
      String userType,
-    // 아이디
-     String userId,
     // 계정 상태
      String userStatus,
 
@@ -38,19 +36,19 @@ public record UserResponse(
 ) implements Serializable {
     public static UserResponse of(
             Long userIdx,
-            String userName, String userType, String userId, String userStatus, Long userSsn1,
+            String userName, String userType, String userStatus, Long userSsn1,
             Long userSsn2, Long userCautionCnt, Long userWarningCnt, Long userSuspensionCnt,
             LocalDateTime userLatelyStop, LocalDateTime userReleaseDate){
-        return new UserResponse(userIdx,userName, userType, userId, userStatus, userSsn1, userSsn2,
+        return new UserResponse(userIdx,userName, userType, userStatus, userSsn1, userSsn2,
                 userCautionCnt, userWarningCnt, userSuspensionCnt, userLatelyStop, userReleaseDate);
     }
 
     public static UserResponse from(UserDto dto){
+
         return new UserResponse(
                 dto.userIdx(),
                 dto.userName(),
                 dto.userType(),
-                dto.userId(),
                 dto.userStatus(),
                 dto.userSsn1(),
                 dto.userSsn2(),

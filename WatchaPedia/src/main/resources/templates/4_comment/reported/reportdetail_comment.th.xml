@@ -1,10 +1,9 @@
-<?xml version="1.0"?>
+        <?xml version="1.0"?>
 <thlogic>
-    <attr sel="form.button-wrap" th:method="get" th:action=" ${user.userType}=='인플루언서' ? '/member/' + ${user.userIdx} + '/일반유저' : '/member/' + ${user.userIdx} + '/인플루언서'"/>
-    <attr sel="#user-table" th:object="${user}">
-        <attr sel="#user-name" th:text="*{userName}"/>
-        <attr sel="#user-type" th:text="*{userType}"/>
-        <attr sel="#user-id" th:text="*{userName}"/>
+    <attr sel="#reported_comment" th:object="${report}">
+        <attr sel="#username" th:text="*{user.userName}"/>
+        <attr sel="#influencer" th:if="*{user.userType == '인플루언서'}"/>
+        <attr sel="#date" th:text="*{#temporals.format(reportRegDate, 'yyyy-MM-dd')}"/>
         <attr sel="#user-ssn" th:text="*{userSsn1} + '-' + *{userSsn2}"/>
         <attr sel="#user-status" th:text="*{userStatus}"/>
         <attr sel="#user-caution" th:text="*{userCautionCnt}"/>

@@ -7,21 +7,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 public record UserRequest(
-        String userId,
+
         String userPw,
         Long userSsn1,
         Long userSsn2,
         String userEmail,
         String userName
 ){
-  public static UserRequest of(String userId, String userPw, Long userSsn1, Long userSsn2,
+  public static UserRequest of(String userPw, Long userSsn1, Long userSsn2,
                                String userEmail, String userName) {
-    return new UserRequest(userId, userPw, userSsn1, userSsn2, userEmail, userName);
+    return new UserRequest(userPw, userSsn1, userSsn2, userEmail, userName);
   }
 
   public UserDto toDto() {
     return UserDto.of(
-            userId, userPw, userSsn1, userSsn2,
+            userPw, userSsn1, userSsn2,
             userEmail, userName
     );
   }

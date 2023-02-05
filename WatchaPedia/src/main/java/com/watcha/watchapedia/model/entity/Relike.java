@@ -5,8 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity(name = "tbRecommentLike")
-@Builder
-@Data
+@Getter
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
