@@ -197,73 +197,51 @@
             신고함
           </div>
           <div class="card-body">
-            <div class="reported_comment">
+            <div class = "reported_comment">
+              <div id="hiddenIdx" hidden></div>
+              <div id="hiddenSessionAdmin" hidden></div>
               <p id="userinformation">
-                    <span id="profilepic">
-                      <img class="profilepic" src="./profilepic.png" alt="" />
-                    </span>
-                <span id="username"> 이재원 </span>
-                <span id="influencer"> ✅ </span>
-                <span id="date"> 5년전 </span>
+                                        <span id="profilepic">
+                                            <img class="profilepic" src="data:image/jpeg;base64,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" alt="기본프로필이미지">
+                                        </span>
+                <span id="username">
+                                            피신고자 이름
+                                        </span>
+                <!-- 인플루언서일경우 아래생성 -->
+                <span id="influencer">
+                                            ✅
+                                        </span>
+                <span id="date">
+                                            신고일자
+                                        </span>
+              </p>
+              <p id="users_cautionCnt">
+                유저의 제제현황
               </p>
 
-              <div id="reply_main">
-                <p>aaaaaaaaaa</p>
+              <div id="comment_main">
+                <p>문제의 코멘트 내용 자리</p>
               </div>
             </div>
 
+
+
             <!-- 버튼누를시 생성 -->
-
-            <!--
-                <hr>
-                    <div id="report_result">
-                                <p>
-                                    <span>처리내용 : </span>
-                                    <span>문제없음 처리</span>
-                                </p>
-                                <p>
-                                    <span>처리일시 : </span>
-                                    <span>2022-05-26 오후 11:24 </span>
-                                </p>
-                                <p>
-                                    <span>관리자 : </span>
-                                    <span>이재원</span>
-                                </p>
-                            </div>
-            -->
-
-            <div id="report_result">
-              <hr />
+            <div class="report_result" th:if="${report.status} != '대기중'">
+              <hr>
               <p>
                 <span>처리내용 : </span>
-                <span>블라인드 처리</span>
+                <span class="processResult">문제없음 처리</span>
               </p>
               <p>
                 <span>처리일시 : </span>
-                <span>2022-05-16 오후 11:24 </span>
+                <span class="processDate">2022-05-26 오후 11:24 </span>
               </p>
               <p>
                 <span>관리자 : </span>
-                <span>이재원</span>
+                <span class="adminId">이재원</span>
               </p>
             </div>
-
-            <!--      <hr>
-                            <div class="report_result">
-                                <p>
-                                    <span>처리내용 : </span>
-                                    <span>스포일러커버 처리</span>
-                                </p>
-                                <p>
-                                    <span>처리일시 : </span>
-                                    <span>2022-05-06 오후 1:23 </span>
-                                </p>
-                                <p>
-                                    <span>관리자 : </span>
-                                    <span>이재원</span>
-                                </p>
-                            </div>
-                         -->
           </div>
         </div>
 
@@ -273,6 +251,7 @@
                   class="button_box"
                   @click="blinder = !blinder"
                   id="blinder_btn"
+                  th:classappend="${report.status == '블라인드' ? 'selected' : ''}"
           >
             블라인드
           </button>
@@ -280,6 +259,7 @@
                   class="button_box"
                   @click="spoiler = !spoiler"
                   id="spoiler_btn"
+                  th:classappend="${report.status == '스포일러' ? 'selected' : ''}"
           >
             스포일러
           </button>
@@ -287,11 +267,12 @@
                   class="button_box"
                   @click="noproblem= !noproblem"
                   id="noproblem_btn"
+                  th:classappend="${report.status == '문제없음' ? 'selected' : ''}"
           >
             문제없음
           </button>
-          <button class="button_box" onclick="history.back()">
-            뒤로가기
+          <button class="button_box" onclick="location.href='/comment/report_page'">
+            목록으로
           </button>
         </div>
       </div>
@@ -317,17 +298,17 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"
 ></script>
-<script src="js/scripts.js"></script>
+<script src="/js/scripts.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
         crossorigin="anonymous"
 ></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="/assets/demo/chart-area-demo.js"></script>
+<script src="/assets/demo/chart-bar-demo.js"></script>
 <script
         src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
         crossorigin="anonymous"
 ></script>
-<script src="js/datatables-simple-demo.js"></script>
+<script src="/js/datatables-simple-demo.js"></script>
 </body>
 </html>

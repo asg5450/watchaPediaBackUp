@@ -21,7 +21,7 @@ public class Report {
     @Setter private String reportText;
     @Setter @Column private Long reportSpoiler;
     @Setter private Long reportInappropriate;
-    @Setter @Column(length = 5) private String reportProcessing;
+    @Setter @Column(length = 30) private String reportProcessing;
     @Setter private String reportReporter;
     @Setter @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime reportRegDate;

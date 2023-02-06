@@ -1,76 +1,97 @@
-const big_container = document.querySelector(".card-body");
-console.log(big_container);
-
 function blind_result() {
-  const p_array = document.querySelectorAll(".card-body > p");
-  if (p_array.length >= 1) {
-    const text_deco = document.querySelector(".card-body > p:last-child");
-    const style = document.createAttribute("style");
-    style.value = "text-decoration:line-through";
-    console.log(style);
-    text_deco.setAttributeNode(style);
-  }
+  const reportIdx = document.getElementById('hiddenIdx').innerText;
+  const processAdmin = document.getElementById('hiddenSessionAdmin').innerText;
+  const updateStatus = "블라인드";
+  fetch('http://localhost:9090/api/report/update', {
+    method: 'PUT',
+    headers: {'content-Type': 'application/json'},
+    body: JSON.stringify({
+      "transaction_time":`${new Date()}`,
+      "resultCode":"ok",
+      "description":"정상",
+      "data":{
+        "reportIdx":`${reportIdx}`,
+        "updateStatus" : `${updateStatus}`,
+        "processAdmin" : `${processAdmin}`
+      }
+    })
+  })
+      .then(response => response.json())
+      .then(data => {
+        alert('업데이트 성공!')
+        location.href = "/comment/report_page"
+      }).catch(() =>{
+        alert('업데이트 실패!')
+        history.go()
+      }
 
-  const newNode = document.createElement("p");
-  newNode.innerHTML =
-    "<div><p>처리내용 : 블라인드처리</p><p>처리일시 : 2022-02-02</p><p>관리자 : 이재원</p></div><hr>";
-  big_container.appendChild(newNode);
+  )
+
 
   const spoiler_btn = document.getElementById("spoiler_btn");
   const noproblem_btn = document.getElementById("noproblem_btn");
   const blinder_btn = document.getElementById("blinder_btn");
-  console.log(blinder_btn);
   blinder_btn.classList.add("selected");
   spoiler_btn.classList.remove("selected");
   noproblem_btn.classList.remove("selected");
 }
 
 function spoiler_result() {
-  const p_array = document.querySelectorAll(".card-body > p");
-  if (p_array.length >= 1) {
-    const text_deco = document.querySelector(".card-body > p:last-child");
-    const style = document.createAttribute("style");
-    style.value = "text-decoration:line-through";
-    console.log(style);
-    text_deco.setAttributeNode(style);
-  }
+  const reportIdx = document.getElementById('hiddenIdx').innerText;
+  const processAdmin = document.getElementById('hiddenSessionAdmin').innerText;
+  const updateStatus = "스포일러";
+  fetch('http://localhost:9090/api/report/update', {
+    method: 'PUT',
+    headers: {'content-Type': 'application/json'},
+    body: JSON.stringify({
+      "transaction_time":`${new Date()}`,
+      "resultCode":"ok",
+      "description":"정상",
+      "data":{
+        "reportIdx":`${reportIdx}`,
+        "updateStatus" : `${updateStatus}`,
+        "processAdmin" : `${processAdmin}`
+      }
+    })
+  })
+      .then(response => response.json())
+      .then(data => {
+        alert('업데이트 성공!')
+        location.href = "/comment/report_page"
+      }).catch(() =>{
+        alert('업데이트 실패!')
+        history.go()
+      }
 
-  const newNode = document.createElement("p");
-  newNode.innerHTML =
-    "<div><p>처리내용 : 스포일러처리</p><p>처리일시 : 2022-02-02</p><p>관리자 : 이재원</p></div><hr>";
-  big_container.appendChild(newNode);
-
-  const spoiler_btn = document.getElementById("spoiler_btn");
-  const noproblem_btn = document.getElementById("noproblem_btn");
-  const blinder_btn = document.getElementById("blinder_btn");
-
-  console.log(spoiler_btn);
-  spoiler_btn.classList.add("selected");
-  blinder_btn.classList.remove("selected");
-  noproblem_btn.classList.remove("selected");
+  )
 }
 
 function noproblem_result() {
-  const p_array = document.querySelectorAll(".card-body > p");
-  if (p_array.length >= 1) {
-    const text_deco = document.querySelector(".card-body > p:last-child");
-    const style = document.createAttribute("style");
-    style.value = "text-decoration:line-through";
-    console.log(style);
-    text_deco.setAttributeNode(style);
-  }
+  const reportIdx = document.getElementById('hiddenIdx').innerText;
+  const processAdmin = document.getElementById('hiddenSessionAdmin').innerText;
+  const updateStatus = "문제없음";
+  fetch('http://localhost:9090/api/report/update', {
+    method: 'PUT',
+    headers: {'content-Type': 'application/json'},
+    body: JSON.stringify({
+      "transaction_time":`${new Date()}`,
+      "resultCode":"ok",
+      "description":"정상",
+      "data":{
+        "reportIdx":`${reportIdx}`,
+        "updateStatus" : `${updateStatus}`,
+        "processAdmin" : `${processAdmin}`
+      }
+    })
+  })
+      .then(response => response.json())
+      .then(data => {
+        alert('업데이트 성공!')
+        location.href = "/comment/report_page"
+      }).catch(() =>{
+        alert('업데이트 실패!')
+        history.go()
+      }
 
-  const newNode = document.createElement("p");
-  newNode.innerHTML =
-    "<div><p>처리내용 : 문제없음처리</p><p>처리일시 : 2022-02-02</p><p>관리자 : 이재원</p></div><hr>";
-  big_container.appendChild(newNode);
-
-  const spoiler_btn = document.getElementById("spoiler_btn");
-  const noproblem_btn = document.getElementById("noproblem_btn");
-  const blinder_btn = document.getElementById("blinder_btn");
-
-  console.log(noproblem_btn);
-  noproblem_btn.classList.add("selected");
-  blinder_btn.classList.remove("selected");
-  spoiler_btn.classList.remove("selected");
+  )
 }

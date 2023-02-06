@@ -4,7 +4,7 @@
     <attr sel=".forTr1" th:each="report,i : ${waitList}">
         <attr sel=".wait_cnt" th:text=" ${i.count}"/>
         <attr sel=".reportIdx" th:text="${report.reportIdx}"/>
-        <attr sel=".reportedPerson" th:text=" ${report.user.userName}"  th:href="@{'/comment/reportdetail_comment/'+${report.reportIdx}}"/>
+        <attr sel=".reportedPerson" th:text=" ${report.user.userName}"  th:href="@{'/comment/reportdetail_reply/'+${report.reportIdx}}"/>
         <attr sel=".reportDate" th:text="${#temporals.format(report.reportRegDate,'yyyy-MM-dd')}"/>
         <attr sel=".spoiler" th:text="${report.reportSpoiler}"/>
         <attr sel=".inappropriate" th:text="${report.reportInappropriate}"/>
@@ -15,7 +15,7 @@
     <attr sel=".forTr2" th:each="report,i : ${completeList}">
         <attr sel=".complete_cnt" th:text=" ${i.count}"/>
         <attr sel=".reportIdx2" th:text="${report.reportIdx}"/>
-        <attr sel=".reportedPerson2" th:text=" ${report.user.userName}"  th:href="@{'/comment/reportdetail_comment/'+${report.reportIdx}}"/>
+        <attr sel=".reportedPerson2" th:text=" ${report.user.userName}"  th:href="@{'/comment/reportdetail_reply/'+${report.reportIdx}}"/>
         <attr sel=".reportDate2" th:text="${#temporals.format(report.reportRegDate,'yyyy-MM-dd')}"/>
         <attr sel=".spoiler2" th:text="${report.reportSpoiler}"/>
         <attr sel=".inappropriate2" th:text="${report.reportInappropriate}"/>

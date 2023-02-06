@@ -57,11 +57,11 @@
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">비밀번호</span>
-                                        <input class="content_box_input_text" name="adminPw" id="adminPw" type="text" @change="pwLength">
+                                        <input class="content_box_input_text" name="adminPw" id="adminPw" type="password" @change="pwLength">
                                     </p>
                                     <p>
                                         <span class="content_box_input_label">비밀번호 확인</span>
-                                        <input class="content_box_input_text" name="adminPwRe" id="adminPwRe" type="text" @change="pwEquals">
+                                        <input class="content_box_input_text" name="adminPwRe" id="adminPwRe" type="password" @change="pwEquals">
                                         <span v-if="pwNoText" class="admin_error_msg4" style="color: indianred">
                                             비밀번호가 잃지하지 않습니다.
                                         </span>

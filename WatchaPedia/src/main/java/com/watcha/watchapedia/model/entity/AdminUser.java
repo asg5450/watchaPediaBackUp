@@ -2,12 +2,10 @@ package com.watcha.watchapedia.model.entity;
 
 import com.watcha.watchapedia.model.config.Auditable;
 import com.watcha.watchapedia.model.config.BaseEntity;
+import com.watcha.watchapedia.model.config.PasswordConverter;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,12 +17,14 @@ import java.util.Objects;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@Convert(converter = PasswordConverter.class, attributeName = "password")
 public class AdminUser extends BaseEntity implements Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adminIdx;
     private String adminName ;
     private String adminId ;
+    @Convert(converter = PasswordConverter.class)
     private String adminPw ;
     private String adminNumber;
     private String adminType ;

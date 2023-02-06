@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <thlogic>
+    <attr sel="#hiddenIdx" th:text="${report.reportIdx}"/>
+    <attr sel="#hiddenSessionAdmin" th:text="${adminId}"/>
     <attr sel="#username" th:text="${report.user.userName}"/>
     <attr sel="#influencer" th:if="${report.user.userType == '인플루언서'}"/>
     <attr sel="#date" th:text="${#temporals.format(report.reportRegDate, 'yyyy-MM-dd')}"/>

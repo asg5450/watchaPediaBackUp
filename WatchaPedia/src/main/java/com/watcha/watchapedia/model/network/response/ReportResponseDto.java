@@ -61,6 +61,19 @@ public record ReportResponseDto(
         );
     }
 
+    public static ReportResponseDto from(ReportResponseDto report, String status){
+
+        return new ReportResponseDto(
+                report.reportIdx(),
+                report.user(),
+                report.commType(),
+                report.reportSpoiler(),
+                report.reportInappropriate(),
+                status,
+                report.reportRegDate()
+        );
+    }
+
 
 
 
